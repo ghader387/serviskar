@@ -28,11 +28,13 @@ body.locked{overflow:hidden;}
 .page{display:none;animation:fade .28s cubic-bezier(.2,.8,.3,1);}
 .page.active{display:block;}
 @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.help-btn,.save-btn,.theme-btn{width:38px;height:38px;border-radius:12px;border:none;color:#fff;font-size:16px;cursor:pointer;flex-shrink:0;display:grid;place-items:center;line-height:1;}
+.help-btn,.save-btn,.theme-btn,.services-btn{width:38px;height:38px;border-radius:12px;border:none;color:#fff;font-size:16px;cursor:pointer;flex-shrink:0;display:grid;place-items:center;line-height:1;}
 .help-btn{background:linear-gradient(135deg,#0284c7,#0369a1);box-shadow:0 4px 12px rgba(2,132,199,.35);}
 .save-btn{background:linear-gradient(135deg,#059669,#10b981);box-shadow:0 4px 12px rgba(5,150,105,.35);}
 .theme-btn{background:linear-gradient(135deg,#f59e0b,#f97316);box-shadow:0 4px 12px rgba(245,158,11,.35);}
 html.dark .theme-btn{background:linear-gradient(135deg,#6366f1,#8b5cf6);}
+.services-btn{background:linear-gradient(135deg,#8b5cf6,#a78bfa);box-shadow:0 4px 12px rgba(139,92,246,.35);}
+html.dark .services-btn{background:linear-gradient(135deg,#a78bfa,#c4b5fd);}
 .topbar{padding:18px 18px 4px;}
 .header-inner{display:flex;align-items:center;gap:10px;background:var(--card);border-radius:22px;padding:14px 16px;box-shadow:0 8px 26px rgba(2,132,199,.2);border:1.5px solid var(--border);}
 .logo-badge{width:60px;height:60px;flex-shrink:0;border-radius:16px;background:var(--card);display:grid;place-items:center;border:1.5px solid var(--border);box-shadow:0 4px 12px rgba(2,132,199,.18);overflow:hidden;}
@@ -239,6 +241,29 @@ html.dark .designer-box .name{color:#fbbf24;}
 .trial-banner{display:none;background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#78350f;padding:10px 16px;font-size:12px;font-weight:800;text-align:center;position:sticky;top:0;z-index:100;box-shadow:0 4px 12px rgba(245,158,11,.4);}
 .trial-banner.danger{background:linear-gradient(135deg,#dc2626,#ef4444);color:#fff;}
 .trial-banner a{color:inherit;text-decoration:underline;font-weight:900;cursor:pointer;}
+
+/* ========== مودال خدمات دیگر ========== */
+.services-overlay{position:fixed;inset:0;background:rgba(12,74,110,.7);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:.28s;z-index:88;display:flex;align-items:center;justify-content:center;padding:16px;overflow-y:auto;}
+.services-overlay.open{opacity:1;pointer-events:auto;}
+.services-card{width:100%;max-width:500px;background:var(--card);border-radius:24px;box-shadow:0 30px 80px rgba(12,74,110,.55);max-height:90vh;overflow-y:auto;border:1.5px solid var(--border);}
+.services-hero{padding:22px 20px 18px;background:linear-gradient(135deg,#8b5cf6 0%,#a78bfa 50%,#c4b5fd 100%);color:#fff;border-radius:23px 23px 0 0;display:flex;align-items:center;gap:14px;position:relative;}
+.services-hero::after{content:'';position:absolute;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.08);top:-90px;left:-50px;}
+.services-hero .icon-wrap{width:52px;height:52px;border-radius:16px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);display:grid;place-items:center;font-size:26px;flex-shrink:0;position:relative;z-index:2;}
+.services-hero h2{margin:0;font-size:18px;font-weight:900;position:relative;z-index:2;}
+.services-hero p{margin:3px 0 0;font-size:11px;opacity:.9;font-weight:600;position:relative;z-index:2;}
+.services-hero .close-x{position:absolute;top:14px;left:14px;z-index:3;width:32px;height:32px;border-radius:50%;border:none;background:rgba(255,255,255,.2);color:#fff;font-size:14px;cursor:pointer;display:grid;place-items:center;}
+.services-body{padding:20px;}
+.services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+.service-card{display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--card);border:1.5px solid var(--border);border-radius:18px;padding:18px 10px;text-decoration:none;color:var(--text);font-size:12.5px;font-weight:800;box-shadow:var(--shadow-sm);transition:transform .2s,background .2s;text-align:center;}
+.service-card:active{transform:scale(.96);background:var(--bg-2);}
+.service-card.full{grid-column:1/-1;}
+.service-icon{width:54px;height:54px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:10px;color:#fff;overflow:hidden;}
+.service-icon.insta{background:linear-gradient(45deg,#833ab4,#fd1d1d,#fcb045);}
+.service-icon.cabin{background:linear-gradient(135deg,#0284c7,#06b6d4);}
+.service-icon.serviskar{background:linear-gradient(135deg,#8b5cf6,#a78bfa);}
+.service-icon.design{background:linear-gradient(135deg,#c026d3,#e879f9);}
+.service-icon.samadiyeh{background:linear-gradient(135deg,#059669,#10b981);}
+.service-card small{font-size:10px;color:var(--muted);font-weight:700;direction:ltr;margin-top:5px;}
 </style>
 </head>
 <body>
@@ -280,12 +305,13 @@ html.dark .designer-box .name{color:#fbbf24;}
 <div class="header-inner">
 <div class="logo-badge" id="headerLogo"></div>
 <div class="brand">
-<div class="brand-name" id="brandName"><span class="project">حساب‌داری</span><span class="tabriz"> خدمات فنی</span></div>
-<small id="brandSub">TECHNICAL SERVICES</small>
+<div class="brand-name" id="brandName"><span class="project">سرویس‌کار</span> <span class="tabriz">خدمات فنی</span></div>
+<small id="brandSub">SERVISKAR — TECHNICAL SERVICES</small>
 </div>
 <div class="jalali-date"><div class="jd-day" id="jdDay">—</div><div class="jd-info" id="jdInfo">—</div></div>
 <button class="theme-btn" id="themeBtn">🌙</button>
 <button class="help-btn" id="helpBtn">❓</button>
+<button class="services-btn" id="servicesBtn" title="خدمات دیگر">🛠️</button>
 </div>
 </div>
 <div class="balance-wrap">
@@ -321,6 +347,7 @@ html.dark .designer-box .name{color:#fbbf24;}
 <button class="theme-btn" onclick="toggleTheme()">🌙</button>
 <button class="save-btn" onclick="backupJSON()">💾</button>
 <button class="help-btn" onclick="openHelp()">❓</button>
+<button class="services-btn" onclick="openServices()">🛠️</button>
 </div>
 <div class="filters" id="invFilters">
 <button class="fbtn active" data-f="all">همه</button>
@@ -341,6 +368,7 @@ html.dark .designer-box .name{color:#fbbf24;}
 <button class="theme-btn" onclick="toggleTheme()">🌙</button>
 <button class="save-btn" onclick="backupJSON()">💾</button>
 <button class="help-btn" onclick="openHelp()">❓</button>
+<button class="services-btn" onclick="openServices()">🛠️</button>
 </div>
 <div class="list" id="custList" style="padding-top:14px;"></div>
 </div>
@@ -353,6 +381,7 @@ html.dark .designer-box .name{color:#fbbf24;}
 <button class="theme-btn" onclick="toggleTheme()">🌙</button>
 <button class="save-btn" onclick="backupJSON()">💾</button>
 <button class="help-btn" onclick="openHelp()">❓</button>
+<button class="services-btn" onclick="openServices()">🛠️</button>
 </div>
 <div class="filters" id="dailyFilters">
 <button class="fbtn active" data-f="all">همه</button>
@@ -373,6 +402,7 @@ html.dark .designer-box .name{color:#fbbf24;}
 <button class="theme-btn" onclick="toggleTheme()">🌙</button>
 <button class="save-btn" onclick="backupJSON()">💾</button>
 <button class="help-btn" onclick="openHelp()">❓</button>
+<button class="services-btn" onclick="openServices()">🛠️</button>
 </div>
 <div class="filters" id="checkFilters">
 <button class="fbtn active" data-f="all">همه</button>
@@ -392,6 +422,7 @@ html.dark .designer-box .name{color:#fbbf24;}
 <button class="theme-btn" onclick="toggleTheme()">🌙</button>
 <button class="save-btn" onclick="backupJSON()">💾</button>
 <button class="help-btn" onclick="openHelp()">❓</button>
+<button class="services-btn" onclick="openServices()">🛠️</button>
 </div>
 <div class="sec" style="padding-top:4px;">
 <div class="sum-grid">
@@ -412,12 +443,13 @@ html.dark .designer-box .name{color:#fbbf24;}
 <div class="head-text"><h2>تنظیمات شرکت</h2><div class="sub">اطلاعات فروشنده و لوگو</div></div>
 <button class="theme-btn" onclick="toggleTheme()">🌙</button>
 <button class="help-btn" onclick="openHelp()">❓</button>
+<button class="services-btn" onclick="openServices()">🛠️</button>
 </div>
 <div class="sec" style="padding-top:14px;">
 <div class="card">
 <h4>🏢 اطلاعات شرکت / فروشنده</h4>
 <div class="hint">این اطلاعات در فاکتور رسمی نمایش داده می‌شود</div>
-<div class="field"><label>نام شرکت / فروشگاه</label><input type="text" id="stName" placeholder="مثلاً: خدمات فنی آسانسور"></div>
+<div class="field"><label>نام شرکت / فروشگاه</label><input type="text" id="stName" placeholder="مثلاً: سرویس‌کار"></div>
 <div class="field"><label>شماره ثبت شرکت</label><input type="text" id="stReg" placeholder="مثلاً: ۱۲۳۴۵"></div>
 <div class="field"><label>کد ملی / شناسه ملی</label><input type="text" id="stNat" placeholder="مثلاً: ۱۲۳۴۵۶۷۸۹۰"></div>
 <div class="field"><label>شماره اقتصادی / مالیاتی</label><input type="text" id="stEco" placeholder="اختیاری"></div>
@@ -558,13 +590,68 @@ html.dark .designer-box .name{color:#fbbf24;}
 </div>
 </div>
 
+<!-- SERVICES MODAL -->
+<div class="services-overlay" id="servicesOverlay">
+<div class="services-card">
+<div class="services-hero">
+<button class="close-x" id="servicesClose">✕</button>
+<div class="icon-wrap">🌟</div>
+<div>
+<h2>خدمات و محصولات ما</h2>
+<p>سرویس‌کار · تبریزکابین · پروژه‌حساب</p>
+</div>
+</div>
+<div class="services-body">
+<div class="services-grid">
+  <a href="https://instagram.com/tabrizcabin.ir" target="_blank" class="service-card">
+    <div class="service-icon insta">
+      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+      </svg>
+    </div>
+    <span>اینستاگرام</span>
+    <small>TabrizCabin</small>
+  </a>
+  <a href="https://tabrizcabin.ir" target="_blank" class="service-card">
+    <div class="service-icon cabin">🏠</div>
+    <span>تبریزکابین</span>
+    <small>tabrizcabin.ir</small>
+  </a>
+  <a href="https://ghader387.github.io/serviskar/" target="_blank" class="service-card">
+    <div class="service-icon serviskar">🔧</div>
+    <span>سرویس‌کار</span>
+    <small>خدمات فنی</small>
+  </a>
+  <a href="https://cabinetsoz.ir" target="_blank" class="service-card">
+    <div class="service-icon design">📐</div>
+    <span>طراحی آنلاین کابینت</span>
+    <small>cabinetsoz.ir</small>
+  </a>
+  <a href="https://ghader387.github.io/samadiyeh-1405/" target="_blank" class="service-card full">
+    <div class="service-icon samadiyeh">
+      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10.5 20.5a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15z"></path>
+        <path d="M10.5 8v5"></path>
+        <path d="M8 10.5h5"></path>
+      </svg>
+    </div>
+    <span>صمدیه ۱۴۰۵ — مرجع جامع دارویی</span>
+    <small>samadiyeh-1405</small>
+  </a>
+</div>
+</div>
+</div>
+</div>
+
 <!-- HELP -->
 <div class="help-overlay" id="helpOverlay">
 <div class="help-card">
 <div class="help-hero">
 <button class="close-x" id="helpClose">✕</button>
 <div class="icon-wrap">❓</div>
-<div><h2>راهنما</h2><p>حساب‌داری خدمات فنی</p></div>
+<div><h2>راهنما</h2><p>سرویس‌کار — خدمات فنی</p></div>
 </div>
 <div class="help-body">
 <div class="help-sec">
@@ -586,7 +673,6 @@ html.dark .designer-box .name{color:#fbbf24;}
 </div>
 </div>
 </div>
-<!-- کارت پرداخت -->
 <div style="margin-top:14px;padding:14px;background:linear-gradient(135deg,#f0f9ff,#e0f2fe);border:2px dashed #0284c7;border-radius:14px;">
 <div style="font-size:11px;color:#0369a1;font-weight:800;margin-bottom:6px;">💳 برای فعال‌سازی، مبلغ زیر را واریز کنید:</div>
 <div style="font-size:12px;color:#334155;font-weight:700;margin-bottom:8px;">مبلغ: <b style="color:#dc2626;">۱٬۰۰۰٬۰۰۰ تومان</b> (یک ساله)</div>
@@ -595,8 +681,6 @@ html.dark .designer-box .name{color:#fbbf24;}
 <div style="font-size:11.5px;color:#334155;font-weight:700;text-align:center;margin-bottom:8px;">به نام: قادر صمدی</div>
 <button class="contact-btn mail" id="copyCardIndexBtn" style="width:100%;background:linear-gradient(135deg,#059669,#10b981);">📋 کپی شماره کارت</button>
 </div>
-
-<!-- QR کد سایت -->
 <div style="margin-top:14px;background:#fff;border:1.5px solid #bae6fd;border-radius:14px;padding:14px;text-align:center;">
 <div style="font-size:11.5px;color:#0c4a6e;font-weight:800;margin-bottom:8px;">📱 اسکن کنید — نصب روی موبایل</div>
 <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://ghader387.github.io/serviskar/" alt="QR" style="width:150px;height:150px;border-radius:10px;background:#fff;padding:4px;border:1.5px solid #bae6fd;">
@@ -606,7 +690,7 @@ html.dark .designer-box .name{color:#fbbf24;}
 <div class="help-sec-title">👨‍💻 طراحی و اجرا</div>
 <div class="designer-box">
 <div class="av">ق</div>
-<div class="info"><div class="name">قادر صمدی</div><div class="role">طراحی و اجرای پروژه «حساب‌داری خدمات فنی»</div></div>
+<div class="info"><div class="name">قادر صمدی</div><div class="role">طراحی و اجرای پروژه «سرویس‌کار»</div></div>
 </div>
 </div>
 <div class="help-sec">
@@ -618,12 +702,6 @@ html.dark .designer-box .name{color:#fbbf24;}
 </div>
 
 <div class="toast" id="toast"><span>ذخیره شد</span></div>
-
-<script>
-/* JS در پیام بعدی */
-</script>
-</body>
-</html>
 <script>
 /* ========== JALALI ========== */
 function _div(a,b){return ~~(a/b);}
@@ -949,10 +1027,10 @@ return '<div style="display:flex;align-items:center;gap:9px;margin-bottom:10px;f
 }
 
 function renderBrand(){
-var name=(settings&&settings.name)?settings.name:'حساب‌داری خدمات فنی';
+var name=(settings&&settings.name)?settings.name:'سرویس‌کار';
 var parts=name.split(' ');
-$('brandName').innerHTML='<span class="project">'+esc(parts[0]||'حساب‌داری')+'</span> <span class="tabriz">'+esc(parts.slice(1).join(' ')||'خدمات فنی')+'</span>';
-$('brandSub').textContent='TECHNICAL SERVICES';
+$('brandName').innerHTML='<span class="project">'+esc(parts[0]||'سرویس‌کار')+'</span> <span class="tabriz">'+esc(parts.slice(1).join(' ')||'خدمات فنی')+'</span>';
+$('brandSub').textContent='SERVISKAR — TECHNICAL SERVICES';
 var logoEl=$('headerLogo');
 if(settings&&settings.logoData){
 logoEl.innerHTML='<img src="'+settings.logoData+'" alt="logo">';
@@ -1164,55 +1242,30 @@ if(s.economicCode)companyInfo+='<div>کد اقتصادی: '+esc(s.economicCode)+
 if(s.phone)companyInfo+='<div>تلفن: '+esc(s.phone)+'</div>';
 if(s.address)companyInfo+='<div>آدرس: '+esc(s.address)+'</div>';
 
-var styleBlock='<style>@import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800;900&display=swap");'+
-'*{box-sizing:border-box;}'+
-'body{font-family:Vazirmatn,Tahoma,sans-serif;margin:0;padding:30px 22px;color:#0f172a;background:#fff;}'+
-'.header{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:16px;border-bottom:3px solid #0284c7;margin-bottom:22px;gap:14px;}'+
-'.header .left{display:flex;gap:14px;align-items:center;}'+
-'.header .company{font-size:11.5px;color:#334155;font-weight:700;line-height:1.9;}'+
-'.header .company b{font-size:15px;color:#0c4a6e;font-weight:900;}'+
-'.header .inv-info{text-align:left;font-size:12px;color:#334155;font-weight:700;line-height:1.9;}'+
-'.header .inv-info b{color:#0c4a6e;font-weight:900;}'+
-'h2{font-size:14px;margin:22px 0 10px;padding:9px 14px;background:#e0f2fe;border-right:4px solid #0284c7;border-radius:8px;color:#0c4a6e;}'+
-'table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:14px;}'+
-'th{background:#0284c7;color:#fff;padding:10px 7px;text-align:right;}'+
-'td{padding:9px 7px;border-bottom:1px solid #e0f2fe;text-align:right;}'+
-'.box{background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:12px;padding:14px 16px;font-size:12.5px;line-height:1.9;color:#0c4a6e;margin-bottom:14px;}'+
-'.summary{background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:12px;padding:14px 16px;margin:18px 0;font-size:13px;font-weight:800;color:#0c4a6e;}'+
-'.summary .row{display:flex;justify-content:space-between;padding:4px 0;}'+
-'.summary .total{font-size:16px;border-top:1.5px solid #bae6fd;margin-top:6px;padding-top:8px;color:#0369a1;}'+
-'.status{text-align:center;font-weight:900;font-size:13px;margin-top:8px;}'+
-'.status.paid{color:#059669;}'+
-'.status.unpaid{color:#dc2626;}'+
-'.footer{margin-top:32px;padding-top:16px;border-top:1px solid #bae6fd;font-size:11px;color:#64748b;text-align:center;line-height:1.9;}'+
-'.footer .credit{color:#0284c7;font-weight:900;}'+
-'@media print{body{padding:14px;}}'+
-'</style>';
-
 return '<div>'+
-'<div class="header">'+
-'<div class="left">'+logoHTML+'<div class="company">'+(companyInfo||'<b>شرکت شما</b>')+'</div></div>'+
-'<div class="inv-info">'+
+'<div style="display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:16px;border-bottom:3px solid #0284c7;margin-bottom:22px;gap:14px;">'+
+'<div style="display:flex;gap:14px;align-items:center;">'+logoHTML+'<div style="font-size:11.5px;color:#334155;font-weight:700;line-height:1.9;">'+(companyInfo||'<b>شرکت شما</b>')+'</div></div>'+
+'<div style="text-align:left;font-size:12px;color:#334155;font-weight:700;line-height:1.9;">'+
 '<div style="font-size:16px;color:#0c4a6e;font-weight:900;margin-bottom:6px;">فاکتور رسمی خدمات</div>'+
 '<div>شماره: <b>'+esc(t.invNumber||'—')+'</b></div>'+
 '<div>تاریخ: <b>'+nowStr+'</b></div>'+
 '<div>روش: <b>'+(t.pay==='check'?'چکی':'نقدی')+'</b></div>'+
 '</div></div>'+
-(c?'<div class="box"><b>👤 مشتری:</b> '+esc(c.name)+(c.phone?'<br><b>📱 تماس:</b> '+esc(c.phone):'')+(c.address?'<br><b>📍 آدرس:</b> '+esc(c.address):'')+'</div>':'')+
-(t.desc?'<div class="box"><b>📝 شرح:</b> '+esc(t.desc)+'</div>':'')+
-'<h2>ردیف‌های فاکتور</h2>'+
-'<table><thead><tr><th>#</th><th>شرح</th><th>تعداد</th><th>قیمت واحد</th><th>جمع</th></tr></thead><tbody>'+rowsHTML+'</tbody></table>'+
-'<div class="summary"><div class="row"><span>جمع ردیف‌ها:</span><span>'+fmt(t.subtotal||0)+' تومان</span></div>'+
-(t.discount?'<div class="row"><span>تخفیف:</span><span>− '+fmt(t.discount)+' تومان</span></div>':'')+
-'<div class="row total"><span>مبلغ نهایی:</span><span>'+fmt(t.total||0)+' تومان</span></div></div>'+
-'<div class="status '+(t.paidStatus==='paid'?'paid':'unpaid')+'">'+(t.paidStatus==='paid'?'✅ پرداخت‌شده':'⏳ پرداخت‌نشده')+'</div>'+
-(t.pay==='check'?'<div class="box" style="margin-top:14px;"><b>🧾 اطلاعات چک:</b><br>سری: '+esc(t.serial||'—')+'<br>سررسید: '+(t.due?faDateFull(t.due):'—')+'<br>بانک: '+esc(t.bank||'—')+'</div>':'')+
-'<div class="footer">'+
-'<div class="credit">با تشکر از اعتماد شما</div>'+
+(c?'<div style="background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:12px;padding:14px 16px;font-size:12.5px;line-height:1.9;color:#0c4a6e;margin-bottom:14px;"><b>👤 مشتری:</b> '+esc(c.name)+(c.phone?'<br><b>📱 تماس:</b> '+esc(c.phone):'')+(c.address?'<br><b>📍 آدرس:</b> '+esc(c.address):'')+'</div>':'')+
+(t.desc?'<div style="background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:12px;padding:14px 16px;font-size:12.5px;line-height:1.9;color:#0c4a6e;margin-bottom:14px;"><b>📝 شرح:</b> '+esc(t.desc)+'</div>':'')+
+'<h2 style="font-size:14px;margin:22px 0 10px;padding:9px 14px;background:#e0f2fe;border-right:4px solid #0284c7;border-radius:8px;color:#0c4a6e;">ردیف‌های فاکتور</h2>'+
+'<table style="width:100%;border-collapse:collapse;font-size:12px;margin-bottom:14px;"><thead><tr><th style="background:#0284c7;color:#fff;padding:10px 7px;text-align:right;">#</th><th style="background:#0284c7;color:#fff;padding:10px 7px;text-align:right;">شرح</th><th style="background:#0284c7;color:#fff;padding:10px 7px;text-align:right;">تعداد</th><th style="background:#0284c7;color:#fff;padding:10px 7px;text-align:right;">قیمت واحد</th><th style="background:#0284c7;color:#fff;padding:10px 7px;text-align:right;">جمع</th></tr></thead><tbody>'+rowsHTML+'</tbody></table>'+
+'<div style="background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:12px;padding:14px 16px;margin:18px 0;font-size:13px;font-weight:800;color:#0c4a6e;">'+
+'<div style="display:flex;justify-content:space-between;padding:4px 0;"><span>جمع ردیف‌ها:</span><span>'+fmt(t.subtotal||0)+' تومان</span></div>'+
+(t.discount?'<div style="display:flex;justify-content:space-between;padding:4px 0;"><span>تخفیف:</span><span>− '+fmt(t.discount)+' تومان</span></div>':'')+
+'<div style="display:flex;justify-content:space-between;padding:4px 0;font-size:16px;border-top:1.5px solid #bae6fd;margin-top:6px;padding-top:8px;color:#0369a1;"><span>مبلغ نهایی:</span><span>'+fmt(t.total||0)+' تومان</span></div></div>'+
+'<div style="text-align:center;font-weight:900;font-size:13px;margin-top:8px;color:'+(t.paidStatus==='paid'?'#059669':'#dc2626')+';">'+(t.paidStatus==='paid'?'✅ پرداخت‌شده':'⏳ پرداخت‌نشده')+'</div>'+
+(t.pay==='check'?'<div style="background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:12px;padding:14px 16px;font-size:12.5px;line-height:1.9;color:#0c4a6e;margin-top:14px;"><b>🧾 اطلاعات چک:</b><br>سری: '+esc(t.serial||'—')+'<br>سررسید: '+(t.due?faDateFull(t.due):'—')+'<br>بانک: '+esc(t.bank||'—')+'</div>':'')+
+'<div style="margin-top:32px;padding-top:16px;border-top:1px solid #bae6fd;font-size:11px;color:#64748b;text-align:center;line-height:1.9;">'+
+'<div style="color:#0284c7;font-weight:900;">با تشکر از اعتماد شما</div>'+
 '<div>📱 '+SUPPORT_PHONE+' | ✉️ '+SUPPORT_EMAIL+'</div>'+
 '<div style="margin-top:8px;color:#0c4a6e;font-weight:800;">طراحی: '+DESIGNER_NAME+'</div>'+
-'</div>'+
-'</div>';
+'</div></div>';
 }
 
 function buildInvoiceText(t){
@@ -1271,28 +1324,7 @@ function closeInvoicePreview(){$('invPreviewOverlay').classList.remove('open');c
 function downloadInvoicePDF(){
 if(!currentPreviewInvoice)return;
 var t=currentPreviewInvoice;
-var fullHTML='<!DOCTYPE html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><title>فاکتور</title>'+
-'<style>@import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800;900&display=swap");'+
-'*{box-sizing:border-box;}body{font-family:Vazirmatn,Tahoma,sans-serif;margin:0;padding:20px;color:#0f172a;background:#fff;}'+
-'.header{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:16px;border-bottom:3px solid #0284c7;margin-bottom:22px;gap:14px;}'+
-'.header .left{display:flex;gap:14px;align-items:center;}'+
-'.header .company{font-size:11.5px;color:#334155;font-weight:700;line-height:1.9;}'+
-'.header .company b{font-size:15px;color:#0c4a6e;font-weight:900;}'+
-'.header .inv-info{text-align:left;font-size:12px;color:#334155;font-weight:700;line-height:1.9;}'+
-'.header .inv-info b{color:#0c4a6e;font-weight:900;}'+
-'h2{font-size:14px;margin:22px 0 10px;padding:9px 14px;background:#e0f2fe;border-right:4px solid #0284c7;border-radius:8px;color:#0c4a6e;}'+
-'table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:14px;}'+
-'th{background:#0284c7;color:#fff;padding:10px 7px;text-align:right;}'+
-'td{padding:9px 7px;border-bottom:1px solid #e0f2fe;text-align:right;}'+
-'.box{background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:12px;padding:14px 16px;font-size:12.5px;line-height:1.9;color:#0c4a6e;margin-bottom:14px;}'+
-'.summary{background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:12px;padding:14px 16px;margin:18px 0;font-size:13px;font-weight:800;color:#0c4a6e;}'+
-'.summary .row{display:flex;justify-content:space-between;padding:4px 0;}'+
-'.summary .total{font-size:16px;border-top:1.5px solid #bae6fd;margin-top:6px;padding-top:8px;color:#0369a1;}'+
-'.status{text-align:center;font-weight:900;font-size:13px;margin-top:8px;}'+
-'.status.paid{color:#059669;}.status.unpaid{color:#dc2626;}'+
-'.footer{margin-top:32px;padding-top:16px;border-top:1px solid #bae6fd;font-size:11px;color:#64748b;text-align:center;line-height:1.9;}'+
-'.footer .credit{color:#0284c7;font-weight:900;}'+
-'</style></head><body>'+$('invPreviewContent').innerHTML+'</body></html>';
+var fullHTML='<!DOCTYPE html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><title>فاکتور</title><style>@import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800;900&display=swap");*{box-sizing:border-box;}body{font-family:Vazirmatn,Tahoma,sans-serif;margin:0;padding:20px;color:#0f172a;background:#fff;}</style></head><body>'+$('invPreviewContent').innerHTML+'</body></html>';
 var container=document.createElement('div');
 container.style.position='fixed';
 container.style.left='-9999px';
@@ -1372,13 +1404,13 @@ showToast('لوگو حذف شد');
 
 /* ========== BACKUP ========== */
 function backupJSON(){
-var data={app:'tech-services',version:2,designer:DESIGNER_NAME,support:SUPPORT_PHONE,tx:tx,customers:customers,settings:settings,exportedAt:new Date().toISOString()};
+var data={app:'serviskar',version:2,designer:DESIGNER_NAME,support:SUPPORT_PHONE,tx:tx,customers:customers,settings:settings,exportedAt:new Date().toISOString()};
 var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
 var url=URL.createObjectURL(blob);
 var a=document.createElement('a');
 var todayArr=todayISO().split('-').map(Number);
 var j=toJalali(todayArr[0],todayArr[1],todayArr[2]);
-a.href=url;a.download='tech-services-'+j.jy+'-'+pad2(j.jm)+'-'+pad2(j.jd)+'.json';
+a.href=url;a.download='serviskar-'+j.jy+'-'+pad2(j.jm)+'-'+pad2(j.jd)+'.json';
 document.body.appendChild(a);a.click();document.body.removeChild(a);
 setTimeout(function(){URL.revokeObjectURL(url);},1500);
 showToast('پشتیبان ذخیره شد 💾');
@@ -1396,6 +1428,15 @@ window.scrollTo({top:0,behavior:'smooth'});
 }
 function openHelp(){$('helpOverlay').classList.add('open');document.body.classList.add('locked');}
 function closeHelp(){$('helpOverlay').classList.remove('open');document.body.classList.remove('locked');}
+
+function openServices(){
+var el=document.getElementById('servicesOverlay');
+if(el){el.classList.add('open');document.body.classList.add('locked');}
+}
+function closeServices(){
+var el=document.getElementById('servicesOverlay');
+if(el){el.classList.remove('open');document.body.classList.remove('locked');}
+}
 
 /* ========== LICENSE EVENTS ========== */
 function resetLicenseForm(){
@@ -1447,7 +1488,7 @@ $('licBackBtn').addEventListener('click',resetLicenseForm);
 $('licWaBtn').addEventListener('click',function(){
 var phone=toEn($('licPhone').value).replace(/[^\d]/g,'');
 var reqCode=$('licReqCode').textContent;
-var msg='درخواست فعال‌سازی نرم‌افزار حساب‌داری خدمات فنی\n\nشماره: '+phone+'\nکد درخواست: '+reqCode+'\n\nلطفاً کد فعال‌سازی را ارسال کنید.';
+var msg='درخواست فعال‌سازی نرم‌افزار سرویس‌کار\n\nشماره: '+phone+'\nکد درخواست: '+reqCode+'\n\nلطفاً کد فعال‌سازی را ارسال کنید.';
 window.open('https://wa.me/'+SUPPORT_WHATSAPP+'?text='+encodeURIComponent(msg),'_blank');
 });
 $('licActivateBtn').addEventListener('click',function(){
@@ -1471,6 +1512,14 @@ $('themeBtn').addEventListener('click',toggleTheme);
 $('helpBtn').addEventListener('click',openHelp);
 $('helpClose').addEventListener('click',closeHelp);
 $('helpOverlay').addEventListener('click',function(e){if(e.target===$('helpOverlay'))closeHelp();});
+
+/* ===== Services modal ===== */
+var servicesBtn=document.getElementById('servicesBtn');
+if(servicesBtn)servicesBtn.addEventListener('click',openServices);
+var servicesClose=document.getElementById('servicesClose');
+if(servicesClose)servicesClose.addEventListener('click',closeServices);
+var servicesOverlay=document.getElementById('servicesOverlay');
+if(servicesOverlay)servicesOverlay.addEventListener('click',function(e){if(e.target===servicesOverlay)closeServices();});
 
 /* ===== Nav ===== */
 $('bnav').addEventListener('click',function(e){
@@ -1550,7 +1599,7 @@ $('removeLogoBtn').addEventListener('click',removeLogo);
 $('renewBtn').addEventListener('click',function(){
 var phone=license.phone||'';
 var reqCode=phone?makeRequestCode(phone):'';
-var msg='درخواست تمدید لایسنس حساب‌داری خدمات فنی\n\nشماره: '+phone+'\nکد درخواست: '+reqCode;
+var msg='درخواست تمدید لایسنس سرویس‌کار\n\nشماره: '+phone+'\nکد درخواست: '+reqCode;
 window.open('https://wa.me/'+SUPPORT_WHATSAPP+'?text='+encodeURIComponent(msg),'_blank');
 });
 
@@ -1593,6 +1642,7 @@ bindFilters('checkFilters',function(v){checkFilter=v;});
 document.addEventListener('keydown',function(e){
 if(e.key==='Escape'){
 if($('helpOverlay').classList.contains('open'))closeHelp();
+else if($('servicesOverlay')&&$('servicesOverlay').classList.contains('open'))closeServices();
 else if($('dpOverlay').classList.contains('open'))closeDatePicker();
 else if($('invPreviewOverlay').classList.contains('open'))closeInvoicePreview();
 else closeSheet();
