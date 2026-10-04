@@ -1,4 +1,4 @@
-const CACHE_NAME = 'serviskar-v4';
+const CACHE_NAME = 'serviskar-v10';
 const urlsToCache = [
   './',
   './index.html',
@@ -11,7 +11,6 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
   );
-  self.skipWaiting();
 });
 
 self.addEventListener('activate', event => {
@@ -25,6 +24,16 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
+  
+  // فایل‌های HTML: همیشه از شبکه
+  if(event.request.destination === 'document'){
+    event.respondWith(
+      fetch(event.request).catch(() => caches.match(event.request))
+    );
+    return;
+  }
+  
+  // بقیه فایل‌ها: اول کش
   event.respondWith(
     caches.match(event.request).then(response => {
       return response || fetch(event.request).then(res => {
@@ -36,4 +45,10 @@ self.addEventListener('fetch', event => {
       }).catch(() => caches.match('./index.html'));
     })
   );
+});
+
+self.addEventListener('message', event => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
 });
