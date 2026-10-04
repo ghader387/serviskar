@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0284c7" id="themeColorMeta">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="حساب‌داری خدمات فنی">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.json">
+<title>حساب‌داری خدمات فنی</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
+:root{--bg:#e0f2fe;--bg-2:#bae6fd;--card:#fff;--primary:#0284c7;--primary-2:#0369a1;--primary-dark:#0c4a6e;--income:#059669;--income-soft:#d1fae5;--expense:#dc2626;--expense-soft:#fee2e2;--pay:#ea580c;--pay-soft:#ffedd5;--check:#d97706;--check-soft:#fef3c7;--text:#0f172a;--text-2:#334155;--muted:#64748b;--border:#bae6fd;--star:#fbbf24;--nav-h:68px;--shadow-sm:0 2px 8px rgba(2,132,199,.12);--shadow-md:0 8px 24px rgba(2,132,199,.18);--shadow-glow:0 12px 30px rgba(2,132,199,.45);}
+html.dark{--bg:#0c1421;--bg-2:#0f1d33;--card:#152238;--primary:#38bdf8;--primary-2:#0ea5e9;--primary-dark:#7dd3fc;--income:#34d399;--income-soft:#064e3b;--expense:#fb7185;--expense-soft:#4c0519;--pay:#fb923c;--pay-soft:#431407;--check:#fbbf24;--check-soft:#451a03;--text:#e0f2fe;--text-2:#bae6fd;--muted:#7dd3fc;--border:#1e3a5f;--shadow-sm:0 2px 8px rgba(0,0,0,.4);--shadow-md:0 8px 24px rgba(0,0,0,.5);--shadow-glow:0 12px 30px rgba(56,189,248,.5);}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;height:100dvh;}
+body{margin:0;font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Tahoma,sans-serif;background:radial-gradient(900px 500px at 100% -5%,var(--bg-2) 0%,transparent 55%),radial-gradient(800px 500px at -10% 10%,var(--bg-2) 0%,transparent 50%),linear-gradient(180deg,var(--bg-2) 0%,var(--bg) 100%);background-attachment:fixed;color:var(--text);overscroll-behavior-y:none;-webkit-font-smoothing:antialiased;height:100dvh;overflow-x:hidden;transition:background .3s,color .3s;}
+body.locked{overflow:hidden;}
+.app{max-width:520px;width:100%;margin:0 auto;min-height:100dvh;padding-bottom:calc(var(--nav-h) + 20px);position:relative;overflow-x:hidden;}
+.page{display:none;animation:fade .28s cubic-bezier(.2,.8,.3,1);}
+.page.active{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.help-btn,.save-btn,.theme-btn{width:38px;height:38px;border-radius:12px;border:none;color:#fff;font-size:16px;cursor:pointer;flex-shrink:0;display:grid;place-items:center;line-height:1;}
+.help-btn{background:linear-gradient(135deg,#0284c7,#0369a1);box-shadow:0 4px 12px rgba(2,132,199,.35);}
+.save-btn{background:linear-gradient(135deg,#059669,#10b981);box-shadow:0 4px 12px rgba(5,150,105,.35);}
+.theme-btn{background:linear-gradient(135deg,#f59e0b,#f97316);box-shadow:0 4px 12px rgba(245,158,11,.35);}
+html.dark .theme-btn{background:linear-gradient(135deg,#6366f1,#8b5cf6);}
+.topbar{padding:18px 18px 4px;}
+.header-inner{display:flex;align-items:center;gap:10px;background:var(--card);border-radius:22px;padding:14px 16px;box-shadow:0 8px 26px rgba(2,132,199,.2);border:1.5px solid var(--border);}
+.logo-badge{width:60px;height:60px;flex-shrink:0;border-radius:16px;background:var(--card);display:grid;place-items:center;border:1.5px solid var(--border);box-shadow:0 4px 12px rgba(2,132,199,.18);overflow:hidden;}
+.logo-badge svg{width:100%;height:100%;display:block;}
+.logo-badge img{width:100%;height:100%;object-fit:contain;display:block;}
+.brand{flex:1;min-width:0;}
+.brand-name{font-size:15.5px;font-weight:900;line-height:1.3;}
+.brand-name .tabriz{background:linear-gradient(135deg,#0284c7,#06b6d4);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:900;}
+.brand-name .project{color:var(--primary-dark);font-weight:900;}
+.brand-name small{display:block;font-size:9.5px;font-weight:700;color:var(--muted);letter-spacing:1.5px;margin-top:3px;text-transform:uppercase;}
+.jalali-date{display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--bg-2),var(--border));border:1.5px solid var(--border);border-radius:14px;padding:8px 10px;min-width:68px;flex-shrink:0;}
+.jalali-date .jd-day{font-size:20px;font-weight:900;color:var(--primary-dark);line-height:1;}
+.jalali-date .jd-info{font-size:9px;font-weight:800;color:var(--primary-2);margin-top:3px;text-align:center;white-space:nowrap;}
+.balance-wrap{padding:14px 16px 0;}
+.balance-card{border-radius:26px;padding:22px;background:radial-gradient(120% 120% at 100% 0%,rgba(255,255,255,.28) 0%,transparent 45%),radial-gradient(120% 120% at 0% 100%,rgba(6,182,212,.35) 0%,transparent 45%),linear-gradient(135deg,#0369a1 0%,#0284c7 50%,#0ea5e9 100%);color:#fff;box-shadow:0 18px 40px rgba(2,132,199,.5),inset 0 1px 0 rgba(255,255,255,.25);}
+.bc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+.bc-label{font-size:12px;opacity:.95;font-weight:700;}
+.bc-chip{font-size:10px;font-weight:800;background:rgba(255,255,255,.22);padding:5px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.3);}
+.bc-value{font-size:34px;font-weight:900;letter-spacing:-.8px;line-height:1.15;direction:ltr;text-align:right;}
+.bc-value .cur{font-size:14px;font-weight:700;opacity:.9;margin-right:8px;}
+.bc-bottom{display:flex;gap:14px;margin-top:16px;}
+.bc-mini{flex:1;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:10px 12px;}
+.bc-mini .l{font-size:10px;opacity:.9;font-weight:700;margin-bottom:3px;}
+.bc-mini .v{font-size:14px;font-weight:800;direction:ltr;text-align:right;}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;padding:14px 16px 0;}
+.stat{background:var(--card);border-radius:18px;padding:13px 10px;text-align:center;box-shadow:var(--shadow-sm);border:1px solid rgba(2,132,199,.1);}
+.stat-ic{width:34px;height:34px;border-radius:11px;margin:0 auto 8px;display:grid;place-items:center;font-size:16px;}
+.stat-ic.buy{background:var(--expense-soft);}.stat-ic.pay{background:var(--pay-soft);}.stat-ic.rec{background:var(--income-soft);}
+.stat-l{font-size:9.5px;color:var(--muted);margin-bottom:4px;font-weight:800;}
+.stat-v{font-size:12px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;direction:ltr;text-align:center;}
+.stat-v.expense{color:var(--expense);}.stat-v.pay{color:var(--pay);}.stat-v.income{color:var(--income);}
+.page-head{display:flex;align-items:center;gap:10px;padding:18px;background:var(--card);margin:0 16px 4px;border-radius:20px;box-shadow:0 6px 20px rgba(2,132,199,.15);border:1.5px solid var(--border);}
+.page-head .logo-badge{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,var(--bg-2),var(--border));}
+.page-head h2{margin:0;font-size:17px;font-weight:900;color:var(--primary-dark);}
+.page-head .sub{font-size:10.5px;color:var(--muted);font-weight:700;margin-top:3px;}
+.page-head .head-text{flex:1;min-width:0;}
+.sec{padding:22px 16px 0;}
+.sec-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding:0 4px;}
+.sec-head h3{margin:0;font-size:14.5px;font-weight:800;}
+.sec-head h3 span{font-size:16px;margin-left:5px;}
+.sec-head a{font-size:11.5px;color:var(--primary-2);font-weight:800;text-decoration:none;cursor:pointer;padding:5px 10px;border-radius:9px;background:var(--bg-2);}
+.filters{display:flex;gap:7px;overflow-x:auto;padding:6px 16px 14px;scrollbar-width:none;}
+.filters::-webkit-scrollbar{display:none;}
+.fbtn{flex-shrink:0;padding:8px 14px;border-radius:11px;border:1.5px solid var(--border);background:var(--card);font-size:12px;font-weight:700;color:var(--text-2);cursor:pointer;white-space:nowrap;}
+.fbtn.active{background:linear-gradient(135deg,#0284c7,#0369a1);color:#fff;border-color:transparent;box-shadow:0 6px 16px rgba(2,132,199,.4);}
+.list{padding:0 16px;}
+.day{margin-bottom:6px;}
+.day-head{display:flex;justify-content:space-between;align-items:center;padding:14px 6px 9px;font-size:12px;color:var(--muted);font-weight:700;}
+.day-net{font-size:11.5px;font-weight:800;direction:ltr;}
+.item{display:flex;align-items:flex-start;gap:12px;background:var(--card);border-radius:18px;padding:13px;margin-bottom:9px;box-shadow:var(--shadow-sm);border:1px solid rgba(2,132,199,.1);}
+.item.starred{background:linear-gradient(135deg,#fffcf2,var(--card));border-color:#fde68a;}
+html.dark .item.starred{background:linear-gradient(135deg,#2a2412,var(--card));border-color:#78350f;}
+.item-icon{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:20px;flex-shrink:0;background:linear-gradient(135deg,var(--bg-2),var(--border));border:1px solid var(--border);}
+.item-body{flex:1;min-width:0;}
+.item-title{font-size:13.5px;font-weight:800;display:flex;align-items:center;gap:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.item-meta{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;align-items:center;}
+.badge{font-size:9.5px;font-weight:800;padding:3.5px 8px;border-radius:7px;display:inline-flex;align-items:center;gap:3px;white-space:nowrap;}
+.badge.cash{background:var(--bg-2);color:var(--primary-dark);}
+.badge.check{background:var(--check-soft);color:#92400e;}
+.badge.invoice{background:#e0f2fe;color:#075985;}
+.badge.overdue{background:var(--expense-soft);color:#991b1b;}
+.badge.soon{background:var(--check-soft);color:#92400e;}
+.badge.paid{background:var(--income-soft);color:#065f46;}
+.badge.pending{background:#e5e7eb;color:#374151;}
+.badge.pay-type{background:var(--pay-soft);color:#9a3412;}
+.badge.rec-type{background:var(--income-soft);color:#065f46;}
+.item-date{font-size:10.5px;color:var(--muted);font-weight:600;direction:ltr;}
+.item-person{font-size:11px;color:var(--text-2);margin-top:5px;font-weight:600;opacity:.85;}
+.item-right{text-align:left;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:6px;}
+.item-amount{font-size:13.5px;font-weight:800;white-space:nowrap;direction:ltr;}
+.item-amount.income{color:var(--income);}
+.item-amount.expense{color:var(--expense);}
+.item-amount.pay{color:var(--pay);}
+.actions-row{display:flex;align-items:center;}
+.del{background:none;border:none;color:var(--muted);font-size:14px;padding:4px 5px;cursor:pointer;border-radius:7px;}
+.star-btn{background:none;border:none;font-size:14px;padding:4px 3px;cursor:pointer;filter:grayscale(1);opacity:.35;}
+.star-btn.on{filter:none;opacity:1;}
+.empty{text-align:center;padding:54px 20px;color:var(--muted);}
+.empty-icon{font-size:48px;margin-bottom:14px;opacity:.45;}
+.empty p{margin:0 0 6px;font-size:14.5px;font-weight:800;color:var(--text-2);}
+.empty span{font-size:12px;font-weight:600;}
+.card{background:var(--card);border-radius:22px;padding:18px;box-shadow:var(--shadow-md);border:1px solid rgba(2,132,199,.1);margin-bottom:14px;}
+.card h4{margin:0 0 4px;font-size:14px;font-weight:900;color:var(--primary-dark);}
+.card .hint{font-size:11px;color:var(--muted);margin-bottom:16px;font-weight:700;}
+.sum-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+.sum-box{background:var(--card);border-radius:18px;padding:15px;box-shadow:var(--shadow-sm);border:1px solid rgba(2,132,199,.1);position:relative;overflow:hidden;}
+.sum-box::before{content:'';position:absolute;top:0;right:0;width:4px;height:100%;background:linear-gradient(180deg,#0284c7,#0369a1);border-radius:0 18px 18px 0;}
+.sum-box:nth-child(2)::before{background:linear-gradient(180deg,#ea580c,#f97316);}
+.sum-box:nth-child(3)::before{background:linear-gradient(180deg,#059669,#34d399);}
+.sum-box:nth-child(4)::before{background:linear-gradient(180deg,#06b6d4,#22d3ee);}
+.sum-box .l{font-size:10.5px;color:var(--muted);font-weight:700;margin-bottom:7px;}
+.sum-box .v{font-size:15px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;direction:ltr;text-align:right;}
+.sum-box .v.g{color:var(--income);}
+.sum-box .v.r{color:var(--expense);}
+.sum-box .v.o{color:var(--pay);}
+.sum-box .v.p{color:var(--primary-dark);}
+.fab{position:fixed;bottom:calc(var(--nav-h) + 18px);left:50%;transform:translateX(-50%);padding:0 26px;height:56px;border-radius:28px;background:linear-gradient(135deg,#0284c7 0%,#0369a1 55%,#06b6d4 130%);color:#fff;border:none;font-size:15px;font-weight:800;box-shadow:0 14px 32px rgba(2,132,199,.6);display:flex;align-items:center;gap:8px;cursor:pointer;z-index:20;}
+.fab i{font-style:normal;font-size:22px;line-height:1;margin-top:-3px;}
+.bnav{position:fixed;bottom:0;left:0;right:0;height:var(--nav-h);background:var(--card);border-top:1px solid var(--border);display:flex;z-index:30;padding-bottom:env(safe-area-inset-bottom);max-width:520px;margin:0 auto;box-shadow:0 -8px 30px rgba(2,132,199,.1);}
+.bnav button{flex:1;border:none;background:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:9.5px;font-weight:800;color:var(--muted);cursor:pointer;padding:0;position:relative;}
+.bnav button .ic{font-size:20px;line-height:1;filter:grayscale(1);opacity:.5;transition:.25s;}
+.bnav button.active{color:var(--primary-dark);}
+.bnav button.active .ic{filter:none;opacity:1;transform:translateY(-2px) scale(1.1);}
+.bnav button.active::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:26px;height:3px;border-radius:0 0 4px 4px;background:linear-gradient(90deg,#0284c7,#06b6d4);}
+.overlay{position:fixed;inset:0;background:rgba(12,74,110,.55);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:.28s;z-index:50;display:flex;align-items:flex-end;justify-content:center;}
+.overlay.open{opacity:1;pointer-events:auto;}
+.sheet{width:100%;max-width:520px;background:var(--card);border-radius:28px 28px 0 0;padding:18px 18px calc(22px + env(safe-area-inset-bottom));transform:translateY(100%);transition:transform .35s cubic-bezier(.2,.8,.3,1);max-height:calc(100dvh - 40px);overflow-y:auto;}
+.overlay.open .sheet{transform:translateY(0);}
+.sheet-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;position:sticky;top:-18px;background:var(--card);padding:4px 0 12px;z-index:5;border-bottom:1px solid var(--border);}
+.sheet-head h3{margin:0;font-size:16.5px;font-weight:900;color:var(--primary-dark);}
+.close{width:34px;height:34px;border-radius:50%;border:none;background:var(--bg-2);color:var(--primary-2);font-size:15px;cursor:pointer;display:grid;place-items:center;}
+.seg{display:flex;background:var(--bg-2);border-radius:15px;padding:4px;margin-bottom:16px;gap:3px;border:1px solid var(--border);}
+.seg button{flex:1;padding:11px 6px;border:none;background:none;border-radius:12px;font-size:13px;font-weight:800;color:var(--muted);cursor:pointer;white-space:nowrap;}
+.seg button.active{background:var(--card);box-shadow:0 3px 10px rgba(2,132,199,.18);}
+.seg button.active[data-type="invoice"]{color:#075985;}
+.seg button.active[data-type="payment"]{color:#9a3412;}
+.seg button.active[data-type="receipt"]{color:#065f46;}
+.field{margin-bottom:15px;}
+.field label{display:block;font-size:12px;font-weight:800;color:var(--text-2);margin-bottom:8px;}
+.field input,.field textarea,.field select{width:100%;padding:13px 14px;border-radius:14px;border:1.5px solid var(--border);font-size:14px;outline:none;background:var(--bg);color:var(--text);font-weight:600;font-family:inherit;}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--primary);background:var(--card);box-shadow:0 0 0 4px rgba(2,132,199,.15);}
+.field textarea{min-height:80px;resize:vertical;}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.hidden{display:none !important;}
+.submit{width:100%;padding:16px;border-radius:17px;border:none;background:linear-gradient(135deg,#0284c7,#0369a1 60%,#06b6d4 130%);color:#fff;font-size:15.5px;font-weight:800;cursor:pointer;box-shadow:var(--shadow-glow);}
+.submit:active{transform:scale(.97);}
+.toast{position:fixed;bottom:calc(var(--nav-h) + 84px);left:50%;transform:translate(-50%,20px);background:linear-gradient(135deg,#0c4a6e,#0369a1);color:#fff;padding:13px 18px;border-radius:15px;font-size:13px;font-weight:700;display:flex;align-items:center;gap:16px;opacity:0;pointer-events:none;transition:.28s;z-index:60;box-shadow:0 14px 36px rgba(0,0,0,.4);white-space:nowrap;}
+.toast.show{opacity:1;transform:translate(-50%,0);pointer-events:auto;}
+.inv-rows{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
+.inv-row{background:var(--bg);border:1.5px solid var(--border);border-radius:14px;padding:11px;display:flex;flex-direction:column;gap:8px;position:relative;}
+.inv-row .row-num{position:absolute;top:-9px;right:12px;background:linear-gradient(135deg,#0284c7,#0369a1);color:#fff;font-size:10px;font-weight:800;padding:3px 9px;border-radius:8px;}
+.inv-row .row-fields{display:grid;grid-template-columns:2fr 1fr 1fr;gap:6px;}
+.inv-row input{padding:9px 11px !important;font-size:12.5px !important;border-radius:10px !important;}
+.inv-row .row-del{position:absolute;top:-9px;left:12px;background:var(--expense-soft);color:var(--expense);border:none;font-size:11px;font-weight:800;padding:3px 9px;border-radius:8px;cursor:pointer;}
+.add-row-btn{width:100%;padding:12px;border-radius:13px;border:1.5px dashed var(--primary);background:transparent;color:var(--primary-dark);font-size:13px;font-weight:800;cursor:pointer;font-family:inherit;}
+.inv-summary{background:linear-gradient(135deg,var(--bg),var(--bg-2));border:1.5px solid var(--border);border-radius:14px;padding:13px;margin-bottom:14px;}
+.inv-summary .row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;font-size:12.5px;font-weight:700;color:var(--text-2);}
+.inv-summary .row.total{border-top:1.5px solid var(--border);margin-top:6px;padding-top:10px;font-size:15px;font-weight:900;color:var(--primary-dark);}
+.help-overlay{position:fixed;inset:0;background:rgba(12,74,110,.65);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:.28s;z-index:85;display:flex;align-items:center;justify-content:center;padding:16px;}
+.help-overlay.open{opacity:1;pointer-events:auto;}
+.help-card{width:100%;max-width:460px;background:var(--card);border-radius:24px;box-shadow:0 30px 80px rgba(12,74,110,.55);max-height:90vh;overflow-y:auto;border:1.5px solid var(--border);}
+.help-hero{padding:22px 20px 18px;background:linear-gradient(135deg,#0284c7 0%,#0369a1 50%,#075985 100%);color:#fff;border-radius:23px 23px 0 0;display:flex;align-items:center;gap:14px;position:relative;}
+.help-hero .icon-wrap{width:52px;height:52px;border-radius:16px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);display:grid;place-items:center;font-size:26px;flex-shrink:0;}
+.help-hero h2{margin:0;font-size:17px;font-weight:900;}
+.help-hero p{margin:3px 0 0;font-size:11px;opacity:.9;font-weight:600;}
+.help-hero .close-x{position:absolute;top:14px;left:14px;width:32px;height:32px;border-radius:50%;border:none;background:rgba(255,255,255,.2);color:#fff;font-size:14px;cursor:pointer;display:grid;place-items:center;}
+.help-body{padding:18px 20px 22px;}
+.help-sec{margin-bottom:18px;}
+.help-sec-title{font-size:12px;font-weight:900;color:var(--primary-dark);margin-bottom:10px;display:flex;align-items:center;gap:7px;}
+.help-sec-title::before{content:'';width:3px;height:15px;border-radius:2px;background:linear-gradient(180deg,#0284c7,#06b6d4);}
+.help-list{background:var(--bg);border-radius:14px;padding:12px 14px;border:1px solid var(--border);}
+.help-list .row{display:flex;gap:10px;padding:9px 0;border-bottom:1px dashed var(--border);}
+.help-list .row:last-child{border-bottom:none;}
+.help-list .ttl{font-size:12.5px;font-weight:800;}
+.help-list .desc{font-size:11px;color:var(--text-2);font-weight:600;line-height:1.6;margin-top:3px;}
+.contact-box{background:linear-gradient(135deg,var(--bg),var(--bg-2));border:1.5px solid var(--border);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px;}
+.contact-email{display:flex;align-items:center;gap:10px;background:var(--card);border-radius:12px;padding:11px 13px;border:1px solid var(--border);}
+.contact-email .ic{font-size:18px;}
+.contact-email .mail{flex:1;font-size:12.5px;font-weight:800;color:var(--primary-dark);direction:ltr;text-align:left;font-family:'Courier New',monospace;}
+.contact-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.contact-btn{padding:11px 8px;border-radius:12px;border:none;font-size:12px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;text-decoration:none;font-family:inherit;}
+.contact-btn.mail{background:linear-gradient(135deg,#0284c7,#0369a1);color:#fff;}
+.contact-btn.copy{background:var(--card);color:var(--primary-dark);border:1.5px solid var(--border);}
+.designer-box{background:linear-gradient(135deg,#fef3c7,#fde68a);border:1.5px solid #fcd34d;border-radius:16px;padding:14px;display:flex;align-items:center;gap:12px;}
+html.dark .designer-box{background:linear-gradient(135deg,#451a03,#78350f);border-color:#92400e;}
+.designer-box .av{width:44px;height:44px;border-radius:13px;background:linear-gradient(135deg,#0284c7,#06b6d4);display:grid;place-items:center;font-size:20px;color:#fff;flex-shrink:0;}
+.designer-box .name{font-size:13.5px;font-weight:900;color:#78350f;}
+html.dark .designer-box .name{color:#fbbf24;}
+.designer-box .role{font-size:10.5px;font-weight:700;color:#92400e;margin-top:3px;opacity:.85;}
+.copyright-box{background:var(--bg);border:1.5px solid var(--border);border-radius:16px;padding:14px;text-align:center;}
+.copyright-box .copy-txt{font-size:11px;font-weight:700;color:var(--text-2);line-height:1.8;}
+.copyright-box .copy-txt b{color:var(--primary-dark);}
+.license-screen{position:fixed;inset:0;background:linear-gradient(135deg,#0c4a6e,#0284c7);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;overflow-y:auto;}
+.license-screen.hidden{display:none;}
+.license-card{width:100%;max-width:440px;background:#fff;border-radius:28px;padding:28px;box-shadow:0 30px 80px rgba(0,0,0,.5);}
+.license-card .logo{width:72px;height:72px;margin:0 auto 16px;border-radius:20px;background:linear-gradient(135deg,#e0f2fe,#bae6fd);display:grid;place-items:center;font-size:32px;}
+.license-card h2{margin:0 0 6px;text-align:center;font-size:19px;font-weight:900;color:#0c4a6e;}
+.license-card .desc{text-align:center;font-size:12px;color:#64748b;font-weight:700;margin-bottom:22px;line-height:1.7;}
+.license-card .field{margin-bottom:14px;}
+.license-card .field label{display:block;font-size:12px;font-weight:800;color:#334155;margin-bottom:7px;}
+.license-card .field input{width:100%;padding:14px;border-radius:14px;border:1.5px solid #bae6fd;font-size:15px;font-family:inherit;font-weight:600;outline:none;background:#f0f9ff;color:#0f172a;text-align:center;letter-spacing:1px;}
+.license-card .field input:focus{border-color:#0284c7;background:#fff;box-shadow:0 0 0 4px rgba(2,132,199,.15);}
+.license-card .btn{width:100%;padding:15px;border-radius:15px;border:none;font-size:15px;font-weight:800;cursor:pointer;font-family:inherit;margin-bottom:10px;}
+.license-card .btn-primary{background:linear-gradient(135deg,#0284c7,#0369a1);color:#fff;box-shadow:0 10px 25px rgba(2,132,199,.45);}
+.license-card .btn-whatsapp{background:linear-gradient(135deg,#059669,#10b981);color:#fff;box-shadow:0 10px 25px rgba(5,150,105,.4);}
+.license-card .btn-ghost{background:#f0f9ff;color:#0c4a6e;border:1.5px solid #bae6fd;}
+.license-card .req-box{background:#fef3c7;border:1.5px solid #fde68a;border-radius:14px;padding:12px;margin-bottom:14px;text-align:center;}
+.license-card .req-box .lbl{font-size:10.5px;color:#78350f;font-weight:800;margin-bottom:5px;}
+.license-card .req-box .val{font-size:18px;font-weight:900;color:#92400e;letter-spacing:1.5px;font-family:'Courier New',monospace;direction:ltr;}
+.license-card .error{color:#dc2626;font-size:12px;font-weight:800;text-align:center;margin-top:10px;min-height:16px;}
+.logo-upload{display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px;background:var(--bg);border-radius:16px;border:1.5px dashed var(--border);}
+.logo-preview{width:100px;height:100px;border-radius:16px;background:var(--card);display:grid;place-items:center;font-size:36px;border:1.5px solid var(--border);overflow:hidden;}
+.logo-preview img{width:100%;height:100%;object-fit:contain;}
+.upload-btn{padding:10px 18px;border-radius:12px;border:none;background:linear-gradient(135deg,#0284c7,#0369a1);color:#fff;font-size:13px;font-weight:800;cursor:pointer;font-family:inherit;}
+.inv-preview-overlay{position:fixed;inset:0;background:rgba(12,74,110,.75);backdrop-filter:blur(6px);z-index:90;display:flex;align-items:center;justify-content:center;padding:12px;opacity:0;pointer-events:none;transition:.28s;overflow-y:auto;}
+.inv-preview-overlay.open{opacity:1;pointer-events:auto;}
+.inv-preview-card{background:#fff;border-radius:20px;max-width:600px;width:100%;max-height:90vh;overflow-y:auto;padding:24px;box-shadow:0 30px 80px rgba(0,0,0,.6);}
+.inv-action-bar{position:sticky;bottom:0;background:#fff;padding-top:16px;border-top:1.5px solid #e0f2fe;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px;}
+.inv-action-bar button{padding:12px;border-radius:12px;border:none;font-size:12.5px;font-weight:800;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:5px;}
+.inv-action-bar .b-pdf{background:linear-gradient(135deg,#dc2626,#ef4444);color:#fff;}
+.inv-action-bar .b-wa{background:linear-gradient(135deg,#059669,#10b981);color:#fff;}
+.inv-action-bar .b-copy{background:#f0f9ff;color:#0c4a6e;border:1.5px solid #bae6fd;}
+.inv-action-bar .b-close{background:#f1f5f9;color:#334155;border:1.5px solid #cbd5e1;}
+.trial-banner{display:none;background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#78350f;padding:10px 16px;font-size:12px;font-weight:800;text-align:center;position:sticky;top:0;z-index:100;box-shadow:0 4px 12px rgba(245,158,11,.4);}
+.trial-banner.danger{background:linear-gradient(135deg,#dc2626,#ef4444);color:#fff;}
+.trial-banner a{color:inherit;text-decoration:underline;font-weight:900;cursor:pointer;}
+</style>
+</head>
+<body>
+
+<!-- LICENSE SCREEN -->
+<div class="license-screen" id="licenseScreen">
+<div class="license-card">
+<div class="logo" id="licLogo">⚙️</div>
+<h2 id="licTitle">فعال‌سازی نرم‌افزار</h2>
+<div class="desc" id="licDesc">برای استفاده از نرم‌افزار، ابتدا شماره تلفن خود را وارد کنید.</div>
+<div id="licStep1">
+<div class="field"><label>شماره تلفن همراه</label><input type="text" id="licPhone" placeholder="09xxxxxxxxx" inputmode="numeric" dir="ltr" maxlength="11"></div>
+<button class="btn btn-primary" id="licReqBtn">📩 دریافت کد درخواست</button>
+</div>
+<div id="licStep2" class="hidden">
+<div class="req-box">
+<div class="lbl">کد درخواست شما (به پشتیبانی بفرستید):</div>
+<div class="val" id="licReqCode">—</div>
+</div>
+<button class="btn btn-whatsapp" id="licWaBtn">📱 ارسال به واتساپ پشتیبانی</button>
+<div class="field" style="margin-top:14px;"><label>کد فعال‌سازی (دریافتی از پشتیبانی)</label><input type="text" id="licActCode" placeholder="TC-XXXX-XXXX" dir="ltr" maxlength="30"></div>
+<button class="btn btn-primary" id="licActivateBtn">✅ فعال‌سازی</button>
+<button class="btn btn-ghost" id="licBackBtn">🔙 بازگشت</button>
+</div>
+<div class="error" id="licError"></div>
+<div style="text-align:center;font-size:10.5px;color:#94a3b8;font-weight:700;margin-top:16px;line-height:1.7;">
+پشتیبانی: ۰۹۱۰۶۶۶۲۵۳۵<br>طراحی: قادر صمدی
+</div>
+</div>
+</div>
+
+<div class="app" id="mainApp" style="display:none;">
+
+<div class="trial-banner" id="trialBanner"></div>
+
+<!-- DASHBOARD -->
+<div class="page active" id="page-dashboard">
+<div class="topbar">
+<div class="header-inner">
+<div class="logo-badge" id="headerLogo"></div>
+<div class="brand">
+<div class="brand-name" id="brandName"><span class="project">حساب‌داری</span><span class="tabriz"> خدمات فنی</span></div>
+<small id="brandSub">TECHNICAL SERVICES</small>
+</div>
+<div class="jalali-date"><div class="jd-day" id="jdDay">—</div><div class="jd-info" id="jdInfo">—</div></div>
+<button class="theme-btn" id="themeBtn">🌙</button>
+<button class="help-btn" id="helpBtn">❓</button>
+</div>
+</div>
+<div class="balance-wrap">
+<div class="balance-card">
+<div class="bc-top"><div class="bc-label">موجودی کل</div><div class="bc-chip" id="bcLicense">💰 حساب</div></div>
+<div class="bc-value" id="balanceValue">۰ <span class="cur">تومان</span></div>
+<div class="bc-bottom">
+<div class="bc-mini"><div class="l">📥 دریافت‌ها</div><div class="v" id="bcRec">۰</div></div>
+<div class="bc-mini"><div class="l">💸 پرداخت‌ها</div><div class="v" id="bcPay">۰</div></div>
+</div>
+</div>
+</div>
+<div class="stats">
+<div class="stat"><div class="stat-ic buy">📄</div><div class="stat-l">فاکتور امروز</div><div class="stat-v expense" id="sTodayInv">۰</div></div>
+<div class="stat"><div class="stat-ic pay">💸</div><div class="stat-l">پرداخت امروز</div><div class="stat-v pay" id="sTodayPay">۰</div></div>
+<div class="stat"><div class="stat-ic rec">📥</div><div class="stat-l">دریافت امروز</div><div class="stat-v income" id="sTodayRec">۰</div></div>
+</div>
+<div class="sec">
+<div class="sec-head"><h3><span>📄</span>آخرین فاکتورها</h3><a onclick="go('invoices')">همه</a></div>
+<div id="dashInvoices"></div>
+</div>
+<div class="sec">
+<div class="sec-head"><h3><span>🕐</span>آخرین تراکنش‌ها</h3><a onclick="go('daily')">همه</a></div>
+<div id="dashRecent"></div>
+</div>
+</div>
+
+<!-- INVOICES -->
+<div class="page" id="page-invoices">
+<div class="page-head">
+<div class="logo-badge" id="invLogo"></div>
+<div class="head-text"><h2>فاکتورها</h2><div class="sub" id="invSub">فاکتورهای خدمات</div></div>
+<button class="theme-btn" onclick="toggleTheme()">🌙</button>
+<button class="save-btn" onclick="backupJSON()">💾</button>
+<button class="help-btn" onclick="openHelp()">❓</button>
+</div>
+<div class="filters" id="invFilters">
+<button class="fbtn active" data-f="all">همه</button>
+<button class="fbtn" data-f="unpaid">پرداخت‌نشده</button>
+<button class="fbtn" data-f="paid">پرداخت‌شده</button>
+<button class="fbtn" data-f="cash">نقدی</button>
+<button class="fbtn" data-f="check">چکی</button>
+<button class="fbtn" data-f="star">⭐ مهم</button>
+</div>
+<div class="list" id="invList"></div>
+</div>
+
+<!-- CUSTOMERS -->
+<div class="page" id="page-customers">
+<div class="page-head">
+<div class="logo-badge" id="custLogo"></div>
+<div class="head-text"><h2>مشتریان</h2><div class="sub" id="custSub">دفترچه مشتریان</div></div>
+<button class="theme-btn" onclick="toggleTheme()">🌙</button>
+<button class="save-btn" onclick="backupJSON()">💾</button>
+<button class="help-btn" onclick="openHelp()">❓</button>
+</div>
+<div class="list" id="custList" style="padding-top:14px;"></div>
+</div>
+
+<!-- DAILY -->
+<div class="page" id="page-daily">
+<div class="page-head">
+<div class="logo-badge" id="dailyLogo"></div>
+<div class="head-text"><h2>حساب روزانه</h2><div class="sub">پرداخت و دریافت</div></div>
+<button class="theme-btn" onclick="toggleTheme()">🌙</button>
+<button class="save-btn" onclick="backupJSON()">💾</button>
+<button class="help-btn" onclick="openHelp()">❓</button>
+</div>
+<div class="filters" id="dailyFilters">
+<button class="fbtn active" data-f="all">همه</button>
+<button class="fbtn" data-f="payment">پرداخت</button>
+<button class="fbtn" data-f="receipt">دریافت</button>
+<button class="fbtn" data-f="check">چکی</button>
+<button class="fbtn" data-f="cash">نقدی</button>
+<button class="fbtn" data-f="star">⭐ مهم</button>
+</div>
+<div class="list" id="dailyList"></div>
+</div>
+
+<!-- CHECKS -->
+<div class="page" id="page-checks">
+<div class="page-head">
+<div class="logo-badge" id="checksLogo"></div>
+<div class="head-text"><h2>چک‌ها</h2><div class="sub" id="checksSub">—</div></div>
+<button class="theme-btn" onclick="toggleTheme()">🌙</button>
+<button class="save-btn" onclick="backupJSON()">💾</button>
+<button class="help-btn" onclick="openHelp()">❓</button>
+</div>
+<div class="filters" id="checkFilters">
+<button class="fbtn active" data-f="all">همه</button>
+<button class="fbtn" data-f="overdue">سررسید گذشته</button>
+<button class="fbtn" data-f="soon">نزدیک سررسید</button>
+<button class="fbtn" data-f="pending">در انتظار</button>
+<button class="fbtn" data-f="paid">پاس‌شده</button>
+</div>
+<div class="list" id="checksList"></div>
+</div>
+
+<!-- REPORTS -->
+<div class="page" id="page-reports">
+<div class="page-head">
+<div class="logo-badge" id="reportsLogo"></div>
+<div class="head-text"><h2>گزارش‌ها</h2><div class="sub">درآمد و نمودار</div></div>
+<button class="theme-btn" onclick="toggleTheme()">🌙</button>
+<button class="save-btn" onclick="backupJSON()">💾</button>
+<button class="help-btn" onclick="openHelp()">❓</button>
+</div>
+<div class="sec" style="padding-top:4px;">
+<div class="sum-grid">
+<div class="sum-box"><div class="l">جمع فاکتورها</div><div class="v r" id="rInv">۰</div></div>
+<div class="sum-box"><div class="l">جمع پرداخت‌ها</div><div class="v o" id="rPay">۰</div></div>
+<div class="sum-box"><div class="l">جمع دریافت‌ها</div><div class="v g" id="rRec">۰</div></div>
+<div class="sum-box"><div class="l">مانده</div><div class="v p" id="rBal">۰</div></div>
+</div>
+<div class="card"><h4>📊 درآمد ماهانه</h4><div class="hint">۱۲ ماه اخیر</div><div id="chartMonthly"></div></div>
+<div class="card"><h4>📈 درآمد سالانه</h4><div class="hint">۵ سال اخیر</div><div id="chartYearly"></div></div>
+</div>
+</div>
+
+<!-- SETTINGS -->
+<div class="page" id="page-settings">
+<div class="page-head">
+<div class="logo-badge" id="settingsLogo"></div>
+<div class="head-text"><h2>تنظیمات شرکت</h2><div class="sub">اطلاعات فروشنده و لوگو</div></div>
+<button class="theme-btn" onclick="toggleTheme()">🌙</button>
+<button class="help-btn" onclick="openHelp()">❓</button>
+</div>
+<div class="sec" style="padding-top:14px;">
+<div class="card">
+<h4>🏢 اطلاعات شرکت / فروشنده</h4>
+<div class="hint">این اطلاعات در فاکتور رسمی نمایش داده می‌شود</div>
+<div class="field"><label>نام شرکت / فروشگاه</label><input type="text" id="stName" placeholder="مثلاً: خدمات فنی آسانسور"></div>
+<div class="field"><label>شماره ثبت شرکت</label><input type="text" id="stReg" placeholder="مثلاً: ۱۲۳۴۵"></div>
+<div class="field"><label>کد ملی / شناسه ملی</label><input type="text" id="stNat" placeholder="مثلاً: ۱۲۳۴۵۶۷۸۹۰"></div>
+<div class="field"><label>شماره اقتصادی / مالیاتی</label><input type="text" id="stEco" placeholder="اختیاری"></div>
+<div class="field"><label>تلفن</label><input type="text" id="stPhone" placeholder="مثلاً: ۰۴۱-۳۳۳۳۳۳۳۳" dir="ltr"></div>
+<div class="field"><label>آدرس</label><textarea id="stAddress" placeholder="آدرس کامل"></textarea></div>
+</div>
+<div class="card">
+<h4>🖼️ لوگوی شرکت</h4>
+<div class="hint">برای فاکتور رسمی استفاده می‌شود</div>
+<div class="logo-upload">
+<div class="logo-preview" id="logoPreview">🏢</div>
+<input type="file" id="logoFile" accept="image/*" style="display:none;">
+<button class="upload-btn" id="uploadLogoBtn">📷 آپلود لوگو</button>
+<button class="upload-btn" id="removeLogoBtn" style="background:linear-gradient(135deg,#dc2626,#ef4444);">🗑️ حذف لوگو</button>
+</div>
+</div>
+<button class="submit" id="saveSettingsBtn">💾 ذخیره تنظیمات</button>
+<div class="card" style="margin-top:14px;">
+<h4>📅 وضعیت لایسنس</h4>
+<div class="hint" id="licenseInfo">—</div>
+<button class="submit" id="renewBtn" style="background:linear-gradient(135deg,#059669,#10b981);">🔄 تمدید لایسنس</button>
+</div>
+</div>
+</div>
+
+</div>
+
+<button class="fab" id="fab" style="display:none;"><i>+</i> ثبت</button>
+
+<nav class="bnav" id="bnav" style="display:none;">
+<button class="active" data-page="dashboard"><span class="ic">🏠</span>خانه</button>
+<button data-page="invoices"><span class="ic">📄</span>فاکتور</button>
+<button data-page="customers"><span class="ic">👥</span>مشتری</button>
+<button data-page="daily"><span class="ic">💰</span>روزانه</button>
+<button data-page="settings"><span class="ic">⚙️</span>تنظیمات</button>
+</nav>
+
+<!-- SHEET -->
+<div class="overlay" id="overlay">
+<div class="sheet">
+<div class="sheet-head"><h3 id="sheetTitle">ثبت جدید</h3><button class="close" id="closeBtn">✕</button></div>
+<div class="seg" id="typeSeg">
+<button data-type="invoice" class="active">📄 فاکتور</button>
+<button data-type="payment">💸 پرداخت</button>
+<button data-type="receipt">📥 دریافت</button>
+</div>
+<div id="invoiceForm">
+<div class="field"><label>مشتری</label><div style="display:flex;gap:8px;"><select id="invCustomer" style="flex:1;"><option value="">— انتخاب مشتری —</option></select><button type="button" id="addCustomerFromInvBtn" style="padding:0 14px;border-radius:14px;border:none;background:linear-gradient(135deg,#059669,#10b981);color:#fff;font-size:13px;font-weight:800;cursor:pointer;font-family:inherit;white-space:nowrap;">+ مشتری</button></div></div>
+<div class="field"><label>شماره فاکتور</label><input type="text" id="invNumber" placeholder="مثلاً ۱۴۰۴-۰۰۱"></div>
+<div class="field"><label>شرح کلی خدمات</label><textarea id="invDesc" placeholder="مثلاً: سرویس دوره‌ای آسانسور..."></textarea></div>
+<div class="field"><label>ردیف‌های فاکتور</label><div class="inv-rows" id="invRows"></div><button class="add-row-btn" id="addRowBtn" type="button">+ افزودن ردیف</button></div>
+<div class="inv-summary">
+<div class="row"><span>جمع ردیف‌ها</span><span id="invSubtotal">۰ تومان</span></div>
+<div class="row"><span>تخفیف</span><span id="invDiscountShow">۰ تومان</span></div>
+<div class="row total"><span>جمع کل</span><span id="invTotal">۰ تومان</span></div>
+</div>
+<div class="field-row">
+<div class="field"><label>تخفیف (تومان)</label><input type="text" id="invDiscount" inputmode="numeric" placeholder="۰"></div>
+<div class="field"><label>وضعیت پرداخت</label><select id="invPaid"><option value="unpaid">پرداخت‌نشده</option><option value="paid">پرداخت‌شده</option></select></div>
+</div>
+<div class="field"><label>روش پرداخت</label><div class="seg" id="paySeg"><button data-pay="cash" class="active">💵 نقدی</button><button data-pay="check">🧾 چک</button></div></div>
+<div id="checkFields" class="hidden">
+<div class="field"><label>شماره سری چک</label><input type="text" id="serialInput" placeholder="۱۲۳۴۵۶"></div>
+<div class="field"><label>تاریخ سررسید</label><input type="text" id="dueDisplay" placeholder="انتخاب تاریخ" readonly style="cursor:pointer;"></div>
+<div class="field"><label>نام بانک</label><input type="text" id="bankInput" placeholder="مثلاً ملت"></div>
+</div>
+<label style="display:flex;align-items:center;gap:10px;padding:13px 14px;border-radius:14px;background:linear-gradient(135deg,#fffbeb,#fef3c7);border:1.5px solid #fde68a;margin-bottom:16px;cursor:pointer;">
+<input type="checkbox" id="invImportant" style="width:19px;height:19px;accent-color:#fbbf24;">
+<span style="font-size:12.5px;font-weight:800;color:#78350f;">⭐ این فاکتور مهم است</span>
+</label>
+<button class="submit" id="saveInvoiceBtn">💾 ذخیره فاکتور</button>
+</div>
+<div id="flowForm" class="hidden">
+<div class="field"><label>مبلغ (تومان)</label><input type="text" id="amountInput" inputmode="numeric" placeholder="۰"></div>
+<div class="field"><label id="titleLabel">بابت / شرح</label><input type="text" id="titleInput" placeholder="مثلاً حقوق، خرید..."></div>
+<div class="field"><label id="personLabel">نام شخص</label><input type="text" id="personInput" placeholder="نام شخص"></div>
+<div class="field"><label>روش پرداخت / دریافت</label><div class="seg" id="flowPaySeg"><button data-pay="cash" class="active">💵 نقدی</button><button data-pay="check">🧾 چک</button></div></div>
+<div id="flowCheckFields" class="hidden">
+<div class="field"><label>شماره سری چک</label><input type="text" id="flowSerial" placeholder="۱۲۳۴۵۶"></div>
+<div class="field"><label>تاریخ سررسید</label><input type="text" id="flowDueDisplay" placeholder="انتخاب تاریخ" readonly style="cursor:pointer;"></div>
+<div class="field"><label>نام بانک</label><input type="text" id="flowBank" placeholder="مثلاً ملت"></div>
+</div>
+<div class="field-row">
+<div class="field"><label>تاریخ</label><input type="text" id="dateDisplay" placeholder="انتخاب تاریخ" readonly style="cursor:pointer;"></div>
+<div class="field"><label>ساعت</label><input type="time" id="timeInput"></div>
+</div>
+<label style="display:flex;align-items:center;gap:10px;padding:13px 14px;border-radius:14px;background:linear-gradient(135deg,#fffbeb,#fef3c7);border:1.5px solid #fde68a;margin-bottom:16px;cursor:pointer;">
+<input type="checkbox" id="flowImportant" style="width:19px;height:19px;accent-color:#fbbf24;">
+<span style="font-size:12.5px;font-weight:800;color:#78350f;">⭐ این مورد مهم است</span>
+</label>
+<button class="submit" id="saveFlowBtn">💾 ذخیره</button>
+</div>
+<div id="customerForm" class="hidden">
+<div class="field"><label>نام مشتری / ساختمان</label><input type="text" id="custName" placeholder="مثلاً ساختمان نگین"></div>
+<div class="field"><label>شماره تماس</label><input type="text" id="custPhone" inputmode="tel" placeholder="۰۹۱۲..."></div>
+<div class="field"><label>آدرس</label><textarea id="custAddress" placeholder="آدرس دقیق"></textarea></div>
+<div class="field"><label>توضیحات</label><textarea id="custNote" placeholder="مثلاً: آسانسور ۶ طبقه"></textarea></div>
+<button class="submit" id="saveCustomerBtn">💾 ذخیره مشتری</button>
+</div>
+</div>
+</div>
+
+<!-- DATE PICKER -->
+<div class="overlay" id="dpOverlay" style="align-items:center;padding:20px;">
+<div style="width:100%;max-width:360px;background:var(--card);border-radius:24px;padding:20px;">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+<button class="close" id="dpPrev">‹</button>
+<div id="dpTitle" style="font-size:15px;font-weight:900;">—</div>
+<button class="close" id="dpNext">›</button>
+</div>
+<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:8px;">
+<span style="text-align:center;font-size:10.5px;font-weight:800;color:var(--muted);padding:6px 0;">ش</span>
+<span style="text-align:center;font-size:10.5px;font-weight:800;color:var(--muted);padding:6px 0;">ی</span>
+<span style="text-align:center;font-size:10.5px;font-weight:800;color:var(--muted);padding:6px 0;">د</span>
+<span style="text-align:center;font-size:10.5px;font-weight:800;color:var(--muted);padding:6px 0;">س</span>
+<span style="text-align:center;font-size:10.5px;font-weight:800;color:var(--muted);padding:6px 0;">چ</span>
+<span style="text-align:center;font-size:10.5px;font-weight:800;color:var(--muted);padding:6px 0;">پ</span>
+<span style="text-align:center;font-size:10.5px;font-weight:800;color:#dc2626;padding:6px 0;">ج</span>
+</div>
+<div id="dpGrid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;"></div>
+<div style="display:flex;gap:8px;margin-top:18px;padding-top:14px;border-top:1px solid var(--border);">
+<button id="dpToday" style="flex:1;padding:12px;border-radius:13px;border:none;background:var(--bg-2);color:var(--primary-dark);font-family:inherit;font-size:13px;font-weight:800;cursor:pointer;">امروز</button>
+<button id="dpClose" style="flex:1;padding:12px;border-radius:13px;border:none;background:linear-gradient(135deg,#0284c7,#0369a1);color:#fff;font-family:inherit;font-size:13px;font-weight:800;cursor:pointer;">تأیید</button>
+</div>
+</div>
+</div>
+
+<!-- INVOICE PREVIEW -->
+<div class="inv-preview-overlay" id="invPreviewOverlay">
+<div class="inv-preview-card">
+<div id="invPreviewContent"></div>
+<div class="inv-action-bar">
+<button class="b-pdf" id="invPdfBtn">📄 PDF</button>
+<button class="b-wa" id="invWaBtn">📱 واتساپ</button>
+<button class="b-copy" id="invCopyBtn">📋 کپی متن</button>
+<button class="b-close" id="invCloseBtn">✕ بستن</button>
+</div>
+</div>
+</div>
+
+<!-- HELP -->
+<div class="help-overlay" id="helpOverlay">
+<div class="help-card">
+<div class="help-hero">
+<button class="close-x" id="helpClose">✕</button>
+<div class="icon-wrap">❓</div>
+<div><h2>راهنما</h2><p>حساب‌داری خدمات فنی</p></div>
+</div>
+<div class="help-body">
+<div class="help-sec">
+<div class="help-sec-title">📄 فاکتور</div>
+<div class="help-list">
+<div class="row"><div><div class="ttl">صدور فاکتور رسمی</div><div class="desc">مشتری را انتخاب کنید، ردیف‌ها را اضافه کنید و ذخیره کنید.</div></div></div>
+<div class="row"><div><div class="ttl">PDF و واتساپ</div><div class="desc">روی فاکتور، دکمه 🖨️ را بزنید تا گزینه‌های PDF، واتساپ و کپی نمایش داده شود.</div></div></div>
+<div class="row"><div><div class="ttl">تنظیمات شرکت</div><div class="desc">در تب تنظیمات، اطلاعات شرکت و لوگو را وارد کنید تا در فاکتور نمایش داده شود.</div></div></div>
+</div>
+</div>
+<div class="help-sec">
+<div class="help-sec-title">📞 پشتیبانی</div>
+<div class="contact-box">
+<div class="contact-email"><span class="ic">📱</span><div class="mail">09106662535</div></div>
+<div class="contact-email"><span class="ic">✉️</span><div class="mail">ghadersamadi50@gmail.com</div></div>
+<div class="contact-actions">
+<a class="contact-btn mail" href="tel:09106662535" style="background:linear-gradient(135deg,#059669,#10b981);">📞 تماس</a>
+<a class="contact-btn mail" href="mailto:ghadersamadi50@gmail.com">✉️ ایمیل</a>
+</div>
+</div>
+</div>
+<div class="help-sec">
+<div class="help-sec-title">👨‍💻 طراحی و اجرا</div>
+<div class="designer-box">
+<div class="av">ق</div>
+<div class="info"><div class="name">قادر صمدی</div><div class="role">طراحی و اجرای پروژه «حساب‌داری خدمات فنی»</div></div>
+</div>
+</div>
+<div class="help-sec">
+<div class="help-sec-title">⚖️ حق کپی‌رایت</div>
+<div class="copyright-box"><div class="copy-txt">تمامی حقوق محفوظ است.<br><b>هرگونه کپی‌برداری بدون اجازه کتبی طراح پیگرد قانونی دارد.</b></div></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="toast" id="toast"><span>ذخیره شد</span></div>
+
+<script>
+/* JS در پیام بعدی */
+</script>
+</body>
+</html>
+<script>
+/* ========== JALALI ========== */
+function _div(a,b){return ~~(a/b);}
+function _mod(a,b){return a-~~(a/b)*b;}
+function _jalCal(jy){var breaks=[-61,9,38,199,426,686,756,818,1111,1181,1210,1635,2060,2097,2192,2262,2324,2394,2456,3178];var bl=breaks.length,gy=jy+621,leapJ=-14,jp=breaks[0],jm,jump,leap,n;for(var i=1;i<bl;i++){jm=breaks[i];jump=jm-jp;if(jy<jm)break;leapJ=leapJ+_div(jump,33)*8+_div(_mod(jump,33),4);jp=jm;}n=jy-jp;leapJ=leapJ+_div(n,33)*8+_div(_mod(n,33)+3,4);if(_mod(jump,33)===4&&jump-n===4)leapJ+=1;var leapG=_div(gy,4)-_div((_div(gy,100)+1)*3,4)-150;var march=20+leapJ-leapG;if(jump-n<6)n=n-jump+_div(jump+4,33)*33;leap=_mod(_mod(n+1,33)-1,4);if(leap===-1)leap=4;return {leap:leap,gy:gy,march:march};}
+function _g2d(gy,gm,gd){var d=_div((gy+_div(gm-8,6)+100100)*1461,4)+_div(153*_mod(gm+9,12)+2,5)+gd-34840408;d=d-_div(_div(gy+100100+_div(gm-8,6),100)*3,4)+752;return d;}
+function _d2g(jdn){var j=4*jdn+139361631;j=j+_div(_div(4*jdn+183187720,146097)*3,4)*4-3908;var i=_div(_mod(j,1461),4)*5+308;var gd=_div(_mod(i,153),5)+1;var gm=_mod(_div(i,153),12)+1;var gy=_div(j,1461)-100100+_div(8-gm,6);return {gy:gy,gm:gm,gd:gd};}
+function _j2d(jy,jm,jd){var r=_jalCal(jy);return _g2d(r.gy,3,r.march)+(jm-1)*31-_div(jm,7)*(jm-7)+jd-1;}
+function _d2j(jdn){var gy=_d2g(jdn).gy,jy=gy-621,jd,jm;var r=_jalCal(jy);var jdn1f=_g2d(gy,3,r.march);var k=jdn-jdn1f;if(k>=0){if(k<=185){jm=1+_div(k,31);jd=_mod(k,31)+1;return {jy:jy,jm:jm,jd:jd};}else k-=186;}else{jy-=1;k+=179;if(r.leap===1)k+=1;}jm=7+_div(k,30);jd=_mod(k,30)+1;return {jy:jy,jm:jm,jd:jd};}
+function toJalali(gy,gm,gd){return _d2j(_g2d(gy,gm,gd));}
+function toGregorian(jy,jm,jd){return _d2g(_j2d(jy,jm,jd));}
+function jMonthLen(jy,jm){if(jm<=6)return 31;if(jm<=11)return 30;return _jalCal(jy).leap===0?30:29;}
+var J_MONTHS=['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
+var FA_D='۰۱۲۳۴۵۶۷۸۹';
+
+function $(id){return document.getElementById(id);}
+function toEn(s){return String(s).replace(/[۰-۹]/g,function(c){return FA_D.indexOf(c);});}
+function toFa(s){return String(s).replace(/\d/g,function(d){return FA_D[+d];});}
+function fmt(n){return Number(n).toLocaleString('fa-IR');}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function pad2(n){return String(n).padStart(2,'0');}
+function todayISO(){var d=new Date();return d.getFullYear()+'-'+pad2(d.getMonth()+1)+'-'+pad2(d.getDate());}
+function yesterdayISO(){var d=new Date();d.setDate(d.getDate()-1);return d.getFullYear()+'-'+pad2(d.getMonth()+1)+'-'+pad2(d.getDate());}
+function nowTime(){var d=new Date();return pad2(d.getHours())+':'+pad2(d.getMinutes());}
+function isoToJalali(iso){if(!iso)return null;var p=iso.split('-').map(Number);return toJalali(p[0],p[1],p[2]);}
+function jalaliToISO(jy,jm,jd){var g=toGregorian(jy,jm,jd);return g.gy+'-'+pad2(g.gm)+'-'+pad2(g.gd);}
+function faDateShort(iso){if(!iso)return '';var j=isoToJalali(iso);if(!j)return '';return toFa(j.jy)+'/'+toFa(pad2(j.jm))+'/'+toFa(pad2(j.jd));}
+function faDateFull(iso){if(!iso)return '';var j=isoToJalali(iso);if(!j)return '';return toFa(j.jd)+' '+J_MONTHS[j.jm-1]+' '+toFa(j.jy);}
+function faDateLong(iso){if(!iso)return '';var j=isoToJalali(iso);if(!j)return '';var d=new Date(iso+'T00:00:00');var wd=new Intl.DateTimeFormat('fa-IR',{weekday:'long'}).format(d);return wd+' '+toFa(j.jd)+' '+J_MONTHS[j.jm-1];}
+function dayLabel(iso){if(iso===todayISO())return 'امروز';if(iso===yesterdayISO())return 'دیروز';return faDateLong(iso);}
+function jMonthKey(iso){var j=isoToJalali(iso);if(!j)return null;return j.jy*100+j.jm;}
+function jMonthLabel(key){var y=Math.floor(key/100),m=key%100;return J_MONTHS[m-1]+' '+toFa(y);}
+function hash(str){var h=5381;for(var i=0;i<str.length;i++){h=((h<<5)+h)+str.charCodeAt(i);h=h&0xFFFFFFFF;}return Math.abs(h).toString(36).toUpperCase();}
+
+/* ========== LOGO SVG ========== */
+function logoSVG(bg,ic,ac){return '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="'+bg+'"/><rect x="8" y="8" width="18" height="84" rx="1" fill="none" stroke="'+ic+'" stroke-width="2.4"/><rect x="30" y="8" width="18" height="84" rx="1" fill="none" stroke="'+ic+'" stroke-width="2.4"/><circle cx="18" cy="50" r="2.6" fill="'+ac+'"/><circle cx="40" cy="50" r="2.6" fill="'+ac+'"/><rect x="54" y="8" width="42" height="38" rx="1" fill="none" stroke="'+ic+'" stroke-width="2.4"/><line x1="68" y1="8" x2="68" y2="46" stroke="'+ic+'" stroke-width="2"/><line x1="82" y1="8" x2="82" y2="46" stroke="'+ic+'" stroke-width="2"/><line x1="54" y1="27" x2="96" y2="27" stroke="'+ic+'" stroke-width="2"/><rect x="54" y="54" width="42" height="38" rx="1" fill="none" stroke="'+ic+'" stroke-width="2.4"/></svg>';}
+function renderLogos(){var isDark=document.documentElement.classList.contains('dark');var bg=isDark?'#152238':'#e0f2fe';var ic=isDark?'#7dd3fc':'#0c4a6e';var ac=isDark?'#38bdf8':'#0284c7';['headerLogo','invLogo','custLogo','dailyLogo','checksLogo','reportsLogo','settingsLogo'].forEach(function(id){var el=$(id);if(el)el.innerHTML=logoSVG(bg,ic,ac);});}
+
+/* ========== THEME ========== */
+var THEME_KEY='tech-services-theme';
+function applyTheme(mode){var html=document.documentElement;if(mode==='dark'){html.classList.add('dark');var b=$('themeBtn');if(b)b.textContent='☀️';}else{html.classList.remove('dark');var b=$('themeBtn');if(b)b.textContent='🌙';}renderLogos();}
+function toggleTheme(){var isDark=document.documentElement.classList.contains('dark');var next=isDark?'light':'dark';try{localStorage.setItem(THEME_KEY,next);}catch(e){}applyTheme(next);}
+function initTheme(){var saved=null;try{saved=localStorage.getItem(THEME_KEY);}catch(e){}if(!saved){var p=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;saved=p?'dark':'light';}applyTheme(saved);}
+
+/* ========== CONSTANTS ========== */
+var KEY='tech-services-accounting-v2';
+var KEY_CUST='tech-services-customers-v2';
+var KEY_SETTINGS='tech-services-settings-v2';
+var KEY_LICENSE='tech-services-license-v2';
+var KEY_TRIAL='tech-services-trial-v2';
+var SECRET_KEY='TABRIZ-2027-FANI';
+var DEV_MODE_KEY='DEV-TABRIZ-2026';
+var TRIAL_DAYS=7;
+var SUPPORT_PHONE='09106662535';
+var SUPPORT_WHATSAPP='989106662535';
+var SUPPORT_EMAIL='ghadersamadi50@gmail.com';
+var DESIGNER_NAME='قادر صمدی';
+var STATUS_LABEL={paid:'پاس‌شده',overdue:'سررسید گذشته',soon:'نزدیک سررسید',pending:'در انتظار'};
+
+var tx=[],customers=[],settings={},license={},lastDeleted=null,toastTimer=null;
+var invFilter='all',dailyFilter='all',checkFilter='all';
+var fType='invoice',fPay='cash',formDate=todayISO(),formDue=null,invRowCounter=0;
+var currentPreviewInvoice=null;
+
+/* ========== LICENSE ========== */
+function makeActivationCode(phone, expiryTs, secretKey){
+var base=phone+'|'+expiryTs+'|'+secretKey;
+var h1=hash(base);var h2=hash(h1+phone);
+return 'TC-'+phone.slice(-4)+'-'+h1.slice(0,4).padEnd(4,'X')+'-'+h2.slice(0,4).padEnd(4,'X');
+}
+function makeRequestCode(phone){
+var h=hash('REQ|'+phone+'|TABRIZ');
+return 'REQ-'+phone.slice(-4)+'-'+h.slice(0,4);
+}
+function verifyActivation(phone, code){
+code=String(code).trim().toUpperCase();
+var now=Math.floor(Date.now()/1000);
+var start=now-5*365*24*3600;
+var end=now+10*365*24*3600;
+var step=24*3600;
+for(var ts=Math.floor(start/step)*step;ts<=end;ts+=step){
+if(makeActivationCode(phone,ts,SECRET_KEY)===code){
+return {valid:true, expiryTs:ts};
+}
+}
+return {valid:false};
+}
+function saveLicense(phone, code, expiryTs){
+license={phone:phone, code:code, expiryTs:expiryTs, activatedAt:Date.now()};
+try{localStorage.setItem(KEY_LICENSE, JSON.stringify(license));}catch(e){}
+}
+function loadLicense(){
+try{var raw=localStorage.getItem(KEY_LICENSE);license=raw?JSON.parse(raw):{};}catch(e){license={};}
+}
+function isLicenseValid(){
+try{
+if(localStorage.getItem('dev-mode') === DEV_MODE_KEY) return true;
+}catch(e){}
+if(license&&license.phone&&license.expiryTs){
+if(Math.floor(Date.now()/1000) < license.expiryTs) return true;
+}
+if(trialDaysLeft() > 0) return true;
+return false;
+}
+function getTrialInfo(){
+try{
+var raw=localStorage.getItem(KEY_TRIAL);
+if(!raw){
+var start=Date.now();
+var info={start:start, deviceId:hash('DEV'+start+Math.random())};
+localStorage.setItem(KEY_TRIAL,JSON.stringify(info));
+return info;
+}
+return JSON.parse(raw);
+}catch(e){return null;}
+}
+function trialDaysLeft(){
+var info=getTrialInfo();
+if(!info)return 0;
+var elapsed=Math.floor((Date.now()-info.start)/(1000*60*60*24));
+var left=TRIAL_DAYS-elapsed;
+return Math.max(0,left);
+}
+function licenseStatusText(){
+var devActive=false;
+try{devActive=localStorage.getItem('dev-mode') === DEV_MODE_KEY;}catch(e){}
+if(devActive)return '🛠️ حالت توسعه فعال';
+if(license&&license.phone&&license.expiryTs){
+var expDate=new Date(license.expiryTs*1000);
+var expStr=new Intl.DateTimeFormat('fa-IR',{dateStyle:'full'}).format(expDate);
+if(Math.floor(Date.now()/1000) < license.expiryTs)return '✅ فعال تا: '+expStr;
+}
+var left=trialDaysLeft();
+if(left>0)return '⏰ تست رایگان — '+toFa(left)+' روز باقی مانده';
+return '❌ لایسنس منقضی شده';
+}
+
+function showLicenseScreen(){
+var left=trialDaysLeft();
+if(left>0){
+hideLicenseScreen();
+renderTrialBanner();
+return;
+}
+$('licenseScreen').classList.remove('hidden');
+$('mainApp').style.display='none';
+$('fab').style.display='none';
+$('bnav').style.display='none';
+}
+function hideLicenseScreen(){
+$('licenseScreen').classList.add('hidden');
+$('mainApp').style.display='block';
+$('fab').style.display='flex';
+$('bnav').style.display='flex';
+}
+
+/* ========== LOAD / PERSIST ========== */
+function load(){try{var raw=localStorage.getItem(KEY);tx=raw?JSON.parse(raw):[];if(!Array.isArray(tx))tx=[];var rawC=localStorage.getItem(KEY_CUST);customers=rawC?JSON.parse(rawC):[];if(!Array.isArray(customers))customers=[];var rawS=localStorage.getItem(KEY_SETTINGS);settings=rawS?JSON.parse(rawS):{};if(typeof settings!=='object')settings={};}catch(e){tx=[];customers=[];settings={};}}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(tx));}catch(e){}}
+function persistCustomers(){try{localStorage.setItem(KEY_CUST,JSON.stringify(customers));}catch(e){}}
+function persistSettings(){try{localStorage.setItem(KEY_SETTINGS,JSON.stringify(settings));}catch(e){}}
+
+/* ========== HELPERS ========== */
+function checkStatus(t){if(t.paid)return 'paid';if(!t.due)return 'pending';var today=todayISO();if(t.due<today)return 'overdue';var days=Math.ceil((new Date(t.due+'T00:00:00')-new Date(today+'T00:00:00'))/86400000);if(days<=7)return 'soon';return 'pending';}
+function customerById(id){return customers.find(function(c){return c.id===id;});}
+function itemTitle(t){return t.type==='invoice'?(t.desc||('فاکتور '+(t.invNumber||''))):(t.title||'—');}
+function itemIcon(t){return t.type==='invoice'?'📄':(t.type==='payment'?'💸':(t.type==='receipt'?'📥':'📌'));}
+function itemAmount(t){return t.type==='invoice'?(t.total||0):(t.amount||0);}
+
+/* ========== RENDER DASHBOARD ========== */
+function renderDashboard(){
+var balance=0,todayInv=0,todayPay=0,todayRec=0,totalRec=0,totalPay=0;
+var t0=todayISO();
+for(var i=0;i<tx.length;i++){
+var t=tx[i];
+if(t.type==='receipt'){balance+=itemAmount(t);totalRec+=itemAmount(t);}
+else if(t.type==='payment'){balance-=itemAmount(t);totalPay+=itemAmount(t);}
+else if(t.type==='invoice'){totalRec+=itemAmount(t);balance+=itemAmount(t);}
+if(t.date===t0){if(t.type==='invoice')todayInv+=itemAmount(t);else if(t.type==='payment')todayPay+=itemAmount(t);else todayRec+=itemAmount(t);}
+}
+$('balanceValue').innerHTML=(balance<0?'−':'')+fmt(Math.abs(balance))+' <span class="cur">تومان</span>';
+$('bcRec').textContent=fmt(totalRec)+' تومان';
+$('bcPay').textContent=fmt(totalPay)+' تومان';
+$('sTodayInv').textContent=fmt(todayInv);
+$('sTodayPay').textContent=fmt(todayPay);
+$('sTodayRec').textContent=fmt(todayRec);
+var todayArr=todayISO().split('-').map(Number);
+var j=toJalali(todayArr[0],todayArr[1],todayArr[2]);
+$('jdDay').textContent=toFa(j.jd);
+$('jdInfo').textContent=J_MONTHS[j.jm-1]+' '+toFa(j.jy);
+var invoices=tx.filter(function(t){return t.type==='invoice';}).sort(function(a,b){return b.createdAt-a.createdAt;}).slice(0,3);
+$('dashInvoices').innerHTML=invoices.length?invoices.map(itemHTML).join(''):'<div class="card" style="text-align:center;color:var(--muted);font-size:12.5px;font-weight:700;padding:24px;">هنوز فاکتوری صادر نشده</div>';
+var recent=tx.slice().sort(function(a,b){return b.createdAt-a.createdAt;}).slice(0,4);
+$('dashRecent').innerHTML=recent.length?recent.map(itemHTML).join(''):'<div class="card" style="text-align:center;color:var(--muted);font-size:12.5px;font-weight:700;padding:24px;">هنوز چیزی ثبت نشده</div>';
+}
+
+function itemHTML(t){
+var icon=itemIcon(t);
+var isInvoice=t.type==='invoice';
+var sign=(t.type==='receipt'||isInvoice)?'+':'−';
+var cls=(t.type==='receipt'||isInvoice)?'income':(t.type==='payment'?'pay':'expense');
+var timeStr=t.time?' • '+toFa(t.time):'';
+var badges=[];
+if(isInvoice)badges.push('<span class="badge invoice">📄 فاکتور'+(t.invNumber?' #'+esc(t.invNumber):'')+'</span>');
+if(t.type==='payment')badges.push('<span class="badge pay-type">پرداخت</span>');
+if(t.type==='receipt')badges.push('<span class="badge rec-type">دریافت</span>');
+if(t.pay)badges.push('<span class="badge '+(t.pay==='check'?'check':'cash')+'">'+(t.pay==='check'?'🧾 چک':'💵 نقدی')+'</span>');
+if(isInvoice&&t.paidStatus)badges.push('<span class="badge '+(t.paidStatus==='paid'?'paid':'pending')+'">'+(t.paidStatus==='paid'?'پرداخت‌شده':'پرداخت‌نشده')+'</span>');
+if(t.pay==='check'){var st=checkStatus(t);if(st!=='pending')badges.push('<span class="badge '+st+'">'+STATUS_LABEL[st]+'</span>');}
+var custLine='';
+if(isInvoice&&t.customerId){var c=customerById(t.customerId);if(c)custLine='<div class="item-person">👤 '+esc(c.name)+(c.phone?' • '+esc(c.phone):'')+'</div>';}
+var personLine=(!isInvoice&&t.person)?'<div class="item-person">👤 '+esc(t.person)+'</div>':'';
+var checkLine=t.pay==='check'?'<div class="item-person">🧾 سری: '+esc(t.serial||'—')+(t.due?' • سررسید: '+faDateShort(t.due):'')+'</div>':'';
+var invLine=isInvoice?'<div class="item-person">📦 '+((t.rows||[]).length)+' ردیف</div>':'';
+return '<div class="item '+(t.important?'starred':'')+'">'+
+'<div class="item-icon">'+icon+'</div>'+
+'<div class="item-body">'+
+'<div class="item-title">'+esc(itemTitle(t))+(t.important?' ⭐':'')+'</div>'+
+'<div class="item-meta">'+badges.join('')+'<span class="item-date">'+faDateShort(t.date)+timeStr+'</span></div>'+
+custLine+personLine+invLine+checkLine+
+'</div>'+
+'<div class="item-right">'+
+'<div class="item-amount '+cls+'">'+sign+fmt(itemAmount(t))+'</div>'+
+'<div class="actions-row">'+
+(isInvoice?'<button class="star-btn" data-print="'+t.id+'" style="filter:none;opacity:.9;font-size:13px;">🖨️</button>':'')+
+'<button class="star-btn '+(t.important?'on':'')+'" data-star="'+t.id+'">⭐</button>'+
+'<button class="del" data-del="'+t.id+'">✕</button>'+
+'</div></div></div>';
+}
+
+function renderInvoices(){
+var items=tx.filter(function(t){return t.type==='invoice';});
+if(invFilter==='unpaid')items=items.filter(function(t){return t.paidStatus==='unpaid';});
+if(invFilter==='paid')items=items.filter(function(t){return t.paidStatus==='paid';});
+if(invFilter==='cash')items=items.filter(function(t){return t.pay==='cash';});
+if(invFilter==='check')items=items.filter(function(t){return t.pay==='check';});
+if(invFilter==='star')items=items.filter(function(t){return t.important;});
+var total=items.reduce(function(s,t){return s+itemAmount(t);},0);
+$('invSub').textContent=fmt(items.length)+' فاکتور • جمع '+fmt(total)+' تومان';
+$('invList').innerHTML=renderGrouped(items);
+}
+
+function renderCustomers(){
+$('custSub').textContent=fmt(customers.length)+' مشتری';
+if(!customers.length){$('custList').innerHTML='<div class="empty"><div class="empty-icon">👥</div><p>هنوز مشتری ثبت نشده</p><span>با دکمه + مشتری اضافه کنید</span></div>';return;}
+$('custList').innerHTML=customers.map(function(c){
+var invs=tx.filter(function(t){return t.type==='invoice'&&t.customerId===c.id;});
+var total=invs.reduce(function(s,t){return s+itemAmount(t);},0);
+return '<div class="item">'+
+'<div class="item-icon">👤</div>'+
+'<div class="item-body">'+
+'<div class="item-title">'+esc(c.name)+'</div>'+
+'<div class="item-meta">'+(c.phone?'<span class="badge cash">📱 '+esc(c.phone)+'</span>':'')+'<span class="badge invoice">📄 '+fmt(invs.length)+' فاکتور</span></div>'+
+(c.address?'<div class="item-person">📍 '+esc(c.address)+'</div>':'')+
+(c.note?'<div class="item-person">📝 '+esc(c.note)+'</div>':'')+
+'</div>'+
+'<div class="item-right"><div class="item-amount income">'+fmt(total)+'</div>'+
+'<div class="actions-row"><button class="del" data-delcust="'+c.id+'">✕</button></div></div></div>';
+}).join('');
+}
+
+function renderDaily(){
+var items=tx.filter(function(t){return t.type==='payment'||t.type==='receipt';});
+if(dailyFilter==='payment')items=items.filter(function(t){return t.type==='payment';});
+if(dailyFilter==='receipt')items=items.filter(function(t){return t.type==='receipt';});
+if(dailyFilter==='check')items=items.filter(function(t){return t.pay==='check';});
+if(dailyFilter==='cash')items=items.filter(function(t){return t.pay==='cash';});
+if(dailyFilter==='star')items=items.filter(function(t){return t.important;});
+$('dailyList').innerHTML=renderGrouped(items);
+}
+
+function renderChecks(){
+var items=tx.filter(function(t){return t.pay==='check';});
+if(checkFilter!=='all')items=items.filter(function(t){return checkStatus(t)===checkFilter;});
+items=items.slice().sort(function(a,b){return (a.due||'9999')<(b.due||'9999')?-1:1;});
+var pending=tx.filter(function(t){return t.pay==='check'&&checkStatus(t)!=='paid';});
+var totalPending=pending.reduce(function(s,t){return s+itemAmount(t);},0);
+$('checksSub').textContent=fmt(pending.length)+' چک در انتظار • '+fmt(totalPending)+' تومان';
+$('checksList').innerHTML=items.length?items.map(itemHTML).join(''):'<div class="empty"><div class="empty-icon">🧾</div><p>چکی یافت نشد</p><span>چک‌ها اینجا نمایش داده می‌شوند</span></div>';
+}
+
+function renderGrouped(items){
+if(!items.length)return '<div class="empty"><div class="empty-icon">📄</div><p>موردی یافت نشد</p><span>با دکمه «ثبت» شروع کنید</span></div>';
+var sorted=items.slice().sort(function(a,b){return b.createdAt-a.createdAt;});
+var groups={};
+for(var i=0;i<sorted.length;i++){var t=sorted[i];if(!groups[t.date])groups[t.date]=[];groups[t.date].push(t);}
+var dates=Object.keys(groups).sort(function(a,b){return a<b?1:-1;});
+return dates.map(function(date){
+var dayItems=groups[date];
+var net=0;
+for(var k=0;k<dayItems.length;k++){var t=dayItems[k];net+=(t.type==='receipt'||t.type==='invoice')?itemAmount(t):-itemAmount(t);}
+var cls=net>=0?'income':'expense';
+return '<div class="day"><div class="day-head"><span>'+dayLabel(date)+'</span><span class="day-net '+cls+'">'+(net>=0?'+':'−')+fmt(Math.abs(net))+'</span></div>'+dayItems.map(itemHTML).join('')+'</div>';
+}).join('');
+}
+
+function renderReports(){
+var inv=0,pay=0,rec=0;
+for(var i=0;i<tx.length;i++){var t=tx[i];if(t.type==='invoice')inv+=itemAmount(t);else if(t.type==='payment')pay+=itemAmount(t);else rec+=itemAmount(t);}
+$('rInv').textContent=fmt(inv);$('rPay').textContent=fmt(pay);$('rRec').textContent=fmt(rec);
+var bal=rec+inv-pay;$('rBal').innerHTML=(bal<0?'−':'')+fmt(Math.abs(bal));
+var todayArr=todayISO().split('-').map(Number);var now=toJalali(todayArr[0],todayArr[1],todayArr[2]);
+var y=now.jy,m=now.jm;var mKeys=[];
+for(var k=0;k<12;k++){mKeys.unshift(y*100+m);m--;if(m===0){m=12;y--;}}
+var mData={};mKeys.forEach(function(k){mData[k]={cash:0,check:0};});
+for(var i=0;i<tx.length;i++){var t=tx[i];if(t.type!=='invoice')continue;var kk=jMonthKey(t.date);if(mData[kk])mData[kk][t.pay==='check'?'check':'cash']+=itemAmount(t);}
+$('chartMonthly').innerHTML=buildStackChart(mKeys,mData,jMonthLabel);
+var nowY=now.jy;var yKeys=[];for(var i=4;i>=0;i--)yKeys.push(nowY-i);
+var yData={};yKeys.forEach(function(k){yData[k]={cash:0,check:0};});
+for(var i=0;i<tx.length;i++){var t=tx[i];if(t.type!=='invoice')continue;var kk=isoToJalali(t.date).jy;if(yData[kk])yData[kk][t.pay==='check'?'check':'cash']+=itemAmount(t);}
+$('chartYearly').innerHTML=buildStackChart(yKeys,yData,function(k){return toFa(k);});
+}
+function buildStackChart(keys,data,labelFn){
+var max=0;keys.forEach(function(k){var v=data[k].cash+data[k].check;if(v>max)max=v;});
+if(!max)return '<div style="text-align:center;color:var(--muted);font-size:12px;font-weight:700;padding:26px 0;">داده‌ای موجود نیست</div>';
+return keys.map(function(k){var cash=data[k].cash,check=data[k].check;var total=cash+check;var wc=max?(cash/max*100):0;var wk=max?(check/max*100):0;
+return '<div style="display:flex;align-items:center;gap:9px;margin-bottom:10px;font-size:11px;">'+
+'<div style="width:72px;flex-shrink:0;color:var(--text-2);font-weight:700;font-size:10.5px;">'+labelFn(k)+'</div>'+
+'<div style="flex:1;display:flex;height:16px;border-radius:8px;overflow:hidden;background:var(--bg-2);">'+
+'<div style="height:100%;width:'+wc+'%;background:linear-gradient(90deg,#0284c7,#0369a1);"></div>'+
+'<div style="height:100%;width:'+wk+'%;background:linear-gradient(90deg,#fbbf24,#d97706);"></div></div>'+
+'<div style="width:66px;flex-shrink:0;text-align:left;font-weight:800;font-size:10.5px;color:var(--text-2);direction:ltr;">'+(total?fmt(total):'—')+'</div></div>';}).join('');
+}
+
+function renderBrand(){
+var name=(settings&&settings.name)?settings.name:'حساب‌داری خدمات فنی';
+var parts=name.split(' ');
+$('brandName').innerHTML='<span class="project">'+esc(parts[0]||'حساب‌داری')+'</span> <span class="tabriz">'+esc(parts.slice(1).join(' ')||'خدمات فنی')+'</span>';
+$('brandSub').textContent='TECHNICAL SERVICES';
+var logoEl=$('headerLogo');
+if(settings&&settings.logoData){
+logoEl.innerHTML='<img src="'+settings.logoData+'" alt="logo">';
+}else{
+var isDark=document.documentElement.classList.contains('dark');
+logoEl.innerHTML=logoSVG(isDark?'#152238':'#e0f2fe',isDark?'#7dd3fc':'#0c4a6e',isDark?'#38bdf8':'#0284c7');
+}
+}
+
+function renderSettings(){
+$('stName').value=settings.name||'';
+$('stReg').value=settings.regNumber||'';
+$('stNat').value=settings.nationalId||'';
+$('stEco').value=settings.economicCode||'';
+$('stPhone').value=settings.phone||'';
+$('stAddress').value=settings.address||'';
+if(settings.logoData){$('logoPreview').innerHTML='<img src="'+settings.logoData+'">';}else{$('logoPreview').textContent='🏢';}
+$('licenseInfo').textContent=licenseStatusText();
+}
+
+function renderTrialBanner(){
+var banner=document.getElementById('trialBanner');
+if(!banner)return;
+try{
+if(localStorage.getItem('dev-mode') === DEV_MODE_KEY){banner.style.display='none';return;}
+}catch(e){}
+if(license&&license.phone&&license.expiryTs&&Math.floor(Date.now()/1000) < license.expiryTs){
+banner.style.display='none';return;
+}
+var left=trialDaysLeft();
+banner.style.display='block';
+if(left>0){
+banner.classList.remove('danger');
+banner.innerHTML='⏰ <b>'+toFa(left)+' روز</b> از تست رایگان باقی مانده — <a onclick="go(\'settings\')">تمدید کنید</a>';
+}else{
+banner.classList.add('danger');
+banner.innerHTML='❌ <b>تست رایگان تمام شد</b> — <a onclick="showLicenseScreen()">فعال‌سازی کنید</a>';
+}
+}
+
+function render(){renderDashboard();renderInvoices();renderCustomers();renderDaily();renderChecks();renderReports();renderSettings();renderBrand();renderTrialBanner();}
+
+/* ========== DATE PICKER ========== */
+var dpTarget=null,dpView=null,dpSelected=null;
+function openDatePicker(target){dpTarget=target;var currentISO=(target==='due'||target==='flowDue')?formDue:formDate;var j=isoToJalali(currentISO||todayISO());dpView={jy:j.jy,jm:j.jm};dpSelected=currentISO||todayISO();renderDP();$('dpOverlay').classList.add('open');}
+function closeDatePicker(){$('dpOverlay').classList.remove('open');}
+function renderDP(){
+var jy=dpView.jy,jm=dpView.jm;
+$('dpTitle').textContent=J_MONTHS[jm-1]+' '+toFa(jy);
+var firstDay=_j2d(jy,jm,1);var greg=_d2g(firstDay);var wd=new Date(greg.gy,greg.gm-1,greg.gd).getDay();var startCol=(wd+1)%7;var len=jMonthLen(jy,jm);
+var todayArr=todayISO().split('-').map(Number);var todayJ=toJalali(todayArr[0],todayArr[1],todayArr[2]);
+var html='';
+for(var i=0;i<startCol;i++)html+='<button disabled style="aspect-ratio:1;border:none;background:none;"></button>';
+for(var d=1;d<=len;d++){
+var col=(startCol+d-1)%7;var isFriday=(col===6);var iso=jalaliToISO(jy,jm,d);var isToday=(todayJ.jy===jy&&todayJ.jm===jm&&todayJ.jd===d);var isSel=(iso===dpSelected);
+var bg='transparent',color=isFriday?'#dc2626':'var(--text)',fw='700';
+if(isToday&&!isSel){bg='var(--bg-2)';color='var(--primary-dark)';fw='900';}
+if(isSel){bg='linear-gradient(135deg,#0284c7,#0369a1)';color='#fff';fw='900';}
+html+='<button data-date="'+iso+'" style="aspect-ratio:1;border:none;background:'+bg+';border-radius:11px;font-family:inherit;font-size:13px;font-weight:'+fw+';color:'+color+';cursor:pointer;display:grid;place-items:center;">'+toFa(d)+'</button>';
+}
+$('dpGrid').innerHTML=html;
+}
+function dpNav(dir){var jy=dpView.jy,jm=dpView.jm;jm+=dir;if(jm>12){jm=1;jy++;}if(jm<1){jm=12;jy--;}dpView={jy:jy,jm:jm};renderDP();}
+function dpPick(iso){dpSelected=iso;if(dpTarget==='due'){formDue=iso;$('dueDisplay').value=faDateFull(iso);}else if(dpTarget==='flowDue'){formDue=iso;$('flowDueDisplay').value=faDateFull(iso);}else{formDate=iso;$('dateDisplay').value=faDateFull(iso);}closeDatePicker();}
+
+/* ========== INVOICE ROWS ========== */
+function addInvRow(){
+invRowCounter++;
+var id='row'+invRowCounter;
+var div=document.createElement('div');
+div.className='inv-row';div.id=id;
+div.innerHTML='<span class="row-num">ردیف '+toFa(invRowCounter)+'</span>'+
+'<button class="row-del" type="button" onclick="document.getElementById(\''+id+'\').remove();updateInvSummary();">✕</button>'+
+'<div class="row-fields"><input type="text" class="row-name" placeholder="شرح خدمت / قطعه">'+
+'<input type="text" class="row-qty" placeholder="تعداد" inputmode="numeric">'+
+'<input type="text" class="row-price" placeholder="قیمت واحد" inputmode="numeric"></div>';
+$('invRows').appendChild(div);
+var inputs=div.querySelectorAll('input');
+for(var i=0;i<inputs.length;i++){
+inputs[i].addEventListener('input',function(){
+if(this.classList.contains('row-price')||this.classList.contains('row-qty')){
+var digits=toEn(this.value).replace(/[^\d]/g,'').replace(/^0+/,'');
+this.value=digits?Number(digits).toLocaleString('fa-IR'):'';
+}
+updateInvSummary();
+});
+}
+updateInvSummary();
+}
+function updateInvSummary(){
+var subtotal=0;var rows=document.querySelectorAll('#invRows .inv-row');
+for(var i=0;i<rows.length;i++){var qty=Number(toEn(rows[i].querySelector('.row-qty').value).replace(/[^\d]/g,''))||0;var price=Number(toEn(rows[i].querySelector('.row-price').value).replace(/[^\d]/g,''))||0;subtotal+=qty*price;}
+var disc=Number(toEn($('invDiscount').value).replace(/[^\d]/g,''))||0;var total=Math.max(0,subtotal-disc);
+$('invSubtotal').textContent=fmt(subtotal)+' تومان';$('invDiscountShow').textContent=fmt(disc)+' تومان';$('invTotal').textContent=fmt(total)+' تومان';
+}
+
+/* ========== FORM SYNC ========== */
+function syncForm(){
+var typeBtns=document.querySelectorAll('#typeSeg button');
+for(var i=0;i<typeBtns.length;i++)typeBtns[i].classList.toggle('active',typeBtns[i].dataset.type===fType);
+$('invoiceForm').classList.toggle('hidden',fType!=='invoice');
+$('flowForm').classList.toggle('hidden',fType==='invoice'||fType==='customer');
+$('customerForm').classList.add('hidden');
+if(fType==='invoice'){$('sheetTitle').textContent='صدور فاکتور';}
+else if(fType==='payment'){$('sheetTitle').textContent='ثبت پرداخت';}
+else if(fType==='receipt'){$('sheetTitle').textContent='ثبت دریافت';}
+if(fType!=='invoice'&&fType!=='customer'){
+var flowBtns=document.querySelectorAll('#flowPaySeg button');
+for(var i=0;i<flowBtns.length;i++)flowBtns[i].classList.toggle('active',flowBtns[i].dataset.pay===fPay);
+$('flowCheckFields').classList.toggle('hidden',fPay!=='check');
+$('titleLabel').textContent=fType==='payment'?'بابت / شرح پرداخت':'بابت / شرح دریافت';
+$('personLabel').textContent=fType==='payment'?'نام دریافت‌کننده':'نام پرداخت‌کننده';
+}
+if(fType==='invoice'){
+var payBtns=document.querySelectorAll('#paySeg button');
+for(var i=0;i<payBtns.length;i++)payBtns[i].classList.toggle('active',payBtns[i].dataset.pay===fPay);
+$('checkFields').classList.toggle('hidden',fPay!=='check');
+}
+}
+function openSheet(mode){
+fType=mode||'invoice';fPay='cash';formDate=todayISO();formDue=null;
+if(fType==='invoice'){
+$('invNumber').value='';$('invDesc').value='';$('invDiscount').value='';
+$('invRows').innerHTML='';invRowCounter=0;addInvRow();addInvRow();
+$('invCustomer').value='';$('invImportant').checked=false;$('invPaid').value='unpaid';
+$('serialInput').value='';$('bankInput').value='';$('dueDisplay').value='';
+updateInvSummary();
+}else{
+$('amountInput').value='';$('titleInput').value='';$('personInput').value='';
+$('flowSerial').value='';$('flowBank').value='';$('flowDueDisplay').value='';
+$('flowImportant').checked=false;$('timeInput').value=nowTime();
+$('dateDisplay').value=faDateFull(formDate);
+}
+syncForm();$('overlay').classList.add('open');document.body.classList.add('locked');
+}
+function openCustomerSheet(fromInvoice){
+fType='customer';
+$('invoiceForm').classList.add('hidden');$('flowForm').classList.add('hidden');$('customerForm').classList.remove('hidden');
+$('sheetTitle').textContent='ثبت مشتری جدید';
+$('custName').value='';$('custPhone').value='';$('custAddress').value='';$('custNote').value='';
+$('overlay').classList.add('open');document.body.classList.add('locked');
+window._fromInvoice=!!fromInvoice;
+}
+function closeSheet(){$('overlay').classList.remove('open');document.body.classList.remove('locked');window._fromInvoice=false;}
+
+/* ========== SAVE ========== */
+function saveInvoice(){
+var rows=[];
+var rowEls=document.querySelectorAll('#invRows .inv-row');
+for(var i=0;i<rowEls.length;i++){
+var name=rowEls[i].querySelector('.row-name').value.trim();
+var qty=Number(toEn(rowEls[i].querySelector('.row-qty').value).replace(/[^\d]/g,''))||0;
+var price=Number(toEn(rowEls[i].querySelector('.row-price').value).replace(/[^\d]/g,''))||0;
+if(name||qty||price)rows.push({name:name,qty:qty,price:price});
+}
+if(!rows.length){alert('حداقل یک ردیف لازم است.');return;}
+var subtotal=0;for(var i=0;i<rows.length;i++)subtotal+=rows[i].qty*rows[i].price;
+var disc=Number(toEn($('invDiscount').value).replace(/[^\d]/g,''))||0;
+var total=Math.max(0,subtotal-disc);
+var customerId=$('invCustomer').value||null;
+var cust=customerId?customerById(customerId):null;
+var rec={id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),type:'invoice',customerId:customerId,customerName:cust?cust.name:'',invNumber:$('invNumber').value.trim(),desc:$('invDesc').value.trim()||(cust?'فاکتور خدمات — '+cust.name:'فاکتور خدمات'),rows:rows,discount:disc,subtotal:subtotal,total:total,pay:fPay,paidStatus:$('invPaid').value,serial:fPay==='check'?$('serialInput').value.trim():'',due:fPay==='check'?formDue:'',bank:fPay==='check'?$('bankInput').value.trim():'',paid:fPay==='check'?false:($('invPaid').value==='paid'),important:$('invImportant').checked,date:formDate||todayISO(),time:nowTime(),createdAt:Date.now()};
+tx.push(rec);persist();render();closeSheet();showToast('فاکتور ذخیره شد 📄');
+}
+
+function saveFlow(){
+var amount=Number(toEn($('amountInput').value).replace(/[^\d]/g,''));
+if(!amount||amount<=0){alert('مبلغ را وارد کنید.');return;}
+var rec={id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),type:fType,amount:amount,title:$('titleInput').value.trim(),person:$('personInput').value.trim(),pay:fPay,serial:fPay==='check'?$('flowSerial').value.trim():'',due:fPay==='check'?formDue:'',bank:fPay==='check'?$('flowBank').value.trim():'',paid:fPay==='check'?false:true,important:$('flowImportant').checked,date:formDate||todayISO(),time:$('timeInput').value||nowTime(),createdAt:Date.now()};
+tx.push(rec);persist();render();closeSheet();showToast(fType==='payment'?'پرداخت ذخیره شد 💸':'دریافت ذخیره شد 📥');
+}
+
+function saveCustomer(){
+var name=$('custName').value.trim();
+if(!name){alert('نام مشتری الزامی است.');return;}
+var rec={id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),name:name,phone:$('custPhone').value.trim(),address:$('custAddress').value.trim(),note:$('custNote').value.trim(),createdAt:Date.now()};
+customers.push(rec);persistCustomers();refreshCustomerSelect();render();
+var wasFromInvoice=window._fromInvoice;closeSheet();showToast('مشتری ذخیره شد 👤');
+if(wasFromInvoice){setTimeout(function(){openSheet('invoice');$('invCustomer').value=rec.id;},300);}
+}
+
+function deleteTx(id){
+var i=-1;for(var k=0;k<tx.length;k++){if(tx[k].id===id){i=k;break;}}
+if(i<0)return;lastDeleted={item:tx[i],index:i};tx.splice(i,1);persist();render();showToast('حذف شد');
+}
+function deleteCustomer(id){if(!confirm('مشتری حذف شود؟'))return;customers=customers.filter(function(c){return c.id!==id;});persistCustomers();refreshCustomerSelect();render();}
+function showToast(msg){$('toast').querySelector('span').textContent=msg||'ذخیره شد';$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){$('toast').classList.remove('show');lastDeleted=null;},3000);}
+function toggleStar(id){var t=null;for(var k=0;k<tx.length;k++){if(tx[k].id===id){t=tx[k];break;}}if(!t)return;t.important=!t.important;persist();render();}
+
+function refreshCustomerSelect(){
+var sel=$('invCustomer');
+sel.innerHTML='<option value="">— انتخاب مشتری —</option>'+customers.map(function(c){return '<option value="'+c.id+'">'+esc(c.name)+(c.phone?' — '+esc(c.phone):'')+'</option>';}).join('');
+}
+
+/* ========== INVOICE BUILD ========== */
+function buildInvoiceHTML(t){
+var c=t.customerId?customerById(t.customerId):null;
+var j=isoToJalali(t.date);
+var nowStr=toFa(j.jd)+' '+J_MONTHS[j.jm-1]+' '+toFa(j.jy);
+var s=settings||{};
+var logoHTML=s.logoData?'<img src="'+s.logoData+'" style="width:80px;height:80px;object-fit:contain;">':'<div style="width:80px;height:80px;background:#e0f2fe;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:32px;">🏢</div>';
+var rowsHTML=(t.rows||[]).map(function(r,i){return '<tr><td>'+fmt(i+1)+'</td><td>'+esc(r.name||'—')+'</td><td>'+fmt(r.qty||0)+'</td><td>'+fmt(r.price||0)+'</td><td>'+fmt((r.qty||0)*(r.price||0))+'</td></tr>';}).join('');
+
+var companyInfo='';
+if(s.name)companyInfo+='<div><b>'+esc(s.name)+'</b></div>';
+if(s.regNumber)companyInfo+='<div>شماره ثبت: '+esc(s.regNumber)+'</div>';
+if(s.nationalId)companyInfo+='<div>شناسه ملی: '+esc(s.nationalId)+'</div>';
+if(s.economicCode)companyInfo+='<div>کد اقتصادی: '+esc(s.economicCode)+'</div>';
+if(s.phone)companyInfo+='<div>تلفن: '+esc(s.phone)+'</div>';
+if(s.address)companyInfo+='<div>آدرس: '+esc(s.address)+'</div>';
+
+var styleBlock='<style>@import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800;900&display=swap");'+
+'*{box-sizing:border-box;}'+
+'body{font-family:Vazirmatn,Tahoma,sans-serif;margin:0;padding:30px 22px;color:#0f172a;background:#fff;}'+
+'.header{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:16px;border-bottom:3px solid #0284c7;margin-bottom:22px;gap:14px;}'+
+'.header .left{display:flex;gap:14px;align-items:center;}'+
+'.header .company{font-size:11.5px;color:#334155;font-weight:700;line-height:1.9;}'+
+'.header .company b{font-size:15px;color:#0c4a6e;font-weight:900;}'+
+'.header .inv-info{text-align:left;font-size:12px;color:#334155;font-weight:700;line-height:1.9;}'+
+'.header .inv-info b{color:#0c4a6e;font-weight:900;}'+
+'h2{font-size:14px;margin:22px 0 10px;padding:9px 14px;background:#e0f2fe;border-right:4px solid #0284c7;border-radius:8px;color:#0c4a6e;}'+
+'table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:14px;}'+
+'th{background:#0284c7;color:#fff;padding:10px 7px;text-align:right;}'+
+'td{padding:9px 7px;border-bottom:1px solid #e0f2fe;text-align:right;}'+
+'.box{background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:12px;padding:14px 16px;font-size:12.5px;line-height:1.9;color:#0c4a6e;margin-bottom:14px;}'+
+'.summary{background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:12px;padding:14px 16px;margin:18px 0;font-size:13px;font-weight:800;color:#0c4a6e;}'+
+'.summary .row{display:flex;justify-content:space-between;padding:4px 0;}'+
+'.summary .total{font-size:16px;border-top:1.5px solid #bae6fd;margin-top:6px;padding-top:8px;color:#0369a1;}'+
+'.status{text-align:center;font-weight:900;font-size:13px;margin-top:8px;}'+
+'.status.paid{color:#059669;}'+
+'.status.unpaid{color:#dc2626;}'+
+'.footer{margin-top:32px;padding-top:16px;border-top:1px solid #bae6fd;font-size:11px;color:#64748b;text-align:center;line-height:1.9;}'+
+'.footer .credit{color:#0284c7;font-weight:900;}'+
+'@media print{body{padding:14px;}}'+
+'</style>';
+
+return '<div>'+
+'<div class="header">'+
+'<div class="left">'+logoHTML+'<div class="company">'+(companyInfo||'<b>شرکت شما</b>')+'</div></div>'+
+'<div class="inv-info">'+
+'<div style="font-size:16px;color:#0c4a6e;font-weight:900;margin-bottom:6px;">فاکتور رسمی خدمات</div>'+
+'<div>شماره: <b>'+esc(t.invNumber||'—')+'</b></div>'+
+'<div>تاریخ: <b>'+nowStr+'</b></div>'+
+'<div>روش: <b>'+(t.pay==='check'?'چکی':'نقدی')+'</b></div>'+
+'</div></div>'+
+(c?'<div class="box"><b>👤 مشتری:</b> '+esc(c.name)+(c.phone?'<br><b>📱 تماس:</b> '+esc(c.phone):'')+(c.address?'<br><b>📍 آدرس:</b> '+esc(c.address):'')+'</div>':'')+
+(t.desc?'<div class="box"><b>📝 شرح:</b> '+esc(t.desc)+'</div>':'')+
+'<h2>ردیف‌های فاکتور</h2>'+
+'<table><thead><tr><th>#</th><th>شرح</th><th>تعداد</th><th>قیمت واحد</th><th>جمع</th></tr></thead><tbody>'+rowsHTML+'</tbody></table>'+
+'<div class="summary"><div class="row"><span>جمع ردیف‌ها:</span><span>'+fmt(t.subtotal||0)+' تومان</span></div>'+
+(t.discount?'<div class="row"><span>تخفیف:</span><span>− '+fmt(t.discount)+' تومان</span></div>':'')+
+'<div class="row total"><span>مبلغ نهایی:</span><span>'+fmt(t.total||0)+' تومان</span></div></div>'+
+'<div class="status '+(t.paidStatus==='paid'?'paid':'unpaid')+'">'+(t.paidStatus==='paid'?'✅ پرداخت‌شده':'⏳ پرداخت‌نشده')+'</div>'+
+(t.pay==='check'?'<div class="box" style="margin-top:14px;"><b>🧾 اطلاعات چک:</b><br>سری: '+esc(t.serial||'—')+'<br>سررسید: '+(t.due?faDateFull(t.due):'—')+'<br>بانک: '+esc(t.bank||'—')+'</div>':'')+
+'<div class="footer">'+
+'<div class="credit">با تشکر از اعتماد شما</div>'+
+'<div>📱 '+SUPPORT_PHONE+' | ✉️ '+SUPPORT_EMAIL+'</div>'+
+'<div style="margin-top:8px;color:#0c4a6e;font-weight:800;">طراحی: '+DESIGNER_NAME+'</div>'+
+'</div>'+
+'</div>';
+}
+
+function buildInvoiceText(t){
+var c=t.customerId?customerById(t.customerId):null;
+var s=settings||{};
+var j=isoToJalali(t.date);
+var nowStr=toFa(j.jd)+' '+J_MONTHS[j.jm-1]+' '+toFa(j.jy);
+var sep='─────────────────────';
+var out='';
+out+='📄 فاکتور خدمات\n'+sep+'\n';
+if(s.name)out+='فروشنده: '+s.name+'\n';
+if(s.regNumber)out+='شماره ثبت: '+s.regNumber+'\n';
+if(s.nationalId)out+='شناسه ملی: '+s.nationalId+'\n';
+if(s.phone)out+='تلفن فروشنده: '+s.phone+'\n';
+if(s.address)out+='آدرس: '+s.address+'\n';
+out+=sep+'\n';
+out+='شماره فاکتور: '+(t.invNumber||'—')+'\n';
+out+='تاریخ: '+nowStr+'\n';
+out+='روش پرداخت: '+(t.pay==='check'?'چکی':'نقدی')+'\n';
+out+=sep+'\n';
+if(c){
+out+='👤 مشتری: '+c.name+'\n';
+if(c.phone)out+='📱 تماس: '+c.phone+'\n';
+if(c.address)out+='📍 آدرس: '+c.address+'\n';
+out+=sep+'\n';
+}
+if(t.desc)out+='📝 شرح: '+t.desc+'\n'+sep+'\n';
+out+='ردیف‌ها:\n';
+(t.rows||[]).forEach(function(r,i){
+out+=(i+1)+'. '+r.name+' × '+r.qty+' × '+fmt(r.price)+' = '+fmt(r.qty*r.price)+' تومان\n';
+});
+out+=sep+'\n';
+out+='جمع ردیف‌ها: '+fmt(t.subtotal||0)+' تومان\n';
+if(t.discount)out+='تخفیف: -'+fmt(t.discount)+' تومان\n';
+out+='💵 مبلغ نهایی: '+fmt(t.total||0)+' تومان\n';
+out+='وضعیت: '+(t.paidStatus==='paid'?'✅ پرداخت‌شده':'⏳ پرداخت‌نشده')+'\n';
+if(t.pay==='check'){
+out+=sep+'\n';
+out+='🧾 اطلاعات چک:\nسری: '+(t.serial||'—')+'\nسررسید: '+(t.due?faDateFull(t.due):'—')+'\nبانک: '+(t.bank||'—')+'\n';
+}
+out+=sep+'\n';
+out+='📱 پشتیبانی: '+SUPPORT_PHONE+'\n';
+out+='طراحی: '+DESIGNER_NAME+'\n';
+return out;
+}
+
+function showInvoicePreview(t){
+currentPreviewInvoice=t;
+var html=buildInvoiceHTML(t);
+$('invPreviewContent').innerHTML=html;
+$('invPreviewOverlay').classList.add('open');
+}
+
+function closeInvoicePreview(){$('invPreviewOverlay').classList.remove('open');currentPreviewInvoice=null;}
+
+function downloadInvoicePDF(){
+if(!currentPreviewInvoice)return;
+var t=currentPreviewInvoice;
+var fullHTML='<!DOCTYPE html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><title>فاکتور</title>'+
+'<style>@import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800;900&display=swap");'+
+'*{box-sizing:border-box;}body{font-family:Vazirmatn,Tahoma,sans-serif;margin:0;padding:20px;color:#0f172a;background:#fff;}'+
+'.header{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:16px;border-bottom:3px solid #0284c7;margin-bottom:22px;gap:14px;}'+
+'.header .left{display:flex;gap:14px;align-items:center;}'+
+'.header .company{font-size:11.5px;color:#334155;font-weight:700;line-height:1.9;}'+
+'.header .company b{font-size:15px;color:#0c4a6e;font-weight:900;}'+
+'.header .inv-info{text-align:left;font-size:12px;color:#334155;font-weight:700;line-height:1.9;}'+
+'.header .inv-info b{color:#0c4a6e;font-weight:900;}'+
+'h2{font-size:14px;margin:22px 0 10px;padding:9px 14px;background:#e0f2fe;border-right:4px solid #0284c7;border-radius:8px;color:#0c4a6e;}'+
+'table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:14px;}'+
+'th{background:#0284c7;color:#fff;padding:10px 7px;text-align:right;}'+
+'td{padding:9px 7px;border-bottom:1px solid #e0f2fe;text-align:right;}'+
+'.box{background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:12px;padding:14px 16px;font-size:12.5px;line-height:1.9;color:#0c4a6e;margin-bottom:14px;}'+
+'.summary{background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:12px;padding:14px 16px;margin:18px 0;font-size:13px;font-weight:800;color:#0c4a6e;}'+
+'.summary .row{display:flex;justify-content:space-between;padding:4px 0;}'+
+'.summary .total{font-size:16px;border-top:1.5px solid #bae6fd;margin-top:6px;padding-top:8px;color:#0369a1;}'+
+'.status{text-align:center;font-weight:900;font-size:13px;margin-top:8px;}'+
+'.status.paid{color:#059669;}.status.unpaid{color:#dc2626;}'+
+'.footer{margin-top:32px;padding-top:16px;border-top:1px solid #bae6fd;font-size:11px;color:#64748b;text-align:center;line-height:1.9;}'+
+'.footer .credit{color:#0284c7;font-weight:900;}'+
+'</style></head><body>'+$('invPreviewContent').innerHTML+'</body></html>';
+var container=document.createElement('div');
+container.style.position='fixed';
+container.style.left='-9999px';
+container.style.top='0';
+container.style.width='800px';
+container.style.background='#fff';
+container.innerHTML=fullHTML;
+document.body.appendChild(container);
+showToast('در حال ساخت PDF...');
+setTimeout(function(){
+html2pdf().set({
+margin:10,
+filename:'invoice-'+(t.invNumber||t.id)+'.pdf',
+image:{type:'jpeg',quality:0.98},
+html2canvas:{scale:2,useCORS:true},
+jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}
+}).from(container).save().then(function(){
+document.body.removeChild(container);
+showToast('PDF ذخیره شد ✅');
+}).catch(function(err){
+document.body.removeChild(container);
+alert('خطا در ساخت PDF: '+err);
+});
+},300);
+}
+
+function sendInvoiceWhatsApp(){
+if(!currentPreviewInvoice)return;
+var t=currentPreviewInvoice;
+var c=t.customerId?customerById(t.customerId):null;
+var text=buildInvoiceText(t);
+var phone=c&&c.phone?c.phone.replace(/[^\d]/g,''):'';
+if(phone&&phone.startsWith('0'))phone='98'+phone.slice(1);
+var url='https://wa.me/'+(phone||'')+'?text='+encodeURIComponent(text);
+window.open(url,'_blank');
+}
+
+function copyInvoiceText(){
+if(!currentPreviewInvoice)return;
+var text=buildInvoiceText(currentPreviewInvoice);
+if(navigator.clipboard&&navigator.clipboard.writeText){
+navigator.clipboard.writeText(text).then(function(){showToast('متن کپی شد 📋');});
+}else{
+var ta=document.createElement('textarea');
+ta.value=text;document.body.appendChild(ta);ta.select();
+document.execCommand('copy');document.body.removeChild(ta);showToast('متن کپی شد 📋');
+}
+}
+
+/* ========== SETTINGS ========== */
+function saveSettings(){
+settings.name=$('stName').value.trim();
+settings.regNumber=$('stReg').value.trim();
+settings.nationalId=$('stNat').value.trim();
+settings.economicCode=$('stEco').value.trim();
+settings.phone=$('stPhone').value.trim();
+settings.address=$('stAddress').value.trim();
+persistSettings();renderBrand();renderSettings();showToast('تنظیمات ذخیره شد 💾');
+}
+function handleLogoUpload(file){
+if(!file)return;
+if(file.size>2*1024*1024){alert('حجم لوگو باید کمتر از ۲ مگابایت باشد');return;}
+var reader=new FileReader();
+reader.onload=function(e){
+settings.logoData=e.target.result;
+persistSettings();renderBrand();renderSettings();
+showToast('لوگو ذخیره شد 🖼️');
+};
+reader.readAsDataURL(file);
+}
+function removeLogo(){
+if(!confirm('لوگو حذف شود؟'))return;
+delete settings.logoData;
+persistSettings();renderBrand();renderSettings();
+showToast('لوگو حذف شد');
+}
+
+/* ========== BACKUP ========== */
+function backupJSON(){
+var data={app:'tech-services',version:2,designer:DESIGNER_NAME,support:SUPPORT_PHONE,tx:tx,customers:customers,settings:settings,exportedAt:new Date().toISOString()};
+var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+var url=URL.createObjectURL(blob);
+var a=document.createElement('a');
+var todayArr=todayISO().split('-').map(Number);
+var j=toJalali(todayArr[0],todayArr[1],todayArr[2]);
+a.href=url;a.download='tech-services-'+j.jy+'-'+pad2(j.jm)+'-'+pad2(j.jd)+'.json';
+document.body.appendChild(a);a.click();document.body.removeChild(a);
+setTimeout(function(){URL.revokeObjectURL(url);},1500);
+showToast('پشتیبان ذخیره شد 💾');
+}
+
+/* ========== NAV ========== */
+function go(page){
+var pages=document.querySelectorAll('.page');
+for(var i=0;i<pages.length;i++)pages[i].classList.remove('active');
+var target=$('page-'+page);
+if(target)target.classList.add('active');
+var navBtns=document.querySelectorAll('.bnav button');
+for(var i=0;i<navBtns.length;i++)navBtns[i].classList.toggle('active',navBtns[i].dataset.page===page);
+window.scrollTo({top:0,behavior:'smooth'});
+}
+function openHelp(){$('helpOverlay').classList.add('open');document.body.classList.add('locked');}
+function closeHelp(){$('helpOverlay').classList.remove('open');document.body.classList.remove('locked');}
+
+/* ========== LICENSE EVENTS ========== */
+function resetLicenseForm(){
+$('licStep1').classList.remove('hidden');$('licStep2').classList.add('hidden');
+$('licPhone').value='';$('licActCode').value='';$('licError').textContent='';
+}
+
+/* ========== INIT ========== */
+document.addEventListener('DOMContentLoaded',function(){
+initTheme();load();loadLicense();renderLogos();
+
+if(isLicenseValid()){
+hideLicenseScreen();
+if(license.phone){$('bcLicense').textContent='💰 '+toFa(license.phone.slice(-4));}
+refreshCustomerSelect();render();syncForm();
+renderTrialBanner();
+}else{
+showLicenseScreen();
+}
+
+/* ===== License Events ===== */
+$('licPhone').addEventListener('input',function(e){
+var raw=e.target.value;
+if(raw.length >= 3 && raw.substring(0,3).toUpperCase() === 'DEV') return;
+if(raw.trim() === DEV_MODE_KEY) return;
+e.target.value=toEn(raw).replace(/[^\d]/g,'').slice(0,11);
+});
+
+$('licPhone').addEventListener('blur',function(e){
+var val=e.target.value.trim();
+if(val===DEV_MODE_KEY){
+try{localStorage.setItem('dev-mode',DEV_MODE_KEY);}catch(err){}
+hideLicenseScreen();
+refreshCustomerSelect();render();syncForm();
+showToast('حالت توسعه فعال شد 🛠️');
+}
+});
+
+$('licReqBtn').addEventListener('click',function(){
+var phone=toEn($('licPhone').value).replace(/[^\d]/g,'');
+if(phone.length<10){$('licError').textContent='شماره تلفن را درست وارد کنید';return;}
+var reqCode=makeRequestCode(phone);
+$('licReqCode').textContent=reqCode;
+$('licStep1').classList.add('hidden');
+$('licStep2').classList.remove('hidden');
+$('licError').textContent='';
+});
+$('licBackBtn').addEventListener('click',resetLicenseForm);
+$('licWaBtn').addEventListener('click',function(){
+var phone=toEn($('licPhone').value).replace(/[^\d]/g,'');
+var reqCode=$('licReqCode').textContent;
+var msg='درخواست فعال‌سازی نرم‌افزار حساب‌داری خدمات فنی\n\nشماره: '+phone+'\nکد درخواست: '+reqCode+'\n\nلطفاً کد فعال‌سازی را ارسال کنید.';
+window.open('https://wa.me/'+SUPPORT_WHATSAPP+'?text='+encodeURIComponent(msg),'_blank');
+});
+$('licActivateBtn').addEventListener('click',function(){
+var phone=toEn($('licPhone').value).replace(/[^\d]/g,'');
+var code=$('licActCode').value.trim();
+if(!code){$('licError').textContent='کد فعال‌سازی را وارد کنید';return;}
+var result=verifyActivation(phone,code);
+if(result.valid){
+saveLicense(phone,code,result.expiryTs);
+hideLicenseScreen();
+if(license.phone){$('bcLicense').textContent='💰 '+toFa(license.phone.slice(-4));}
+refreshCustomerSelect();render();syncForm();
+showToast('فعال‌سازی موفق ✅');
+}else{
+$('licError').textContent='❌ کد نامعتبر است یا برای این شماره نیست';
+}
+});
+
+/* ===== Theme & help ===== */
+$('themeBtn').addEventListener('click',toggleTheme);
+$('helpBtn').addEventListener('click',openHelp);
+$('helpClose').addEventListener('click',closeHelp);
+$('helpOverlay').addEventListener('click',function(e){if(e.target===$('helpOverlay'))closeHelp();});
+
+/* ===== Nav ===== */
+$('bnav').addEventListener('click',function(e){
+var b=e.target.closest('button[data-page]');if(b)go(b.dataset.page);
+});
+
+/* ===== FAB ===== */
+$('fab').addEventListener('click',function(){
+var activePage=document.querySelector('.page.active');
+var page=activePage?activePage.id.replace('page-',''):'dashboard';
+if(page==='customers')openCustomerSheet(false);
+else if(page==='invoices'||page==='dashboard')openSheet('invoice');
+else if(page==='daily')openSheet('payment');
+else openSheet('invoice');
+});
+
+/* ===== Type seg ===== */
+$('typeSeg').addEventListener('click',function(e){
+var b=e.target.closest('button[data-type]');if(!b)return;
+fType=b.dataset.type;syncForm();
+});
+$('paySeg').addEventListener('click',function(e){
+var b=e.target.closest('button[data-pay]');if(!b)return;
+fPay=b.dataset.pay;
+if(fPay==='check'&&!formDue){formDue=todayISO();$('dueDisplay').value=faDateFull(formDue);}
+syncForm();
+});
+$('flowPaySeg').addEventListener('click',function(e){
+var b=e.target.closest('button[data-pay]');if(!b)return;
+fPay=b.dataset.pay;
+if(fPay==='check'&&!formDue){formDue=todayISO();$('flowDueDisplay').value=faDateFull(formDue);}
+syncForm();
+});
+
+/* ===== Inputs ===== */
+$('addRowBtn').addEventListener('click',addInvRow);
+$('addCustomerFromInvBtn').addEventListener('click',function(){openCustomerSheet(true);});
+$('invDiscount').addEventListener('input',function(e){
+var digits=toEn(e.target.value).replace(/[^\d]/g,'').replace(/^0+/,'');
+e.target.value=digits?Number(digits).toLocaleString('fa-IR'):'';
+updateInvSummary();
+});
+$('amountInput').addEventListener('input',function(e){
+var digits=toEn(e.target.value).replace(/[^\d]/g,'').replace(/^0+/,'');
+e.target.value=digits?Number(digits).toLocaleString('fa-IR'):'';
+});
+
+/* ===== Date picker ===== */
+$('dateDisplay').addEventListener('click',function(){openDatePicker('date');});
+$('dueDisplay').addEventListener('click',function(){openDatePicker('due');});
+$('flowDueDisplay').addEventListener('click',function(){openDatePicker('flowDue');});
+$('dpPrev').addEventListener('click',function(){dpNav(-1);});
+$('dpNext').addEventListener('click',function(){dpNav(1);});
+$('dpClose').addEventListener('click',closeDatePicker);
+$('dpToday').addEventListener('click',function(){dpPick(todayISO());});
+$('dpGrid').addEventListener('click',function(e){
+var b=e.target.closest('button[data-date]');if(!b)return;
+dpPick(b.dataset.date);
+});
+$('dpOverlay').addEventListener('click',function(e){if(e.target===$('dpOverlay'))closeDatePicker();});
+
+/* ===== Sheet ===== */
+$('closeBtn').addEventListener('click',closeSheet);
+$('overlay').addEventListener('click',function(e){if(e.target===$('overlay'))closeSheet();});
+$('saveInvoiceBtn').addEventListener('click',saveInvoice);
+$('saveFlowBtn').addEventListener('click',saveFlow);
+$('saveCustomerBtn').addEventListener('click',saveCustomer);
+
+/* ===== Settings ===== */
+$('saveSettingsBtn').addEventListener('click',saveSettings);
+$('uploadLogoBtn').addEventListener('click',function(){$('logoFile').click();});
+$('logoFile').addEventListener('change',function(e){
+var f=e.target.files[0];if(f)handleLogoUpload(f);
+e.target.value='';
+});
+$('removeLogoBtn').addEventListener('click',removeLogo);
+$('renewBtn').addEventListener('click',function(){
+var phone=license.phone||'';
+var reqCode=phone?makeRequestCode(phone):'';
+var msg='درخواست تمدید لایسنس حساب‌داری خدمات فنی\n\nشماره: '+phone+'\nکد درخواست: '+reqCode;
+window.open('https://wa.me/'+SUPPORT_WHATSAPP+'?text='+encodeURIComponent(msg),'_blank');
+});
+
+/* ===== Global click ===== */
+document.addEventListener('click',function(e){
+var del=e.target.closest('[data-del]');if(del){deleteTx(del.dataset.del);return;}
+var delc=e.target.closest('[data-delcust]');if(delc){deleteCustomer(delc.dataset.delcust);return;}
+var star=e.target.closest('[data-star]');if(star){toggleStar(star.dataset.star);return;}
+var pr=e.target.closest('[data-print]');
+if(pr){
+var id=pr.dataset.print;
+var t=null;for(var k=0;k<tx.length;k++){if(tx[k].id===id){t=tx[k];break;}}
+if(t)showInvoicePreview(t);
+return;
+}
+});
+
+/* ===== Invoice preview buttons ===== */
+$('invPdfBtn').addEventListener('click',downloadInvoicePDF);
+$('invWaBtn').addEventListener('click',sendInvoiceWhatsApp);
+$('invCopyBtn').addEventListener('click',copyInvoiceText);
+$('invCloseBtn').addEventListener('click',closeInvoicePreview);
+$('invPreviewOverlay').addEventListener('click',function(e){if(e.target===$('invPreviewOverlay'))closeInvoicePreview();});
+
+/* ===== Filters ===== */
+function bindFilters(id,setter){
+$(id).addEventListener('click',function(e){
+var b=e.target.closest('.fbtn');if(!b)return;
+var btns=$(id).querySelectorAll('.fbtn');
+for(var i=0;i<btns.length;i++)btns[i].classList.remove('active');
+b.classList.add('active');
+setter(b.dataset.f);render();
+});
+}
+bindFilters('invFilters',function(v){invFilter=v;});
+bindFilters('dailyFilters',function(v){dailyFilter=v;});
+bindFilters('checkFilters',function(v){checkFilter=v;});
+
+/* ===== ESC ===== */
+document.addEventListener('keydown',function(e){
+if(e.key==='Escape'){
+if($('helpOverlay').classList.contains('open'))closeHelp();
+else if($('dpOverlay').classList.contains('open'))closeDatePicker();
+else if($('invPreviewOverlay').classList.contains('open'))closeInvoicePreview();
+else closeSheet();
+}
+});
+
+/* ===== Service Worker ===== */
+if('serviceWorker' in navigator){
+navigator.serviceWorker.register('sw.js').catch(function(){});
+}
+});
+</script>

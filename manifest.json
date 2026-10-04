@@ -1,0 +1,20 @@
+{
+  "name": "حساب‌داری خدمات فنی",
+  "short_name": "حساب‌داری",
+  "description": "سیستم حساب‌داری و صدور فاکتور خدمات فنی",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#e0f2fe",
+  "theme_color": "#0284c7",
+  "lang": "fa",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzAyODRjNyIvPjxyZWN0IHg9IjgiIHk9IjgiIHdpZHRoPSIxOCIgaGVpZ2h0PSI4NCIgcng9IjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIyLjQiLz48cmVjdCB4PSIzMCIgeT0iOCIgd2lkdGg9IjE4IiBoZWlnaHQ9Ijg0IiByeD0iMSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIuNCIvPjxjaXJjbGUgY3g9IjE4IiBjeT0iNTAiIHI9IjIuNiIgZmlsbD0iIzA2YjZkNCIvPjxjaXJjbGUgY3g9IjQwIiBjeT0iNTAiIHI9IjIuNiIgZmlsbD0iIzA2YjZkNCIvPjwvc3ZnPg==",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
