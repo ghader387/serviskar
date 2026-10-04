@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tech-services-v1';
+const CACHE_NAME = 'serviskar-v2';
 const urlsToCache = [
   './',
   './index.html',
