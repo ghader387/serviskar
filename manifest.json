@@ -1,8 +1,9 @@
 {
-  "name": "حساب‌داری خدمات فنی",
-  "short_name": "حساب‌داری",
+  "name": "سرویس‌کار — خدمات فنی",
+  "short_name": "سرویس‌کار",
   "description": "سیستم حساب‌داری و صدور فاکتور خدمات فنی",
   "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#e0f2fe",
