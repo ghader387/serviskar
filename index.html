@@ -1672,7 +1672,50 @@ if(copyCardBtn){
 
 /* ===== Service Worker ===== */
 if('serviceWorker' in navigator){
-navigator.serviceWorker.register('sw.js').catch(function(){});
+  var newWorker = null;
+  var refreshing = false;
+  
+  navigator.serviceWorker.register('sw.js').then(function(reg){
+    reg.addEventListener('updatefound', function(){
+      newWorker = reg.installing;
+      newWorker.addEventListener('statechange', function(){
+        if(newWorker.state === 'installed' && navigator.serviceWorker.controller){
+          showUpdateBanner();
+        }
+      });
+    });
+    
+    setInterval(function(){ reg.update(); }, 60000);
+    
+  }).catch(function(){});
+  
+  window.applyUpdate = function(){
+    if(newWorker){
+      newWorker.postMessage({type:'SKIP_WAITING'});
+    } else {
+      location.reload(true);
+    }
+  };
+  
+  navigator.serviceWorker.addEventListener('controllerchange', function(){
+    if(refreshing) return;
+    refreshing = true;
+    window.location.reload();
+  });
+}
+
+function showUpdateBanner(){
+  if(document.getElementById('updateBanner')) return;
+  
+  var banner = document.createElement('div');
+  banner.id = 'updateBanner';
+  banner.style.cssText = 'position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#059669,#10b981);color:#fff;padding:14px 20px;border-radius:18px;font-size:13px;font-weight:800;z-index:9999;box-shadow:0 14px 36px rgba(5,150,105,.5);display:flex;gap:12px;align-items:center;white-space:nowrap;font-family:inherit;';
+  banner.innerHTML = '🎉 <b>نسخه جدید آماده است!</b> <button onclick="applyUpdate()" style="background:#fff;color:#059669;border:none;padding:9px 16px;border-radius:11px;font-weight:900;cursor:pointer;font-family:inherit;font-size:12.5px;">🔄 آپدیت</button>';
+  document.body.appendChild(banner);
+  
+  setTimeout(function(){
+    if(banner.parentNode && !refreshing) banner.remove();
+  }, 30000);
 }
 });
 </script>
