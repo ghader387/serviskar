@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0c4a6e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="پنل ادمین">
+<title>پنل ادمین — سرویس‌کار</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{margin:0;font-family:'Vazirmatn',Tahoma,sans-serif;background:radial-gradient(800px 400px at 100% 0%,#0f1d33 0%,transparent 55%),linear-gradient(180deg,#0c1421 0%,#0c4a6e 100%);min-height:100dvh;color:#e0f2fe;-webkit-font-smoothing:antialiased;}
+.app{max-width:520px;margin:0 auto;padding:18px 16px 90px;min-height:100dvh;}
+.header{background:linear-gradient(135deg,#0c4a6e,#0284c7);border-radius:22px;padding:18px 20px;display:flex;align-items:center;gap:14px;box-shadow:0 14px 40px rgba(2,132,199,.4);margin-bottom:16px;}
+.header .logo{width:54px;height:54px;border-radius:16px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);display:grid;place-items:center;font-size:26px;flex-shrink:0;}
+.header h1{margin:0;font-size:17px;font-weight:900;color:#fff;}
+.header p{margin:3px 0 0;font-size:11px;font-weight:700;color:#bae6fd;opacity:.9;}
+.logout-btn{background:linear-gradient(135deg,#dc2626,#ef4444);color:#fff;border:none;padding:8px 14px;border-radius:10px;font-size:11.5px;font-weight:800;cursor:pointer;font-family:inherit;}
+/* tabs */
+.tabs{display:flex;background:#0f1d33;border:1.5px solid #1e3a5f;border-radius:16px;padding:5px;gap:4px;margin-bottom:16px;}
+.tabs button{flex:1;padding:12px 6px;border:none;background:transparent;border-radius:12px;font-family:inherit;font-size:12.5px;font-weight:800;color:#7dd3fc;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:.2s;}
+.tabs button.active{background:linear-gradient(135deg,#0284c7,#0369a1);color:#fff;box-shadow:0 6px 16px rgba(2,132,199,.4);}
+.tab-page{display:none;animation:fade .28s;}
+.tab-page.active{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.card{background:rgba(21,34,56,.85);backdrop-filter:blur(10px);border:1.5px solid #1e3a5f;border-radius:20px;padding:18px;box-shadow:0 10px 30px rgba(0,0,0,.4);margin-bottom:14px;}
+.card h3{margin:0 0 4px;font-size:14px;font-weight:900;color:#7dd3fc;}
+.card .hint{font-size:11px;color:#7dd3fc;font-weight:700;margin-bottom:14px;opacity:.85;}
+.field{margin-bottom:14px;}
+.field label{display:block;font-size:12px;font-weight:800;color:#bae6fd;margin-bottom:7px;}
+.field input,.field select{width:100%;padding:14px;border-radius:14px;border:1.5px solid #1e3a5f;font-size:14.5px;outline:none;background:#0f1d33;color:#e0f2fe;font-weight:600;font-family:inherit;}
+.field input:focus,.field select:focus{border-color:#38bdf8;background:#152238;box-shadow:0 0 0 4px rgba(56,189,248,.15);}
+.field input.mono{direction:ltr;text-align:center;letter-spacing:1.5px;font-family:'Courier New',monospace;}
+.btn{width:100%;padding:15px;border-radius:15px;border:none;font-size:14.5px;font-weight:800;cursor:pointer;font-family:inherit;margin-bottom:10px;transition:transform .15s;}
+.btn:active{transform:scale(.97);}
+.btn-primary{background:linear-gradient(135deg,#0284c7,#0369a1);color:#fff;box-shadow:0 10px 26px rgba(2,132,199,.45);}
+.btn-green{background:linear-gradient(135deg,#059669,#10b981);color:#fff;box-shadow:0 10px 26px rgba(5,150,105,.45);}
+.btn-red{background:linear-gradient(135deg,#dc2626,#ef4444);color:#fff;box-shadow:0 10px 26px rgba(220,38,38,.45);}
+.btn-orange{background:linear-gradient(135deg,#ea580c,#f97316);color:#fff;box-shadow:0 10px 26px rgba(234,88,12,.45);}
+.btn-ghost{background:#0f1d33;color:#7dd3fc;border:1.5px solid #1e3a5f;}
+.code-result{background:linear-gradient(135deg,#064e3b,#065f46);border:2px solid #10b981;border-radius:16px;padding:18px;text-align:center;margin-bottom:14px;animation:pop .4s;}
+@keyframes pop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+.code-result .lbl{font-size:11px;font-weight:800;color:#6ee7b7;margin-bottom:8px;}
+.code-result .code{font-size:22px;font-weight:900;color:#fff;letter-spacing:3px;direction:ltr;font-family:'Courier New',monospace;word-break:break-all;padding:12px;background:rgba(0,0,0,.3);border-radius:12px;user-select:all;-webkit-user-select:all;cursor:text;}
+.code-result .info{font-size:11px;font-weight:700;color:#a7f3d0;margin-top:10px;line-height:1.8;}
+.code-box{background:#fff;border-radius:14px;padding:16px;margin-bottom:12px;text-align:center;border:2px dashed #10b981;}
+.code-box .lbl{font-size:11px;font-weight:800;color:#065f46;margin-bottom:8px;}
+.code-box .code{font-size:24px;font-weight:900;color:#065f46;letter-spacing:3px;direction:ltr;font-family:'Courier New',monospace;word-break:break-all;user-select:all;-webkit-user-select:all;cursor:text;}
+.code-box .note{font-size:10px;color:#059669;font-weight:700;margin-top:8px;}
+/* user list */
+.user-search{margin-bottom:12px;display:flex;gap:8px;}
+.user-search input{flex:1;padding:13px 14px;border-radius:12px;border:1.5px solid #1e3a5f;background:#0f1d33;color:#e0f2fe;font-family:inherit;font-size:13.5px;font-weight:600;outline:none;direction:ltr;text-align:left;}
+.user-search input:focus{border-color:#38bdf8;}
+.user-search .clear-btn{padding:0 14px;border-radius:12px;border:none;background:#1e3a5f;color:#7dd3fc;font-size:13px;font-weight:800;cursor:pointer;font-family:inherit;}
+.u-filters{display:flex;gap:6px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none;margin-bottom:8px;}
+.u-filters::-webkit-scrollbar{display:none;}
+.u-fbtn{flex-shrink:0;padding:8px 13px;border-radius:11px;border:1.5px solid #1e3a5f;background:#0f1d33;font-size:11.5px;font-weight:800;color:#7dd3fc;cursor:pointer;font-family:inherit;white-space:nowrap;}
+.u-fbtn.active{background:linear-gradient(135deg,#0284c7,#0369a1);color:#fff;border-color:transparent;box-shadow:0 4px 12px rgba(2,132,199,.4);}
+.stats-mini{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
+.stat-mini{background:#0f1d33;border:1px solid #1e3a5f;border-radius:14px;padding:12px 8px;text-align:center;}
+.stat-mini .n{font-size:20px;font-weight:900;color:#6ee7b7;direction:ltr;}
+.stat-mini .n.warn{color:#fbbf24;}
+.stat-mini .n.danger{color:#fca5a5;}
+.stat-mini .l{font-size:10px;color:#94a3b8;font-weight:800;margin-top:4px;}
+.user-item{background:#0f1d33;border:1px solid #1e3a5f;border-radius:16px;padding:14px;margin-bottom:10px;position:relative;overflow:hidden;}
+.user-item.active{border-color:#10b981;}
+.user-item.expiring{border-color:#fbbf24;}
+.user-item.expired{border-color:#dc2626;}
+.user-item::before{content:'';position:absolute;top:0;right:0;width:4px;height:100%;background:#10b981;}
+.user-item.expiring::before{background:#fbbf24;}
+.user-item.expired::before{background:#dc2626;}
+.user-item .u-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px;}
+.user-item .u-name{font-size:14px;font-weight:900;color:#7dd3fc;direction:ltr;font-family:'Courier New',monospace;letter-spacing:1px;}
+.user-item .u-badge{font-size:10px;font-weight:900;padding:4px 10px;border-radius:8px;white-space:nowrap;}
+.user-item .u-badge.active{background:#065f46;color:#6ee7b7;}
+.user-item .u-badge.expiring{background:#78350f;color:#fbbf24;}
+.user-item .u-badge.expired{background:#7f1d1d;color:#fca5a5;}
+.user-item .u-code{background:#152238;border:1px dashed #10b981;border-radius:10px;padding:9px 12px;font-size:13px;font-weight:900;color:#6ee7b7;direction:ltr;font-family:'Courier New',monospace;letter-spacing:1.5px;word-break:break-all;text-align:center;margin-bottom:10px;user-select:all;-webkit-user-select:all;cursor:text;}
+.user-item .u-row{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#cbd5e1;font-weight:700;padding:4px 0;gap:8px;}
+.user-item .u-row .v{direction:ltr;font-family:'Courier New',monospace;color:#e0f2fe;font-weight:800;}
+.user-item .u-row .v.fa{direction:rtl;font-family:'Vazirmatn',Tahoma,sans-serif;letter-spacing:0;}
+.user-item .u-actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:10px;}
+.user-item .u-actions button{padding:10px 4px;border-radius:10px;border:none;font-family:inherit;font-size:10.5px;font-weight:800;cursor:pointer;}
+.u-btn-copy{background:#1e3a5f;color:#7dd3fc;}
+.u-btn-wa{background:#065f46;color:#6ee7b7;}
+.u-btn-renew{background:#7c2d12;color:#fdba74;}
+.u-btn-del{background:#7f1d1d;color:#fca5a5;grid-column:span 3;padding:8px !important;font-size:10px !important;}
+.history-item{background:#0f1d33;border:1px solid #1e3a5f;border-radius:12px;padding:11px 13px;margin-bottom:8px;font-size:12px;}
+.history-item .row1{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px;}
+.history-item .phone{font-weight:900;color:#7dd3fc;direction:ltr;font-family:'Courier New',monospace;}
+.history-item .code{font-weight:900;color:#6ee7b7;font-family:'Courier New',monospace;font-size:12.5px;letter-spacing:1px;direction:ltr;word-break:break-all;}
+.history-item .date{font-size:10px;color:#94a3b8;font-weight:700;}
+.history-item .copy-sm{background:#1e3a5f;color:#7dd3fc;border:none;padding:5px 10px;border-radius:8px;font-size:10.5px;font-weight:800;cursor:pointer;font-family:inherit;}
+.toast{position:fixed;bottom:30px;left:50%;transform:translate(-50%,30px);background:linear-gradient(135deg,#065f46,#10b981);color:#fff;padding:14px 22px;border-radius:16px;font-size:13.5px;font-weight:800;opacity:0;pointer-events:none;transition:.28s;z-index:100;box-shadow:0 14px 36px rgba(0,0,0,.5);white-space:nowrap;max-width:90vw;overflow:hidden;text-overflow:ellipsis;}
+.toast.show{opacity:1;transform:translate(-50%,0);}
+.toast.error{background:linear-gradient(135deg,#7f1d1d,#dc2626);}
+.login-screen{position:fixed;inset:0;background:linear-gradient(135deg,#0c1421,#0c4a6e);display:flex;align-items:center;justify-content:center;padding:20px;z-index:200;}
+.login-card{width:100%;max-width:400px;background:rgba(21,34,56,.95);backdrop-filter:blur(10px);border:1.5px solid #1e3a5f;border-radius:26px;padding:30px;box-shadow:0 30px 80px rgba(0,0,0,.6);}
+.login-card .lock{width:76px;height:76px;border-radius:22px;background:linear-gradient(135deg,#0284c7,#0369a1);display:grid;place-items:center;font-size:36px;margin:0 auto 16px;box-shadow:0 12px 30px rgba(2,132,199,.5);}
+.login-card h2{margin:0 0 6px;text-align:center;font-size:19px;font-weight:900;color:#7dd3fc;}
+.login-card p{margin:0 0 22px;text-align:center;font-size:11.5px;font-weight:700;color:#94a3b8;}
+.error-msg{color:#fca5a5;font-size:12px;font-weight:800;text-align:center;min-height:18px;margin-top:8px;}
+.hidden{display:none !important;}
+.empty-list{text-align:center;color:#7dd3fc;padding:32px 16px;font-size:12.5px;font-weight:700;opacity:.7;}
+.empty-list .icon{font-size:38px;display:block;margin-bottom:10px;opacity:.6;}
+.helper-note{background:linear-gradient(135deg,#fef3c7,#fde68a);border:1.5px solid #fcd34d;border-radius:12px;padding:10px 12px;font-size:11px;font-weight:700;color:#78350f;margin-top:10px;line-height:1.7;}
+.fab-add{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);padding:0 22px;height:54px;border-radius:27px;background:linear-gradient(135deg,#059669,#10b981);color:#fff;border:none;font-family:inherit;font-size:14px;font-weight:900;box-shadow:0 14px 32px rgba(5,150,105,.6);display:flex;align-items:center;gap:8px;cursor:pointer;z-index:50;}
+.fab-add:active{transform:translateX(-50%) scale(.96);}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-screen" id="loginScreen">
+<div class="login-card">
+<div class="lock">🔐</div>
+<h2>پنل مدیریت</h2>
+<p>سرویس‌کار — ورود ادمین</p>
+<div class="field"><label>رمز عبور</label><input type="password" id="adminPassword" class="mono" placeholder="رمز را وارد کنید" autocomplete="off"></div>
+<button class="btn btn-primary" id="loginBtn">🔓 ورود</button>
+<div class="error-msg" id="loginError"></div>
+</div>
+</div>
+
+<!-- MAIN -->
+<div class="app hidden" id="adminApp">
+<div class="header">
+<div class="logo">⚙️</div>
+<div style="flex:1;">
+<h1>پنل مدیریت سرویس‌کار</h1>
+<p>مدیریت مشتریان و کدهای فعال‌سازی</p>
+</div>
+<button class="logout-btn" id="logoutBtn">خروج</button>
+</div>
+
+<!-- TABS -->
+<div class="tabs" id="mainTabs">
+<button data-tab="users" class="active">👥 کاربران</button>
+<button data-tab="new">🎁 کد جدید</button>
+<button data-tab="history">📜 تاریخچه</button>
+</div>
+
+<!-- TAB: USERS LIST -->
+<div class="tab-page active" id="tab-users">
+
+<div class="stats-mini" id="userStats">
+<div class="stat-mini"><div class="n" id="statTotal">۰</div><div class="l">کل کاربران</div></div>
+<div class="stat-mini"><div class="n warn" id="statActive">۰</div><div class="l">فعال</div></div>
+<div class="stat-mini"><div class="n danger" id="statExpired">۰</div><div class="l">منقضی</div></div>
+</div>
+
+<div class="card" style="padding:14px;">
+<div class="user-search">
+<input type="text" id="userSearchInput" placeholder="جستجو بر اساس شماره موبایل...">
+<button class="clear-btn" id="clearSearchBtn">✕</button>
+</div>
+<div class="u-filters" id="userFilters">
+<button class="u-fbtn active" data-f="all">همه</button>
+<button class="u-fbtn" data-f="active">✅ فعال</button>
+<button class="u-fbtn" data-f="expiring">⏰ نزدیک انقضا</button>
+<button class="u-fbtn" data-f="expired">❌ منقضی</button>
+</div>
+</div>
+
+<div id="usersList"></div>
+
+</div>
+
+<!-- TAB: NEW CODE -->
+<div class="tab-page" id="tab-new">
+<div class="card">
+<h3>🔑 تولید کد فعال‌سازی</h3>
+<div class="hint">شماره موبایل مشتری و مدت اعتبار را وارد کنید</div>
+<div class="field"><label>شماره موبایل مشتری</label><input type="text" id="custPhone" class="mono" placeholder="09xxxxxxxxx" maxlength="11" inputmode="numeric"></div>
+<div class="field"><label>مدت اعتبار</label>
+<select id="duration">
+<option value="30">۱ ماه (۳۰ روز)</option>
+<option value="90">۳ ماه (۹۰ روز)</option>
+<option value="180">۶ ماه (۱۸۰ روز)</option>
+<option value="365" selected>۱ سال (۳۶۵ روز)</option>
+<option value="730">۲ سال (۷۳۰ روز)</option>
+<option value="1825">۵ سال (۱۸۲۵ روز)</option>
+<option value="custom">سفارشی (تعداد روز)</option>
+</select></div>
+<div class="field hidden" id="customDaysField"><label>تعداد روز سفارشی</label><input type="text" id="customDays" class="mono" placeholder="مثلاً 500" inputmode="numeric"></div>
+<button class="btn btn-green" id="genBtn">🎁 تولید کد فعال‌سازی</button>
+</div>
+
+<div class="card hidden" id="resultCard">
+<h3>✅ کد فعال‌سازی تولید شد</h3>
+<div class="hint">این کد را به مشتری بدهید</div>
+
+<div class="code-result">
+<div class="lbl">کد فعال‌سازی (روی کد ضربه بزنید و نگه دارید)</div>
+<div class="code" id="outCode">—</div>
+<div class="info" id="outInfo">—</div>
+</div>
+
+<div class="code-box">
+<div class="lbl">📋 فقط کد (برای ارسال جداگانه)</div>
+<div class="code" id="outCodeOnly">—</div>
+<div class="note">مشتری می‌تواند با نگه‌داشتن این کد، آن را کپی کند</div>
+</div>
+
+<button class="btn btn-orange" id="sendCodeOnlyBtn">📤 ارسال فقط کد (به‌صورت جداگانه)</button>
+<button class="btn btn-green" id="waSendBtn">📱 ارسال پیام کامل + راهنما</button>
+<button class="btn btn-primary" id="copyCodeBtn">📋 کپی کد</button>
+
+<div class="helper-note">
+💡 <b>راهنما:</b> اگر مشتری گفت «کد را کپی نمی‌شود»، از دکمه <b>📤 ارسال فقط کد</b> استفاده کن. در این حالت فقط کد به‌صورت تک‌خطی می‌رود و مشتری با نگه‌داشتن روی آن، راحت کپی می‌کند.
+</div>
+</div>
+</div>
+
+<!-- TAB: HISTORY -->
+<div class="tab-page" id="tab-history">
+<div class="card">
+<h3>📜 تاریخچه کدها</h3>
+<div class="hint" id="histCount">—</div>
+<div id="historyList"></div>
+<button class="btn btn-ghost" id="clearHistBtn" style="margin-top:10px;">🗑️ پاک کردن تاریخچه</button>
+</div>
+<div class="card">
+<h3>💾 پشتیبان‌گیری</h3>
+<div class="hint">پشتیبان از لیست کاربران بگیرید</div>
+<button class="btn btn-primary" id="exportUsersBtn">📤 خروجی JSON</button>
+<button class="btn btn-ghost" id="exportCsvBtn">📊 خروجی CSV (Excel)</button>
+</div>
+</div>
+
+</div>
+
+<button class="fab-add" id="fabNewCode">+ کد جدید</button>
+
+<div class="toast" id="toast"><span>انجام شد</span></div>
+
+<script>
+var ADMIN_PASSWORD='Gh@4152841';
+var SECRET_KEY='TABRIZ-2027-FANI';
+var SESSION_KEY='serviskar-admin-session';
+var USERS_KEY='serviskar-admin-users-v2';  // لیست کامل کاربران
+var HIST_KEY='serviskar-admin-history-v2'; // تاریخچه کدها
+var FA_D='۰۱۲۳۴۵۶۷۸۹';
+
+function $(id){return document.getElementById(id);}
+function toEn(s){return String(s).replace(/[۰-۹]/g,function(c){return FA_D.indexOf(c);});}
+function toFa(s){return String(s).replace(/\d/g,function(d){return FA_D[+d];});}
+function hash(str){var h=5381;for(var i=0;i<str.length;i++){h=((h<<5)+h)+str.charCodeAt(i);h=h&0xFFFFFFFF;}return Math.abs(h).toString(36).toUpperCase();}
+function pad2(n){return String(n).padStart(2,'0');}
+
+function makeActivationCode(phone, expiryTs, secretKey){
+var base=phone+'|'+expiryTs+'|'+secretKey;
+var h1=hash(base);
+var h2=hash(h1+phone);
+return 'TC-'+phone.slice(-4)+'-'+h1.slice(0,4).padEnd(4,'X')+'-'+h2.slice(0,4).padEnd(4,'X');
+}
+
+function showToast(msg, isError){
+var t=$('toast');
+t.querySelector('span').textContent=msg;
+t.classList.toggle('error', !!isError);
+t.classList.add('show');
+clearTimeout(window._tt);
+window._tt=setTimeout(function(){t.classList.remove('show');},2500);
+}
+
+function _div(a,b){return ~~(a/b);}
+function _mod(a,b){return a-~~(a/b)*b;}
+function _jalCal(jy){var breaks=[-61,9,38,199,426,686,756,818,1111,1181,1210,1635,2060,2097,2192,2262,2324,2394,2456,3178];var bl=breaks.length,gy=jy+621,leapJ=-14,jp=breaks[0],jm,jump,leap,n;for(var i=1;i<bl;i++){jm=breaks[i];jump=jm-jp;if(jy<jm)break;leapJ=leapJ+_div(jump,33)*8+_div(_mod(jump,33),4);jp=jm;}n=jy-jp;leapJ=leapJ+_div(n,33)*8+_div(_mod(n,33)+3,4);if(_mod(jump,33)===4&&jump-n===4)leapJ+=1;var leapG=_div(gy,4)-_div((_div(gy,100)+1)*3,4)-150;var march=20+leapJ-leapG;if(jump-n<6)n=n-jump+_div(jump+4,33)*33;leap=_mod(_mod(n+1,33)-1,4);if(leap===-1)leap=4;return {leap:leap,gy:gy,march:march};}
+function _g2d(gy,gm,gd){var d=_div((gy+_div(gm-8,6)+100100)*1461,4)+_div(153*_mod(gm+9,12)+2,5)+gd-34840408;d=d-_div(_div(gy+100100+_div(gm-8,6),100)*3,4)+752;return d;}
+function _d2g(jdn){var j=4*jdn+139361631;j=j+_div(_div(4*jdn+183187720,146097)*3,4)*4-3908;var i=_div(_mod(j,1461),4)*5+308;var gd=_div(_mod(i,153),5)+1;var gm=_mod(_div(i,153),12)+1;var gy=_div(j,1461)-100100+_div(8-gm,6);return {gy:gy,gm:gm,gd:gd};}
+function _j2d(jy,jm,jd){var r=_jalCal(jy);return _g2d(r.gy,3,r.march)+(jm-1)*31-_div(jm,7)*(jm-7)+jd-1;}
+function _d2j(jdn){var gy=_d2g(jdn).gy,jy=gy-621,jd,jm;var r=_jalCal(jy);var jdn1f=_g2d(gy,3,r.march);var k=jdn-jdn1f;if(k>=0){if(k<=185){jm=1+_div(k,31);jd=_mod(k,31)+1;return {jy:jy,jm:jm,jd:jd};}else k-=186;}else{jy-=1;k+=179;if(r.leap===1)k+=1;}jm=7+_div(k,30);jd=_mod(k,30)+1;return {jy:jy,jm:jm,jd:jd};}
+function toJalali(gy,gm,gd){return _d2j(_g2d(gy,gm,gd));}
+var J_MONTHS=['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
+function faDateLongFromTs(ts){
+var d=new Date(ts*1000);
+var j=toJalali(d.getFullYear(),d.getMonth()+1,d.getDate());
+return toFa(j.jd)+' '+J_MONTHS[j.jm-1]+' '+toFa(j.jy);
+}
+function faDateTimeFromTs(ts){
+var d=new Date(ts*1000);
+var j=toJalali(d.getFullYear(),d.getMonth()+1,d.getDate());
+var h=pad2(d.getHours())+':'+pad2(d.getMinutes());
+return toFa(j.jd)+' '+J_MONTHS[j.jm-1]+' '+toFa(j.jy)+' — '+toFa(h);
+}
+function daysBetween(ts1, ts2){
+var s=Math.floor(ts1/1000);
+var e=Math.floor(ts2/1000);
+return Math.floor((e-s)/86400);
+}
+
+/* ===== USER DATABASE ===== */
+function loadUsers(){try{var raw=localStorage.getItem(USERS_KEY);return raw?JSON.parse(raw):[];}catch(e){return [];}}
+function saveUsers(list){try{localStorage.setItem(USERS_KEY,JSON.stringify(list));}catch(e){}}
+
+function findUserByPhone(phone){
+var list=loadUsers();
+for(var i=0;i<list.length;i++){if(list[i].phone===phone)return list[i];}
+return null;
+}
+
+function upsertUser(phone, code, days, expiryTs){
+var list=loadUsers();
+var idx=-1;
+for(var i=0;i<list.length;i++){if(list[i].phone===phone){idx=i;break;}}
+var now=Date.now();
+if(idx>=0){
+// کاربر موجود → تمدید
+list[idx].code=code;
+list[idx].expiryTs=expiryTs;
+list[idx].lastRenewedAt=now;
+list[idx].days=days;
+list[idx].renewCount=(list[idx].renewCount||0)+1;
+}else{
+// کاربر جدید
+list.push({
+phone:phone,
+code:code,
+expiryTs:expiryTs,
+days:days,
+createdAt:now,
+lastRenewedAt:now,
+renewCount:0
+});
+}
+list.sort(function(a,b){return (b.lastRenewedAt||b.createdAt)-(a.lastRenewedAt||a.createdAt);});
+saveUsers(list);
+return list;
+}
+
+function deleteUser(phone){
+var list=loadUsers();
+list=list.filter(function(u){return u.phone!==phone;});
+saveUsers(list);
+renderUsers();
+}
+
+function getUserStatus(user){
+var nowSec=Math.floor(Date.now()/1000);
+var remaining=user.expiryTs-nowSec;
+if(remaining<=0)return 'expired';
+if(remaining<=7*86400)return 'expiring';
+return 'active';
+}
+
+function getUserStatusLabel(status){
+if(status==='active')return '✅ فعال';
+if(status==='expiring')return '⏰ نزدیک انقضا';
+return '❌ منقضی';
+}
+
+/* ===== RENDER USERS ===== */
+var userFilter='all';
+var userSearch='';
+
+function renderUsers(){
+var users=loadUsers();
+
+// آمار
+var nowSec=Math.floor(Date.now()/1000);
+var total=users.length;
+var active=0,expired=0;
+users.forEach(function(u){
+var st=getUserStatus(u);
+if(st==='expired')expired++;
+else active++;
+});
+$('statTotal').textContent=toFa(total);
+$('statActive').textContent=toFa(active);
+$('statExpired').textContent=toFa(expired);
+
+// فیلتر
+var filtered=users.slice();
+if(userFilter==='active')filtered=filtered.filter(function(u){return getUserStatus(u)==='active';});
+if(userFilter==='expiring')filtered=filtered.filter(function(u){return getUserStatus(u)==='expiring';});
+if(userFilter==='expired')filtered=filtered.filter(function(u){return getUserStatus(u)==='expired';});
+if(userSearch){
+var q=userSearch.replace(/[^\d]/g,'');
+if(q.length>0){
+filtered=filtered.filter(function(u){return u.phone.indexOf(q)!==-1;});
+}
+}
+
+// رندر
+if(!filtered.length){
+$('usersList').innerHTML='<div class="empty-list"><span class="icon">👥</span>کاربری یافت نشد</div>';
+return;
+}
+
+$('usersList').innerHTML=filtered.map(function(u){
+var st=getUserStatus(u);
+var remaining=u.expiryTs-nowSec;
+var remainingTxt='';
+if(remaining<=0){
+var absDays=Math.floor(Math.abs(remaining)/86400);
+remainingTxt=toFa(absDays)+' روز گذشته';
+}else{
+var d=Math.floor(remaining/86400);
+var h=Math.floor((remaining%86400)/3600);
+if(d>0)remainingTxt=toFa(d)+' روز و '+toFa(h)+' ساعت';
+else remainingTxt=toFa(h)+' ساعت';
+}
+var renewCount=u.renewCount||0;
+return '<div class="user-item '+st+'">'+
+'<div class="u-head">'+
+'<div class="u-name">'+toFa(u.phone)+'</div>'+
+'<div class="u-badge '+st+'">'+getUserStatusLabel(st)+'</div>'+
+'</div>'+
+'<div class="u-code" data-code="'+u.code+'">'+u.code+'</div>'+
+'<div class="u-row"><span>📅 انقضا:</span><span class="v fa">'+faDateLongFromTs(u.expiryTs)+'</span></div>'+
+'<div class="u-row"><span>⏱ باقیمانده:</span><span class="v fa">'+remainingTxt+'</span></div>'+
+(renewCount>0?'<div class="u-row"><span>🔄 تعداد تمدید:</span><span class="v">'+toFa(renewCount)+' بار</span></div>':'')+
+'<div class="u-row"><span>📆 آخرین تمدید:</span><span class="v fa">'+faDateTimeFromTs(u.lastRenewedAt||u.createdAt)+'</span></div>'+
+'<div class="u-actions">'+
+'<button class="u-btn-copy" data-act="copy" data-phone="'+u.phone+'">📋 کپی کد</button>'+
+'<button class="u-btn-wa" data-act="wa" data-phone="'+u.phone+'">📤 واتساپ</button>'+
+'<button class="u-btn-renew" data-act="renew" data-phone="'+u.phone+'">🔄 تمدید</button>'+
+'<button class="u-btn-del" data-act="del" data-phone="'+u.phone+'">🗑️ حذف از لیست</button>'+
+'</div>'+
+'</div>';
+}).join('');
+}
+
+/* ===== HISTORY ===== */
+function loadHistory(){try{var raw=localStorage.getItem(HIST_KEY);return raw?JSON.parse(raw):[];}catch(e){return [];}}
+function saveHistory(list){try{localStorage.setItem(HIST_KEY,JSON.stringify(list));}catch(e){}}
+function addHistory(phone, code, days, expiryTs){
+var list=loadHistory();
+list.unshift({phone:phone,code:code,days:days,expiryTs:expiryTs,createdAt:Date.now()});
+if(list.length>200)list=list.slice(0,200);
+saveHistory(list);
+renderHistory();
+}
+function renderHistory(){
+var list=loadHistory();
+$('histCount').textContent=toFa(list.length)+' کد ثبت شده';
+if(!list.length){$('historyList').innerHTML='<div style="text-align:center;color:#7dd3fc;padding:16px;font-size:12px;font-weight:700;opacity:.6;">هنوز کدی تولید نشده</div>';return;}
+$('historyList').innerHTML=list.map(function(h){
+var d=new Date(h.createdAt);
+var dateStr=new Intl.DateTimeFormat('fa-IR',{dateStyle:'short',timeStyle:'short'}).format(d);
+return '<div class="history-item">'+
+'<div class="row1">'+
+'<div class="phone">'+toFa(h.phone)+'</div>'+
+'<button class="copy-sm" data-copy="'+h.code+'">📋 کپی</button>'+
+'<button class="copy-sm" data-copy-phone="'+h.phone+'" data-copy-code="'+h.code+'" style="background:#065f46;color:#6ee7b7;">📤 فقط کد</button>'+
+'</div>'+
+'<div class="code">'+h.code+'</div>'+
+'<div class="date" style="margin-top:6px;">📅 اعتبار: '+faDateLongFromTs(h.expiryTs)+' • '+dateStr+'</div>'+
+'</div>';
+}).join('');
+}
+
+/* ===== LOGIN ===== */
+function checkSession(){
+try{if(sessionStorage.getItem(SESSION_KEY)==='OK'){showApp();return;}}catch(e){}
+$('loginScreen').classList.remove('hidden');
+$('adminApp').classList.add('hidden');
+}
+function showApp(){
+$('loginScreen').classList.add('hidden');
+$('adminApp').classList.remove('hidden');
+renderUsers();
+renderHistory();
+}
+function doLogin(){
+var val=$('adminPassword').value;
+if(val===ADMIN_PASSWORD){
+try{sessionStorage.setItem(SESSION_KEY,'OK');}catch(e){}
+$('loginError').textContent='';
+showApp();
+showToast('خوش آمدید ✅');
+}else{
+$('loginError').textContent='❌ رمز عبور نادرست است';
+$('adminPassword').value='';
+}
+}
+function doLogout(){
+try{sessionStorage.removeItem(SESSION_KEY);}catch(e){}
+$('adminPassword').value='';
+$('loginScreen').classList.remove('hidden');
+$('adminApp').classList.add('hidden');
+}
+
+/* ===== GENERATE CODE ===== */
+function calcExpiryTs(days){
+var nowSec=Math.floor(Date.now()/1000);
+var rawExpiry=nowSec+days*86400;
+var step=24*3600;
+return Math.floor(rawExpiry/step)*step;
+}
+
+function generateCode(){
+var phone=toEn($('custPhone').value).replace(/[^\d]/g,'');
+if(phone.length<10){alert('شماره موبایل را درست وارد کنید (۱۱ رقم)');return;}
+if(!/^09\d{9}$/.test(phone)){if(!confirm('شماره با فرمت ۰۹ شروع نمی‌شود. ادامه؟'))return;}
+var days=0;
+var dur=$('duration').value;
+if(dur==='custom'){
+days=Number(toEn($('customDays').value).replace(/[^\d]/g,''));
+if(!days||days<1){alert('تعداد روز را وارد کنید');return;}
+}else{days=Number(dur);}
+
+var expiryTs=calcExpiryTs(days);
+var code=makeActivationCode(phone,expiryTs,SECRET_KEY);
+
+// بررسی کاربر موجود
+var existing=findUserByPhone(phone);
+if(existing){
+var existingStatus=getUserStatus(existing);
+if(existingStatus!=='expired'){
+if(!confirm('⚠️ این شماره قبلاً ثبت شده.\n\nکد فعلی: '+existing.code+'\nاعتبار: '+faDateLongFromTs(existing.expiryTs)+'\n\nآیا کد جدید ساخته شود؟ (تمدید)'))return;
+}
+}
+
+upsertUser(phone, code, days, expiryTs);
+addHistory(phone,code,days,expiryTs);
+
+$('outCode').textContent=code;
+$('outCodeOnly').textContent=code;
+$('outInfo').innerHTML='📱 مشتری: '+toFa(phone)+'<br>📅 اعتبار تا: '+faDateLongFromTs(expiryTs)+' ('+toFa(days)+' روز)';
+$('resultCard').classList.remove('hidden');
+$('resultCard').scrollIntoView({behavior:'smooth',block:'nearest'});
+showToast(existing?'کد تمدید شد 🔄':'کاربر جدید اضافه شد ✅');
+renderUsers();
+}
+
+/* ===== RENEW USER ===== */
+function renewUser(phone){
+var user=findUserByPhone(phone);
+if(!user){showToast('کاربر یافت نشد',true);return;}
+var dur=prompt('مدت تمدید (تعداد روز):\n\nپیشنهاد:\n۳۰ = ۱ ماه\n۹۰ = ۳ ماه\n۱۸۰ = ۶ ماه\n۳۶۵ = ۱ سال','365');
+if(!dur)return;
+var days=Number(toEn(dur).replace(/[^\d]/g,''));
+if(!days||days<1){alert('عدد نامعتبر');return;}
+var expiryTs=calcExpiryTs(days);
+var code=makeActivationCode(phone,expiryTs,SECRET_KEY);
+upsertUser(phone,code,days,expiryTs);
+addHistory(phone,code,days,expiryTs);
+showToast('کد تمدید ساخته شد ✅');
+renderUsers();
+
+// نمایش کد جدید در تب «کد جدید» و پیشنهاد ارسال
+$('custPhone').value=phone;
+$('outCode').textContent=code;
+$('outCodeOnly').textContent=code;
+$('outInfo').innerHTML='📱 مشتری: '+toFa(phone)+' (تمدید)<br>📅 اعتبار جدید تا: '+faDateLongFromTs(expiryTs);
+$('resultCard').classList.remove('hidden');
+
+// سوال ارسال
+setTimeout(function(){
+if(confirm('کد تمدید ساخته شد. الان با واتساپ بفرستم؟')){
+sendCodeOnly(phone, code);
+}
+}, 400);
+}
+
+/* ===== SEND TO WHATSAPP ===== */
+function sendCodeOnly(phone, code){
+if(phone&&phone.startsWith('0'))phone='98'+phone.slice(1);
+window.open('https://wa.me/'+(phone||'')+'?text='+encodeURIComponent(code),'_blank');
+}
+function sendFullMessage(phone, code, days){
+if(phone&&phone.startsWith('0'))phone='98'+phone.slice(1);
+var durTxt=days+' روز';
+var msg='🎁 کد فعال‌سازی نرم‌افزار سرویس‌کار\n'+
+'\n'+
+'━━━━━━━━━━━━━━━\n'+
+code+'\n'+
+'━━━━━━━━━━━━━━━\n'+
+'\n'+
+'📅 مدت: '+durTxt+'\n'+
+'\n'+
+'📖 روش فعال‌سازی:\n'+
+'۱. برنامه «سرویس‌کار» را باز کنید\n'+
+'۲. شماره موبایل خود را وارد کنید\n'+
+'۳. روی «دریافت کد درخواست» بزنید\n'+
+'۴. کد بالا را در فیلد «کد فعال‌سازی» وارد کنید\n'+
+'۵. دکمه سبز «فعال‌سازی» را بزنید\n'+
+'\n'+
+'💡 نکته: اگر کد را نتوانستید کپی کنید، روی کد ضربه بزنید و نگه دارید.';
+window.open('https://wa.me/'+(phone||'')+'?text='+encodeURIComponent(msg),'_blank');
+}
+
+/* ===== CLIPBOARD ===== */
+function copyToClipboard(text, msg){
+if(navigator.clipboard&&navigator.clipboard.writeText){
+navigator.clipboard.writeText(text).then(function(){showToast(msg||'کپی شد 📋');}).catch(function(){fallbackCopy(text,msg);});
+}else{fallbackCopy(text,msg);}
+}
+function fallbackCopy(text,msg){
+var ta=document.createElement('textarea');
+ta.value=text;
+ta.style.position='fixed';ta.style.left='-9999px';
+document.body.appendChild(ta);ta.select();
+try{document.execCommand('copy');showToast(msg||'کپی شد 📋');}catch(e){}
+document.body.removeChild(ta);
+}
+
+/* ===== EXPORT ===== */
+function exportUsersJSON(){
+var users=loadUsers();
+var data={app:'serviskar-admin',version:2,exportedAt:new Date().toISOString(),count:users.length,users:users};
+var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+var url=URL.createObjectURL(blob);
+var a=document.createElement('a');
+a.href=url;
+a.download='serviskar-users-'+new Date().toISOString().slice(0,10)+'.json';
+document.body.appendChild(a);a.click();document.body.removeChild(a);
+setTimeout(function(){URL.revokeObjectURL(url);},1500);
+showToast('فایل پشتیبان ذخیره شد 💾');
+}
+
+function exportUsersCSV(){
+var users=loadUsers();
+var rows=[['شماره موبایل','کد فعال‌سازی','تاریخ انقضا','وضعیت','تعداد تمدید','تاریخ ایجاد']];
+var nowSec=Math.floor(Date.now()/1000);
+users.forEach(function(u){
+var st=getUserStatus(u);
+var statusTxt=st==='active'?'فعال':(st==='expiring'?'نزدیک انقضا':'منقضی');
+rows.push([u.phone,u.code,faDateLongFromTs(u.expiryTs),statusTxt,(u.renewCount||0),faDateTimeFromTs(u.createdAt)]);
+});
+var csv='\uFEFF'+rows.map(function(r){return r.map(function(c){return '"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
+var blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
+var url=URL.createObjectURL(blob);
+var a=document.createElement('a');
+a.href=url;
+a.download='serviskar-users-'+new Date().toISOString().slice(0,10)+'.csv';
+document.body.appendChild(a);a.click();document.body.removeChild(a);
+setTimeout(function(){URL.revokeObjectURL(url);},1500);
+showToast('فایل CSV ذخیره شد 📊');
+}
+
+/* ===== TABS ===== */
+function switchTab(name){
+var btns=document.querySelectorAll('#mainTabs button');
+for(var i=0;i<btns.length;i++)btns[i].classList.toggle('active',btns[i].dataset.tab===name);
+var pages=document.querySelectorAll('.tab-page');
+for(var i=0;i<pages.length;i++)pages[i].classList.remove('active');
+var el=$('tab-'+name);
+if(el)el.classList.add('active');
+$('fabNewCode').style.display=(name==='new')?'none':'flex';
+window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ===== INIT ===== */
+document.addEventListener('DOMContentLoaded',function(){
+checkSession();
+
+// Login
+$('loginBtn').addEventListener('click',doLogin);
+$('adminPassword').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
+$('logoutBtn').addEventListener('click',doLogout);
+
+// Tabs
+$('mainTabs').addEventListener('click',function(e){
+var b=e.target.closest('button[data-tab]');if(!b)return;
+switchTab(b.dataset.tab);
+});
+
+// FAB
+$('fabNewCode').addEventListener('click',function(){switchTab('new');});
+
+// Generate
+$('duration').addEventListener('change',function(){
+if(this.value==='custom'){$('customDaysField').classList.remove('hidden');}
+else{$('customDaysField').classList.add('hidden');}
+});
+$('genBtn').addEventListener('click',generateCode);
+
+// Send buttons
+$('copyCodeBtn').addEventListener('click',function(){
+var code=$('outCode').textContent;
+if(!code||code==='—')return;
+copyToClipboard(code,'کد کپی شد 📋');
+});
+$('sendCodeOnlyBtn').addEventListener('click',function(){
+var phone=toEn($('custPhone').value).replace(/[^\d]/g,'');
+var code=$('outCodeOnly').textContent;
+if(!code||code==='—')return;
+sendCodeOnly(phone,code);
+});
+$('waSendBtn').addEventListener('click',function(){
+var phone=toEn($('custPhone').value).replace(/[^\d]/g,'');
+var code=$('outCode').textContent;
+if(!code||code==='—')return;
+var dur=$('duration').value;
+var days=dur==='custom'?Number(toEn($('customDays').value).replace(/[^\d]/g,'')):Number(dur);
+sendFullMessage(phone,code,days);
+});
+
+// User search
+$('userSearchInput').addEventListener('input',function(e){
+userSearch=e.target.value;
+renderUsers();
+});
+$('clearSearchBtn').addEventListener('click',function(){
+$('userSearchInput').value='';
+userSearch='';
+renderUsers();
+});
+
+// User filters
+$('userFilters').addEventListener('click',function(e){
+var b=e.target.closest('.u-fbtn');if(!b)return;
+var btns=$('userFilters').querySelectorAll('.u-fbtn');
+for(var i=0;i<btns.length;i++)btns[i].classList.remove('active');
+b.classList.add('active');
+userFilter=b.dataset.f;
+renderUsers();
+});
+
+// User actions
+document.addEventListener('click',function(e){
+// copy code
+var codeEl=e.target.closest('.u-code');
+if(codeEl && !e.target.closest('button')){
+var c=codeEl.dataset.code;
+if(c)copyToClipboard(c,'کد کپی شد 📋');
+return;
+}
+var btn=e.target.closest('[data-act]');
+if(btn){
+var act=btn.dataset.act;
+var phone=btn.dataset.phone;
+var user=findUserByPhone(phone);
+if(act==='copy'&&user){
+copyToClipboard(user.code,'کد کپی شد 📋');
+}else if(act==='wa'&&user){
+sendCodeOnly(phone,user.code);
+}else if(act==='renew'){
+renewUser(phone);
+}else if(act==='del'){
+if(confirm('کاربر '+toFa(phone)+' از لیست حذف شود؟\n\n(کد فعلی او همچنان روی گوشی‌اش کار می‌کند، فقط از لیست ادمین حذف می‌شود)')) {
+deleteUser(phone);
+showToast('کاربر حذف شد');
+}
+}
+return;
+}
+
+// history copy
+var hc=e.target.closest('[data-copy]');
+if(hc){copyToClipboard(hc.dataset.copy,'کپی شد 📋');return;}
+var hw=e.target.closest('[data-copy-phone]');
+if(hw){
+sendCodeOnly(hw.dataset.copyPhone, hw.dataset.copyCode);
+return;
+}
+});
+
+// History clear
+$('clearHistBtn').addEventListener('click',function(){
+if(!confirm('تاریخچه پاک شود؟\n\n(لیست کاربران دست‌نخورده می‌ماند)'))return;
+saveHistory([]);
+renderHistory();
+showToast('تاریخچه پاک شد');
+});
+
+// Export
+$('exportUsersBtn').addEventListener('click',exportUsersJSON);
+$('exportCsvBtn').addEventListener('click',exportUsersCSV);
+
+// Phone inputs
+$('custPhone').addEventListener('input',function(e){
+e.target.value=toEn(e.target.value).replace(/[^\d]/g,'').slice(0,11);
+});
+$('customDays').addEventListener('input',function(e){
+e.target.value=toEn(e.target.value).replace(/[^\d]/g,'').slice(0,5);
+});
+});
+</script>
+</body>
+</html>
