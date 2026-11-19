@@ -130,8 +130,12 @@ html[dir="ltr"] .user-item .u-row .v.fa{direction:ltr;}
 <div class="lock">🔐</div>
 <h2>پنل مدیریت</h2>
 <p>سرویس‌کار — ورود ادمین</p>
-<div class="field"><label>رمز عبور</label><input type="password" id="adminPassword" class="mono" placeholder="رمز را وارد کنید" autocomplete="off"></div>
-<button class="btn btn-primary" id="loginBtn">🔓 ورود</button>
+<form id="loginForm" action="#" method="post" autocomplete="on" onsubmit="return false;">
+<input type="text" name="username" id="adminUser" value="admin" autocomplete="username" readonly style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" tabindex="-1" aria-hidden="true">
+<div class="field"><label>رمز عبور</label><input type="password" name="password" id="adminPassword" class="mono" placeholder="رمز را وارد کنید" autocomplete="current-password"></div>
+<label style="display:flex;align-items:center;gap:8px;margin:4px 0 12px;font-size:14px;cursor:pointer;"><input type="checkbox" id="rememberMe" checked style="width:18px;height:18px;"> <span>مرا به خاطر بسپار</span></label>
+<button type="submit" class="btn btn-primary" id="loginBtn">🔓 ورود</button>
+</form>
 <div class="error-msg" id="loginError"></div>
 </div>
 </div>
@@ -254,7 +258,7 @@ html[dir="ltr"] .user-item .u-row .v.fa{direction:ltr;}
 /* ========== i18n (FA / EN) ========== */
 var LANG_KEY='lang';
 var LANG=(function(){var s=null;try{s=localStorage.getItem(LANG_KEY);}catch(e){}if(s==='fa'||s==='en')return s;var n=String((navigator.languages&&navigator.languages[0])||navigator.language||'').toLowerCase();return n.indexOf('fa')===0?'fa':'en';})();
-var I18N={"آبان": "Aban", "آخرین تمدید": "Last renewed", "آذر": "Azar", "آیا کد جدید ساخته شود؟ (تمدید": "Create a new code? (renewal", "اردیبهشت": "Ordibehesht", "ارسال فقط کد": "Send code only", "ارسال فقط کد (به‌صورت جداگانه": "Send code only (as a separate message", "ارسال پیام کامل + راهنما": "Send full message + instructions", "از لیست حذف شود؟\n\n(کد فعلی او همچنان روی گوشی‌اش کار می‌کند، فقط از لیست ادمین حذف می‌شود": "from the list?\n\n(Their current code keeps working on their phone; they are only removed from the admin list", "استفاده کن. در این حالت فقط کد به‌صورت تک‌خطی می‌رود و مشتری با نگه‌داشتن روی آن، راحت کپی می‌کند": "button. Only the code is sent, on a single line, and the customer can copy it easily by tapping and holding", "اسفند": "Esfand", "اعتبار": "Valid until", "اعتبار تا": "Valid until", "انجام شد": "Done", "انقضا": "Expires", "اگر مشتری گفت «کد را کپی نمی‌شود»، از دکمه": "If the customer says “the code won’t copy”, use the", "این شماره قبلاً ثبت شده.\n\nکد فعلی": "This number is already registered.\n\nCurrent code", "این کد را به مشتری بدهید": "Give this code to the customer", "بار": "times", "باقیمانده": "Remaining", "بهمن": "Bahman", "تاریخ انقضا": "Expiry date", "تاریخ ایجاد": "Created", "تاریخچه": "History", "تاریخچه پاک شد": "History cleared", "تاریخچه پاک شود؟\n\n(لیست کاربران دست‌نخورده می‌ماند": "Clear the history?\n\n(The user list is not affected", "تاریخچه کدها": "Code history", "تعداد تمدید": "Renewals", "تعداد روز را وارد کنید": "Please enter the number of days", "تعداد روز سفارشی": "Custom number of days", "تمدید": "Renew", "تمدید)<br>📅 اعتبار جدید تا": "renewal)<br>📅 New expiry", "تولید کد فعال‌سازی": "Generate activation code", "تیر": "Tir", "جستجو بر اساس شماره موبایل": "Search by mobile number", "حذف از لیست": "Remove from list", "خرداد": "Khordad", "خروج": "Sign out", "خروجی": "Export", "خوش آمدید": "Welcome", "دی": "Dey", "راهنما": "Help", "رمز را وارد کنید": "Enter the password", "رمز عبور": "Password", "رمز عبور نادرست است": "Incorrect password", "روز": "days", "روز و": "days and", "روز گذشته": "days ago", "روش فعال‌سازی": "How to activate", "زبان": "Language", "ساعت": "hours", "سرویس‌کار": "Serviskar", "سرویس‌کار — ورود ادمین": "Serviskar — admin sign-in", "سفارشی (تعداد روز": "Custom (number of days", "شماره با فرمت ۰۹ شروع نمی‌شود. ادامه؟": "The number doesn't start with 09. Continue?", "شماره موبایل": "Mobile number", "شماره موبایل را درست وارد کنید": "Please enter a valid mobile number", "شماره موبایل را درست وارد کنید (۱۱ رقم": "Please enter a valid mobile number (11 digits", "شماره موبایل مشتری": "Customer's mobile number", "شماره موبایل مشتری و مدت اعتبار را وارد کنید": "Enter the customer's mobile number and validity period", "شهریور": "Shahrivar", "عدد نامعتبر": "Invalid number", "فایل CSV ذخیره شد": "CSV file saved", "فایل پشتیبان ذخیره شد": "Backup file saved", "فروردین": "Farvardin", "فعال": "Active", "فعال‌سازی": "Activate", "فقط کد": "Code only", "فقط کد (برای ارسال جداگانه": "Code only (to send separately", "مثلاً": "e.g.", "مدت": "Duration", "مدت اعتبار": "Validity period", "مدت تمدید (تعداد روز):\n\nپیشنهاد:\n۳۰ = ۱ ماه\n۹۰ = ۳ ماه\n۱۸۰ = ۶ ماه\n۳۶۵ = ۱ سال": "Renewal length (days):\n\nSuggestions:\n30 = 1 month\n90 = 3 months\n180 = 6 months\n365 = 1 year", "مدیریت مشتریان و کدهای فعال‌سازی": "Manage customers and activation codes", "مرداد": "Mordad", "مشتری": "Customer", "مشتری می‌تواند با نگه‌داشتن این کد، آن را کپی کند": "The customer can tap and hold this code to copy it", "منقضی": "Expired", "مهر": "Mehr", "نزدیک انقضا": "Expiring soon", "نکته: اگر کد را نتوانستید کپی کنید، روی کد ضربه بزنید و نگه دارید": "Tip: if the code won't copy, tap and hold it", "همه": "All", "هنوز کدی تولید نشده": "No codes generated yet", "واتساپ": "WhatsApp", "ورود": "Sign in", "وضعیت": "Status", "پاک کردن تاریخچه": "Clear history", "پشتیبان از لیست کاربران بگیرید": "Back up the user list", "پشتیبان‌گیری": "Backup", "پنل ادمین": "Admin panel", "پنل ادمین — سرویس‌کار": "Admin panel — Serviskar", "پنل مدیریت": "Admin panel", "پنل مدیریت سرویس‌کار": "Serviskar admin panel", "کاربر": "Remove user", "کاربر جدید اضافه شد": "New user added", "کاربر حذف شد": "User removed", "کاربر یافت نشد": "User not found", "کاربران": "Users", "کاربری یافت نشد": "No users found", "کد تمدید ساخته شد": "Renewal code created", "کد تمدید ساخته شد. الان با واتساپ بفرستم؟": "Renewal code created. Send it on WhatsApp now?", "کد تمدید شد": "Code renewed", "کد ثبت شده": "codes recorded", "کد جدید": "New code", "کد فعال‌سازی": "Activation code", "کد فعال‌سازی (روی کد ضربه بزنید و نگه دارید": "Activation code (tap and hold to copy", "کد فعال‌سازی تولید شد": "Activation code generated", "کد فعال‌سازی نرم‌افزار سرویس‌کار": "Your Serviskar activation code", "کد کپی شد": "Code copied", "کل کاربران": "Total users", "کپی": "Copy", "کپی شد": "Copied", "کپی کد": "Copy code", "۱ سال (۳۶۵ روز": "1 year (365 days", "۱ ماه (۳۰ روز": "1 month (30 days", "۱. برنامه «سرویس‌کار» را باز کنید": "1. Open the Serviskar app", "۲ سال (۷۳۰ روز": "2 years (730 days", "۲. شماره موبایل خود را وارد کنید": "2. Enter your mobile number", "۳ ماه (۹۰ روز": "3 months (90 days", "۳. روی «دریافت کد درخواست» بزنید": "3. Tap “Get request code”", "۴. کد بالا را در فیلد «کد فعال‌سازی» وارد کنید": "4. Enter the code above in the “Activation code” field", "۵ سال (۱۸۲۵ روز": "5 years (1825 days", "۵. دکمه سبز «فعال‌سازی» را بزنید": "5. Tap the green “Activate” button", "۶ ماه (۱۸۰ روز": "6 months (180 days"};
+var I18N={"مرا به خاطر بسپار": "Remember me", "آبان": "Aban", "آخرین تمدید": "Last renewed", "آذر": "Azar", "آیا کد جدید ساخته شود؟ (تمدید": "Create a new code? (renewal", "اردیبهشت": "Ordibehesht", "ارسال فقط کد": "Send code only", "ارسال فقط کد (به‌صورت جداگانه": "Send code only (as a separate message", "ارسال پیام کامل + راهنما": "Send full message + instructions", "از لیست حذف شود؟\n\n(کد فعلی او همچنان روی گوشی‌اش کار می‌کند، فقط از لیست ادمین حذف می‌شود": "from the list?\n\n(Their current code keeps working on their phone; they are only removed from the admin list", "استفاده کن. در این حالت فقط کد به‌صورت تک‌خطی می‌رود و مشتری با نگه‌داشتن روی آن، راحت کپی می‌کند": "button. Only the code is sent, on a single line, and the customer can copy it easily by tapping and holding", "اسفند": "Esfand", "اعتبار": "Valid until", "اعتبار تا": "Valid until", "انجام شد": "Done", "انقضا": "Expires", "اگر مشتری گفت «کد را کپی نمی‌شود»، از دکمه": "If the customer says “the code won’t copy”, use the", "این شماره قبلاً ثبت شده.\n\nکد فعلی": "This number is already registered.\n\nCurrent code", "این کد را به مشتری بدهید": "Give this code to the customer", "بار": "times", "باقیمانده": "Remaining", "بهمن": "Bahman", "تاریخ انقضا": "Expiry date", "تاریخ ایجاد": "Created", "تاریخچه": "History", "تاریخچه پاک شد": "History cleared", "تاریخچه پاک شود؟\n\n(لیست کاربران دست‌نخورده می‌ماند": "Clear the history?\n\n(The user list is not affected", "تاریخچه کدها": "Code history", "تعداد تمدید": "Renewals", "تعداد روز را وارد کنید": "Please enter the number of days", "تعداد روز سفارشی": "Custom number of days", "تمدید": "Renew", "تمدید)<br>📅 اعتبار جدید تا": "renewal)<br>📅 New expiry", "تولید کد فعال‌سازی": "Generate activation code", "تیر": "Tir", "جستجو بر اساس شماره موبایل": "Search by mobile number", "حذف از لیست": "Remove from list", "خرداد": "Khordad", "خروج": "Sign out", "خروجی": "Export", "خوش آمدید": "Welcome", "دی": "Dey", "راهنما": "Help", "رمز را وارد کنید": "Enter the password", "رمز عبور": "Password", "رمز عبور نادرست است": "Incorrect password", "روز": "days", "روز و": "days and", "روز گذشته": "days ago", "روش فعال‌سازی": "How to activate", "زبان": "Language", "ساعت": "hours", "سرویس‌کار": "Serviskar", "سرویس‌کار — ورود ادمین": "Serviskar — admin sign-in", "سفارشی (تعداد روز": "Custom (number of days", "شماره با فرمت ۰۹ شروع نمی‌شود. ادامه؟": "The number doesn't start with 09. Continue?", "شماره موبایل": "Mobile number", "شماره موبایل را درست وارد کنید": "Please enter a valid mobile number", "شماره موبایل را درست وارد کنید (۱۱ رقم": "Please enter a valid mobile number (11 digits", "شماره موبایل مشتری": "Customer's mobile number", "شماره موبایل مشتری و مدت اعتبار را وارد کنید": "Enter the customer's mobile number and validity period", "شهریور": "Shahrivar", "عدد نامعتبر": "Invalid number", "فایل CSV ذخیره شد": "CSV file saved", "فایل پشتیبان ذخیره شد": "Backup file saved", "فروردین": "Farvardin", "فعال": "Active", "فعال‌سازی": "Activate", "فقط کد": "Code only", "فقط کد (برای ارسال جداگانه": "Code only (to send separately", "مثلاً": "e.g.", "مدت": "Duration", "مدت اعتبار": "Validity period", "مدت تمدید (تعداد روز):\n\nپیشنهاد:\n۳۰ = ۱ ماه\n۹۰ = ۳ ماه\n۱۸۰ = ۶ ماه\n۳۶۵ = ۱ سال": "Renewal length (days):\n\nSuggestions:\n30 = 1 month\n90 = 3 months\n180 = 6 months\n365 = 1 year", "مدیریت مشتریان و کدهای فعال‌سازی": "Manage customers and activation codes", "مرداد": "Mordad", "مشتری": "Customer", "مشتری می‌تواند با نگه‌داشتن این کد، آن را کپی کند": "The customer can tap and hold this code to copy it", "منقضی": "Expired", "مهر": "Mehr", "نزدیک انقضا": "Expiring soon", "نکته: اگر کد را نتوانستید کپی کنید، روی کد ضربه بزنید و نگه دارید": "Tip: if the code won't copy, tap and hold it", "همه": "All", "هنوز کدی تولید نشده": "No codes generated yet", "واتساپ": "WhatsApp", "ورود": "Sign in", "وضعیت": "Status", "پاک کردن تاریخچه": "Clear history", "پشتیبان از لیست کاربران بگیرید": "Back up the user list", "پشتیبان‌گیری": "Backup", "پنل ادمین": "Admin panel", "پنل ادمین — سرویس‌کار": "Admin panel — Serviskar", "پنل مدیریت": "Admin panel", "پنل مدیریت سرویس‌کار": "Serviskar admin panel", "کاربر": "Remove user", "کاربر جدید اضافه شد": "New user added", "کاربر حذف شد": "User removed", "کاربر یافت نشد": "User not found", "کاربران": "Users", "کاربری یافت نشد": "No users found", "کد تمدید ساخته شد": "Renewal code created", "کد تمدید ساخته شد. الان با واتساپ بفرستم؟": "Renewal code created. Send it on WhatsApp now?", "کد تمدید شد": "Code renewed", "کد ثبت شده": "codes recorded", "کد جدید": "New code", "کد فعال‌سازی": "Activation code", "کد فعال‌سازی (روی کد ضربه بزنید و نگه دارید": "Activation code (tap and hold to copy", "کد فعال‌سازی تولید شد": "Activation code generated", "کد فعال‌سازی نرم‌افزار سرویس‌کار": "Your Serviskar activation code", "کد کپی شد": "Code copied", "کل کاربران": "Total users", "کپی": "Copy", "کپی شد": "Copied", "کپی کد": "Copy code", "۱ سال (۳۶۵ روز": "1 year (365 days", "۱ ماه (۳۰ روز": "1 month (30 days", "۱. برنامه «سرویس‌کار» را باز کنید": "1. Open the Serviskar app", "۲ سال (۷۳۰ روز": "2 years (730 days", "۲. شماره موبایل خود را وارد کنید": "2. Enter your mobile number", "۳ ماه (۹۰ روز": "3 months (90 days", "۳. روی «دریافت کد درخواست» بزنید": "3. Tap “Get request code”", "۴. کد بالا را در فیلد «کد فعال‌سازی» وارد کنید": "4. Enter the code above in the “Activation code” field", "۵ سال (۱۸۲۵ روز": "5 years (1825 days", "۵. دکمه سبز «فعال‌سازی» را بزنید": "5. Tap the green “Activate” button", "۶ ماه (۱۸۰ روز": "6 months (180 days"};
 var I18N_REV=null;
 var I18N_FA_D='\u06f0\u06f1\u06f2\u06f3\u06f4\u06f5\u06f6\u06f7\u06f8\u06f9';
 var I18N_HAS_FA=/[\u0600-\u06FF]/;
@@ -335,7 +339,8 @@ document.addEventListener('click',function(e){
 var b=e.target.closest&&e.target.closest('.lang-switch button[data-lang]');
 if(!b)return;e.preventDefault();applyLang(b.getAttribute('data-lang'),true);
 });
-var ADMIN_PASSWORD='Gh@4152841';
+var ADMIN_PASSWORD_HASH='6988bb35d25171ef68204c5210148e1aced4aa2a689c66aeeab85c1d52f6c9ff';
+var REMEMBER_KEY='serviskar-admin-remember';
 var SECRET_KEY='TABRIZ-2027-FANI';
 var SESSION_KEY='serviskar-admin-session';
 var USERS_KEY='serviskar-admin-users-v2';  // لیست کامل کاربران
@@ -554,8 +559,13 @@ T('<div class="date" style="margin-top:6px;">📅 اعتبار: ')+faDateLongFro
 }
 
 /* ===== LOGIN ===== */
+function sha256Hex(str){
+if(!(window.crypto&&crypto.subtle))return Promise.reject(new Error('no-crypto'));
+return crypto.subtle.digest('SHA-256',new TextEncoder().encode(str)).then(function(b){return Array.prototype.map.call(new Uint8Array(b),function(x){return ('0'+x.toString(16)).slice(-2);}).join('');});
+}
 function checkSession(){
 try{if(sessionStorage.getItem(SESSION_KEY)==='OK'){showApp();return;}}catch(e){}
+try{if(localStorage.getItem(REMEMBER_KEY)===ADMIN_PASSWORD_HASH){try{sessionStorage.setItem(SESSION_KEY,'OK');}catch(e){}showApp();return;}}catch(e){}
 $('loginScreen').classList.remove('hidden');
 $('adminApp').classList.add('hidden');
 }
@@ -567,8 +577,10 @@ renderHistory();
 }
 function doLogin(){
 var val=$('adminPassword').value;
-if(val===ADMIN_PASSWORD){
+sha256Hex(val).then(function(h){
+if(h===ADMIN_PASSWORD_HASH){
 try{sessionStorage.setItem(SESSION_KEY,'OK');}catch(e){}
+try{if($('rememberMe').checked)localStorage.setItem(REMEMBER_KEY,h);else localStorage.removeItem(REMEMBER_KEY);}catch(e){}
 $('loginError').textContent='';
 showApp();
 showToast(T('خوش آمدید ✅'));
@@ -576,9 +588,11 @@ showToast(T('خوش آمدید ✅'));
 $('loginError').textContent=T('❌ رمز عبور نادرست است');
 $('adminPassword').value='';
 }
+}).catch(function(){$('loginError').textContent=T('❌ رمز عبور نادرست است');});
 }
 function doLogout(){
 try{sessionStorage.removeItem(SESSION_KEY);}catch(e){}
+try{localStorage.removeItem(REMEMBER_KEY);}catch(e){}
 $('adminPassword').value='';
 $('loginScreen').classList.remove('hidden');
 $('adminApp').classList.add('hidden');
@@ -751,8 +765,7 @@ applyLang(LANG,false);
 checkSession();
 
 // Login
-$('loginBtn').addEventListener('click',doLogin);
-$('adminPassword').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
+$('loginForm').addEventListener('submit',function(e){e.preventDefault();doLogin();});
 $('logoutBtn').addEventListener('click',doLogout);
 
 // Tabs
