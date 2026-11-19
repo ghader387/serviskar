@@ -109,6 +109,16 @@ body{margin:0;font-family:'Vazirmatn',Tahoma,sans-serif;background:radial-gradie
 .helper-note{background:linear-gradient(135deg,#fef3c7,#fde68a);border:1.5px solid #fcd34d;border-radius:12px;padding:10px 12px;font-size:11px;font-weight:700;color:#78350f;margin-top:10px;line-height:1.7;}
 .fab-add{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);padding:0 22px;height:54px;border-radius:27px;background:linear-gradient(135deg,#059669,#10b981);color:#fff;border:none;font-family:inherit;font-size:14px;font-weight:900;box-shadow:0 14px 32px rgba(5,150,105,.6);display:flex;align-items:center;gap:8px;cursor:pointer;z-index:50;}
 .fab-add:active{transform:translateX(-50%) scale(.96);}
+
+.lang-switch{display:inline-flex;flex-shrink:0;background:var(--bg-2,#e0f2fe);border:1.5px solid var(--border,#bae6fd);border-radius:12px;padding:3px;gap:2px;direction:ltr;}
+.lang-switch button{border:none;background:transparent;font-family:inherit;font-size:12px;font-weight:900;color:var(--muted,#64748b);padding:6px 10px;border-radius:9px;cursor:pointer;line-height:1;min-width:34px;}
+.lang-switch button.active{background:linear-gradient(135deg,#0284c7,#0369a1);color:#fff;box-shadow:0 3px 10px rgba(2,132,199,.35);}
+
+.lang-switch{background:#0f1d33;border-color:#1e3a5f;}
+.lang-switch button{color:#7dd3fc;}
+.login-card .lic-top{display:flex;justify-content:flex-end;margin:-12px -12px 4px;}
+html[dir="ltr"] .user-item::before{right:auto;left:0;}
+html[dir="ltr"] .user-item .u-row .v.fa{direction:ltr;}
 </style>
 </head>
 <body>
@@ -116,6 +126,7 @@ body{margin:0;font-family:'Vazirmatn',Tahoma,sans-serif;background:radial-gradie
 <!-- LOGIN -->
 <div class="login-screen" id="loginScreen">
 <div class="login-card">
+<div class="lic-top"><div class="lang-switch" data-noi18n role="group" aria-label="Language / زبان"><button type="button" data-lang="fa" lang="fa">فا</button><button type="button" data-lang="en" lang="en">EN</button></div></div>
 <div class="lock">🔐</div>
 <h2>پنل مدیریت</h2>
 <p>سرویس‌کار — ورود ادمین</p>
@@ -133,6 +144,7 @@ body{margin:0;font-family:'Vazirmatn',Tahoma,sans-serif;background:radial-gradie
 <h1>پنل مدیریت سرویس‌کار</h1>
 <p>مدیریت مشتریان و کدهای فعال‌سازی</p>
 </div>
+<div class="lang-switch" data-noi18n role="group" aria-label="Language / زبان"><button type="button" data-lang="fa" lang="fa">فا</button><button type="button" data-lang="en" lang="en">EN</button></div>
 <button class="logout-btn" id="logoutBtn">خروج</button>
 </div>
 
@@ -165,7 +177,7 @@ body{margin:0;font-family:'Vazirmatn',Tahoma,sans-serif;background:radial-gradie
 </div>
 </div>
 
-<div id="usersList"></div>
+<div id="usersList" data-noi18n></div>
 
 </div>
 
@@ -195,13 +207,13 @@ body{margin:0;font-family:'Vazirmatn',Tahoma,sans-serif;background:radial-gradie
 
 <div class="code-result">
 <div class="lbl">کد فعال‌سازی (روی کد ضربه بزنید و نگه دارید)</div>
-<div class="code" id="outCode">—</div>
+<div class="code" id="outCode" data-noi18n>—</div>
 <div class="info" id="outInfo">—</div>
 </div>
 
 <div class="code-box">
 <div class="lbl">📋 فقط کد (برای ارسال جداگانه)</div>
-<div class="code" id="outCodeOnly">—</div>
+<div class="code" id="outCodeOnly" data-noi18n>—</div>
 <div class="note">مشتری می‌تواند با نگه‌داشتن این کد، آن را کپی کند</div>
 </div>
 
@@ -220,7 +232,7 @@ body{margin:0;font-family:'Vazirmatn',Tahoma,sans-serif;background:radial-gradie
 <div class="card">
 <h3>📜 تاریخچه کدها</h3>
 <div class="hint" id="histCount">—</div>
-<div id="historyList"></div>
+<div id="historyList" data-noi18n></div>
 <button class="btn btn-ghost" id="clearHistBtn" style="margin-top:10px;">🗑️ پاک کردن تاریخچه</button>
 </div>
 <div class="card">
@@ -238,16 +250,102 @@ body{margin:0;font-family:'Vazirmatn',Tahoma,sans-serif;background:radial-gradie
 <div class="toast" id="toast"><span>انجام شد</span></div>
 
 <script>
+
+/* ========== i18n (FA / EN) ========== */
+var LANG_KEY='lang';
+var LANG=(function(){var s=null;try{s=localStorage.getItem(LANG_KEY);}catch(e){}if(s==='fa'||s==='en')return s;var n=String((navigator.languages&&navigator.languages[0])||navigator.language||'').toLowerCase();return n.indexOf('fa')===0?'fa':'en';})();
+var I18N={"آبان": "Aban", "آخرین تمدید": "Last renewed", "آذر": "Azar", "آیا کد جدید ساخته شود؟ (تمدید": "Create a new code? (renewal", "اردیبهشت": "Ordibehesht", "ارسال فقط کد": "Send code only", "ارسال فقط کد (به‌صورت جداگانه": "Send code only (as a separate message", "ارسال پیام کامل + راهنما": "Send full message + instructions", "از لیست حذف شود؟\n\n(کد فعلی او همچنان روی گوشی‌اش کار می‌کند، فقط از لیست ادمین حذف می‌شود": "from the list?\n\n(Their current code keeps working on their phone; they are only removed from the admin list", "استفاده کن. در این حالت فقط کد به‌صورت تک‌خطی می‌رود و مشتری با نگه‌داشتن روی آن، راحت کپی می‌کند": "button. Only the code is sent, on a single line, and the customer can copy it easily by tapping and holding", "اسفند": "Esfand", "اعتبار": "Valid until", "اعتبار تا": "Valid until", "انجام شد": "Done", "انقضا": "Expires", "اگر مشتری گفت «کد را کپی نمی‌شود»، از دکمه": "If the customer says “the code won’t copy”, use the", "این شماره قبلاً ثبت شده.\n\nکد فعلی": "This number is already registered.\n\nCurrent code", "این کد را به مشتری بدهید": "Give this code to the customer", "بار": "times", "باقیمانده": "Remaining", "بهمن": "Bahman", "تاریخ انقضا": "Expiry date", "تاریخ ایجاد": "Created", "تاریخچه": "History", "تاریخچه پاک شد": "History cleared", "تاریخچه پاک شود؟\n\n(لیست کاربران دست‌نخورده می‌ماند": "Clear the history?\n\n(The user list is not affected", "تاریخچه کدها": "Code history", "تعداد تمدید": "Renewals", "تعداد روز را وارد کنید": "Please enter the number of days", "تعداد روز سفارشی": "Custom number of days", "تمدید": "Renew", "تمدید)<br>📅 اعتبار جدید تا": "renewal)<br>📅 New expiry", "تولید کد فعال‌سازی": "Generate activation code", "تیر": "Tir", "جستجو بر اساس شماره موبایل": "Search by mobile number", "حذف از لیست": "Remove from list", "خرداد": "Khordad", "خروج": "Sign out", "خروجی": "Export", "خوش آمدید": "Welcome", "دی": "Dey", "راهنما": "Help", "رمز را وارد کنید": "Enter the password", "رمز عبور": "Password", "رمز عبور نادرست است": "Incorrect password", "روز": "days", "روز و": "days and", "روز گذشته": "days ago", "روش فعال‌سازی": "How to activate", "زبان": "Language", "ساعت": "hours", "سرویس‌کار": "Serviskar", "سرویس‌کار — ورود ادمین": "Serviskar — admin sign-in", "سفارشی (تعداد روز": "Custom (number of days", "شماره با فرمت ۰۹ شروع نمی‌شود. ادامه؟": "The number doesn't start with 09. Continue?", "شماره موبایل": "Mobile number", "شماره موبایل را درست وارد کنید": "Please enter a valid mobile number", "شماره موبایل را درست وارد کنید (۱۱ رقم": "Please enter a valid mobile number (11 digits", "شماره موبایل مشتری": "Customer's mobile number", "شماره موبایل مشتری و مدت اعتبار را وارد کنید": "Enter the customer's mobile number and validity period", "شهریور": "Shahrivar", "عدد نامعتبر": "Invalid number", "فایل CSV ذخیره شد": "CSV file saved", "فایل پشتیبان ذخیره شد": "Backup file saved", "فروردین": "Farvardin", "فعال": "Active", "فعال‌سازی": "Activate", "فقط کد": "Code only", "فقط کد (برای ارسال جداگانه": "Code only (to send separately", "مثلاً": "e.g.", "مدت": "Duration", "مدت اعتبار": "Validity period", "مدت تمدید (تعداد روز):\n\nپیشنهاد:\n۳۰ = ۱ ماه\n۹۰ = ۳ ماه\n۱۸۰ = ۶ ماه\n۳۶۵ = ۱ سال": "Renewal length (days):\n\nSuggestions:\n30 = 1 month\n90 = 3 months\n180 = 6 months\n365 = 1 year", "مدیریت مشتریان و کدهای فعال‌سازی": "Manage customers and activation codes", "مرداد": "Mordad", "مشتری": "Customer", "مشتری می‌تواند با نگه‌داشتن این کد، آن را کپی کند": "The customer can tap and hold this code to copy it", "منقضی": "Expired", "مهر": "Mehr", "نزدیک انقضا": "Expiring soon", "نکته: اگر کد را نتوانستید کپی کنید، روی کد ضربه بزنید و نگه دارید": "Tip: if the code won't copy, tap and hold it", "همه": "All", "هنوز کدی تولید نشده": "No codes generated yet", "واتساپ": "WhatsApp", "ورود": "Sign in", "وضعیت": "Status", "پاک کردن تاریخچه": "Clear history", "پشتیبان از لیست کاربران بگیرید": "Back up the user list", "پشتیبان‌گیری": "Backup", "پنل ادمین": "Admin panel", "پنل ادمین — سرویس‌کار": "Admin panel — Serviskar", "پنل مدیریت": "Admin panel", "پنل مدیریت سرویس‌کار": "Serviskar admin panel", "کاربر": "Remove user", "کاربر جدید اضافه شد": "New user added", "کاربر حذف شد": "User removed", "کاربر یافت نشد": "User not found", "کاربران": "Users", "کاربری یافت نشد": "No users found", "کد تمدید ساخته شد": "Renewal code created", "کد تمدید ساخته شد. الان با واتساپ بفرستم؟": "Renewal code created. Send it on WhatsApp now?", "کد تمدید شد": "Code renewed", "کد ثبت شده": "codes recorded", "کد جدید": "New code", "کد فعال‌سازی": "Activation code", "کد فعال‌سازی (روی کد ضربه بزنید و نگه دارید": "Activation code (tap and hold to copy", "کد فعال‌سازی تولید شد": "Activation code generated", "کد فعال‌سازی نرم‌افزار سرویس‌کار": "Your Serviskar activation code", "کد کپی شد": "Code copied", "کل کاربران": "Total users", "کپی": "Copy", "کپی شد": "Copied", "کپی کد": "Copy code", "۱ سال (۳۶۵ روز": "1 year (365 days", "۱ ماه (۳۰ روز": "1 month (30 days", "۱. برنامه «سرویس‌کار» را باز کنید": "1. Open the Serviskar app", "۲ سال (۷۳۰ روز": "2 years (730 days", "۲. شماره موبایل خود را وارد کنید": "2. Enter your mobile number", "۳ ماه (۹۰ روز": "3 months (90 days", "۳. روی «دریافت کد درخواست» بزنید": "3. Tap “Get request code”", "۴. کد بالا را در فیلد «کد فعال‌سازی» وارد کنید": "4. Enter the code above in the “Activation code” field", "۵ سال (۱۸۲۵ روز": "5 years (1825 days", "۵. دکمه سبز «فعال‌سازی» را بزنید": "5. Tap the green “Activate” button", "۶ ماه (۱۸۰ روز": "6 months (180 days"};
+var I18N_REV=null;
+var I18N_FA_D='\u06f0\u06f1\u06f2\u06f3\u06f4\u06f5\u06f6\u06f7\u06f8\u06f9';
+var I18N_HAS_FA=/[\u0600-\u06FF]/;
+var I18N_CORE=/^([\s\S]*?)([\u0600-\u06FF\u200C](?:[\s\S]*[\u0600-\u06FF\u200C])?)([\s\S]*)$/;
+var I18N_SEG=/[\u0600-\u06EF\u06FA-\u06FF\u200C](?:[\u0600-\u06EF\u06FA-\u06FF\u200C]|[\s\u00A0\u00AB\u00BB().,:!?\/\-\u2014\u2026\u061F\u060C\u06F0-\u06F9]+(?=[\u0600-\u06EF\u06FA-\u06FF\u200C]))*/g;
+function i18nHas(k){return Object.prototype.hasOwnProperty.call(I18N,k);}
+function i18nDigits(s){return String(s).replace(/[\u06f0-\u06f9]/g,function(c){return I18N_FA_D.indexOf(c);}).replace(/\u066c/g,',').replace(/\u066b/g,'.');}
+function T(s){
+if(LANG!=='en'||s==null)return s;
+s=String(s);
+if(!I18N_HAS_FA.test(s))return s;
+var out;
+if(i18nHas(s))out=I18N[s];
+else{var m=s.match(I18N_CORE);
+if(m&&i18nHas(m[2]))out=m[1]+I18N[m[2]]+m[3];
+else out=s.replace(I18N_SEG,function(seg){return i18nHas(seg)?I18N[seg]:seg;});}
+return i18nDigits(out);
+}
+function L(fa,en){return LANG==='en'?en:fa;}
+function LOC(){return LANG==='en'?'en-US':'fa-IR';}
+function DIRS(){return LANG==='en'?{d:'ltr',s:'left',e:'right'}:{d:'rtl',s:'right',e:'left'};}
+function i18nRev(v){
+if(!I18N_REV){I18N_REV={};for(var k in I18N){if(i18nHas(k)&&!Object.prototype.hasOwnProperty.call(I18N_REV,I18N[k]))I18N_REV[I18N[k]]=k;}}
+var t=v.trim();if(!t)return v;
+if(Object.prototype.hasOwnProperty.call(I18N_REV,t))return v.replace(t,I18N_REV[t]);
+var m=t.match(/^([^A-Za-z]*)([\s\S]*?[A-Za-z.)]?)$/);
+if(m&&m[2]&&Object.prototype.hasOwnProperty.call(I18N_REV,m[2]))return v.replace(m[2],I18N_REV[m[2]]);
+return v;
+}
+function i18nTextNode(n){
+var v=n.nodeValue;
+if(LANG==='en'){
+if(n.__i18nEn!==undefined&&v===n.__i18nEn)return;
+if(!I18N_HAS_FA.test(v))return;
+var t=T(v);if(t!==v){n.__i18nFa=v;n.__i18nEn=t;n.nodeValue=t;}
+}else{
+if(n.__i18nEn!==undefined&&v===n.__i18nEn){n.nodeValue=n.__i18nFa;return;}
+if(/[A-Za-z]/.test(v)){var r=i18nRev(v);if(r!==v)n.nodeValue=r;}
+}
+}
+var I18N_ATTRS=['placeholder','title','alt','aria-label'];
+function i18nAttrs(el){
+for(var i=0;i<I18N_ATTRS.length;i++){
+var a=I18N_ATTRS[i];if(!el.hasAttribute(a))continue;
+var v=el.getAttribute(a);el.__i18nA=el.__i18nA||{};var c=el.__i18nA[a];
+if(LANG==='en'){
+if(c&&v===c.en)continue;
+if(!I18N_HAS_FA.test(v))continue;
+var t=T(v);if(t!==v){el.__i18nA[a]={fa:v,en:t};el.setAttribute(a,t);}
+}else{
+if(c&&v===c.en){el.setAttribute(a,c.fa);continue;}
+if(/[A-Za-z]/.test(v)){var r=i18nRev(v);if(r!==v)el.setAttribute(a,r);}
+}
+}
+}
+function i18nWalk(root){
+if(!root)return;
+if(root.nodeType===1)i18nAttrs(root);
+var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT|NodeFilter.SHOW_ELEMENT,{acceptNode:function(n){
+if(n.nodeType===1){var tg=n.tagName;if(tg==='TEXTAREA'){i18nAttrs(n);return NodeFilter.FILTER_REJECT;}if(tg==='SCRIPT'||tg==='STYLE'||n.hasAttribute('data-noi18n'))return NodeFilter.FILTER_REJECT;}
+return NodeFilter.FILTER_ACCEPT;}});
+var n;while((n=w.nextNode())){if(n.nodeType===3)i18nTextNode(n);else i18nAttrs(n);}
+}
+var I18N_TITLE_FA=null;
+function applyLang(lang,save){
+if(lang!=='fa'&&lang!=='en')lang='fa';
+LANG=lang;
+if(save){try{localStorage.setItem(LANG_KEY,lang);}catch(e){}}
+var h=document.documentElement;h.setAttribute('lang',lang);h.setAttribute('dir',lang==='en'?'ltr':'rtl');
+if(I18N_TITLE_FA===null)I18N_TITLE_FA=document.title;
+document.title=lang==='en'?T(I18N_TITLE_FA):I18N_TITLE_FA;
+i18nWalk(document.body);
+var sw=document.querySelectorAll('.lang-switch button');
+for(var i=0;i<sw.length;i++){var on=sw[i].getAttribute('data-lang')===lang;sw[i].classList.toggle('active',on);sw[i].setAttribute('aria-pressed',on?'true':'false');}
+if(typeof i18nRerender==='function'){try{i18nRerender();}catch(e){if(window.console)console.error(e);}}
+}
+document.addEventListener('click',function(e){
+var b=e.target.closest&&e.target.closest('.lang-switch button[data-lang]');
+if(!b)return;e.preventDefault();applyLang(b.getAttribute('data-lang'),true);
+});
 var ADMIN_PASSWORD='Gh@4152841';
 var SECRET_KEY='TABRIZ-2027-FANI';
 var SESSION_KEY='serviskar-admin-session';
 var USERS_KEY='serviskar-admin-users-v2';  // لیست کامل کاربران
 var HIST_KEY='serviskar-admin-history-v2'; // تاریخچه کدها
+function JM(i){return LANG==='en'?J_MONTHS_EN[i]:J_MONTHS[i];}
 var FA_D='۰۱۲۳۴۵۶۷۸۹';
 
 function $(id){return document.getElementById(id);}
 function toEn(s){return String(s).replace(/[۰-۹]/g,function(c){return FA_D.indexOf(c);});}
-function toFa(s){return String(s).replace(/\d/g,function(d){return FA_D[+d];});}
+function toFa(s){if(LANG==='en')return String(s);return String(s).replace(/\d/g,function(d){return FA_D[+d];});}
 function hash(str){var h=5381;for(var i=0;i<str.length;i++){h=((h<<5)+h)+str.charCodeAt(i);h=h&0xFFFFFFFF;}return Math.abs(h).toString(36).toUpperCase();}
 function pad2(n){return String(n).padStart(2,'0');}
 
@@ -275,17 +373,18 @@ function _d2g(jdn){var j=4*jdn+139361631;j=j+_div(_div(4*jdn+183187720,146097)*3
 function _j2d(jy,jm,jd){var r=_jalCal(jy);return _g2d(r.gy,3,r.march)+(jm-1)*31-_div(jm,7)*(jm-7)+jd-1;}
 function _d2j(jdn){var gy=_d2g(jdn).gy,jy=gy-621,jd,jm;var r=_jalCal(jy);var jdn1f=_g2d(gy,3,r.march);var k=jdn-jdn1f;if(k>=0){if(k<=185){jm=1+_div(k,31);jd=_mod(k,31)+1;return {jy:jy,jm:jm,jd:jd};}else k-=186;}else{jy-=1;k+=179;if(r.leap===1)k+=1;}jm=7+_div(k,30);jd=_mod(k,30)+1;return {jy:jy,jm:jm,jd:jd};}
 function toJalali(gy,gm,gd){return _d2j(_g2d(gy,gm,gd));}
+var J_MONTHS_EN=['Farvardin','Ordibehesht','Khordad','Tir','Mordad','Shahrivar','Mehr','Aban','Azar','Dey','Bahman','Esfand'];
 var J_MONTHS=['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
 function faDateLongFromTs(ts){
 var d=new Date(ts*1000);
 var j=toJalali(d.getFullYear(),d.getMonth()+1,d.getDate());
-return toFa(j.jd)+' '+J_MONTHS[j.jm-1]+' '+toFa(j.jy);
+return toFa(j.jd)+' '+JM(j.jm-1)+' '+toFa(j.jy);
 }
 function faDateTimeFromTs(ts){
 var d=new Date(ts*1000);
 var j=toJalali(d.getFullYear(),d.getMonth()+1,d.getDate());
 var h=pad2(d.getHours())+':'+pad2(d.getMinutes());
-return toFa(j.jd)+' '+J_MONTHS[j.jm-1]+' '+toFa(j.jy)+' — '+toFa(h);
+return toFa(j.jd)+' '+JM(j.jm-1)+' '+toFa(j.jy)+' — '+toFa(h);
 }
 function daysBetween(ts1, ts2){
 var s=Math.floor(ts1/1000);
@@ -348,9 +447,9 @@ return 'active';
 }
 
 function getUserStatusLabel(status){
-if(status==='active')return '✅ فعال';
-if(status==='expiring')return '⏰ نزدیک انقضا';
-return '❌ منقضی';
+if(status==='active')return T('✅ فعال');
+if(status==='expiring')return T('⏰ نزدیک انقضا');
+return T('❌ منقضی');
 }
 
 /* ===== RENDER USERS ===== */
@@ -387,7 +486,7 @@ filtered=filtered.filter(function(u){return u.phone.indexOf(q)!==-1;});
 
 // رندر
 if(!filtered.length){
-$('usersList').innerHTML='<div class="empty-list"><span class="icon">👥</span>کاربری یافت نشد</div>';
+$('usersList').innerHTML=T('<div class="empty-list"><span class="icon">👥</span>کاربری یافت نشد</div>');
 return;
 }
 
@@ -397,12 +496,12 @@ var remaining=u.expiryTs-nowSec;
 var remainingTxt='';
 if(remaining<=0){
 var absDays=Math.floor(Math.abs(remaining)/86400);
-remainingTxt=toFa(absDays)+' روز گذشته';
+remainingTxt=toFa(absDays)+T(' روز گذشته');
 }else{
 var d=Math.floor(remaining/86400);
 var h=Math.floor((remaining%86400)/3600);
-if(d>0)remainingTxt=toFa(d)+' روز و '+toFa(h)+' ساعت';
-else remainingTxt=toFa(h)+' ساعت';
+if(d>0)remainingTxt=toFa(d)+T(' روز و ')+toFa(h)+T(' ساعت');
+else remainingTxt=toFa(h)+T(' ساعت');
 }
 var renewCount=u.renewCount||0;
 return '<div class="user-item '+st+'">'+
@@ -411,15 +510,15 @@ return '<div class="user-item '+st+'">'+
 '<div class="u-badge '+st+'">'+getUserStatusLabel(st)+'</div>'+
 '</div>'+
 '<div class="u-code" data-code="'+u.code+'">'+u.code+'</div>'+
-'<div class="u-row"><span>📅 انقضا:</span><span class="v fa">'+faDateLongFromTs(u.expiryTs)+'</span></div>'+
-'<div class="u-row"><span>⏱ باقیمانده:</span><span class="v fa">'+remainingTxt+'</span></div>'+
-(renewCount>0?'<div class="u-row"><span>🔄 تعداد تمدید:</span><span class="v">'+toFa(renewCount)+' بار</span></div>':'')+
-'<div class="u-row"><span>📆 آخرین تمدید:</span><span class="v fa">'+faDateTimeFromTs(u.lastRenewedAt||u.createdAt)+'</span></div>'+
+T('<div class="u-row"><span>📅 انقضا:</span><span class="v fa">')+faDateLongFromTs(u.expiryTs)+'</span></div>'+
+T('<div class="u-row"><span>⏱ باقیمانده:</span><span class="v fa">')+remainingTxt+'</span></div>'+
+(renewCount>0?T('<div class="u-row"><span>🔄 تعداد تمدید:</span><span class="v">')+toFa(renewCount)+T(' بار</span></div>'):'')+
+T('<div class="u-row"><span>📆 آخرین تمدید:</span><span class="v fa">')+faDateTimeFromTs(u.lastRenewedAt||u.createdAt)+'</span></div>'+
 '<div class="u-actions">'+
-'<button class="u-btn-copy" data-act="copy" data-phone="'+u.phone+'">📋 کپی کد</button>'+
-'<button class="u-btn-wa" data-act="wa" data-phone="'+u.phone+'">📤 واتساپ</button>'+
-'<button class="u-btn-renew" data-act="renew" data-phone="'+u.phone+'">🔄 تمدید</button>'+
-'<button class="u-btn-del" data-act="del" data-phone="'+u.phone+'">🗑️ حذف از لیست</button>'+
+'<button class="u-btn-copy" data-act="copy" data-phone="'+u.phone+T('">📋 کپی کد</button>')+
+'<button class="u-btn-wa" data-act="wa" data-phone="'+u.phone+T('">📤 واتساپ</button>')+
+'<button class="u-btn-renew" data-act="renew" data-phone="'+u.phone+T('">🔄 تمدید</button>')+
+'<button class="u-btn-del" data-act="del" data-phone="'+u.phone+T('">🗑️ حذف از لیست</button>')+
 '</div>'+
 '</div>';
 }).join('');
@@ -437,19 +536,19 @@ renderHistory();
 }
 function renderHistory(){
 var list=loadHistory();
-$('histCount').textContent=toFa(list.length)+' کد ثبت شده';
-if(!list.length){$('historyList').innerHTML='<div style="text-align:center;color:#7dd3fc;padding:16px;font-size:12px;font-weight:700;opacity:.6;">هنوز کدی تولید نشده</div>';return;}
+$('histCount').textContent=toFa(list.length)+T(' کد ثبت شده');
+if(!list.length){$('historyList').innerHTML=T('<div style="text-align:center;color:#7dd3fc;padding:16px;font-size:12px;font-weight:700;opacity:.6;">هنوز کدی تولید نشده</div>');return;}
 $('historyList').innerHTML=list.map(function(h){
 var d=new Date(h.createdAt);
-var dateStr=new Intl.DateTimeFormat('fa-IR',{dateStyle:'short',timeStyle:'short'}).format(d);
+var dateStr=new Intl.DateTimeFormat(LOC(),{dateStyle:'short',timeStyle:'short'}).format(d);
 return '<div class="history-item">'+
 '<div class="row1">'+
 '<div class="phone">'+toFa(h.phone)+'</div>'+
-'<button class="copy-sm" data-copy="'+h.code+'">📋 کپی</button>'+
-'<button class="copy-sm" data-copy-phone="'+h.phone+'" data-copy-code="'+h.code+'" style="background:#065f46;color:#6ee7b7;">📤 فقط کد</button>'+
+'<button class="copy-sm" data-copy="'+h.code+T('">📋 کپی</button>')+
+'<button class="copy-sm" data-copy-phone="'+h.phone+'" data-copy-code="'+h.code+T('" style="background:#065f46;color:#6ee7b7;">📤 فقط کد</button>')+
 '</div>'+
 '<div class="code">'+h.code+'</div>'+
-'<div class="date" style="margin-top:6px;">📅 اعتبار: '+faDateLongFromTs(h.expiryTs)+' • '+dateStr+'</div>'+
+T('<div class="date" style="margin-top:6px;">📅 اعتبار: ')+faDateLongFromTs(h.expiryTs)+' • '+dateStr+'</div>'+
 '</div>';
 }).join('');
 }
@@ -472,9 +571,9 @@ if(val===ADMIN_PASSWORD){
 try{sessionStorage.setItem(SESSION_KEY,'OK');}catch(e){}
 $('loginError').textContent='';
 showApp();
-showToast('خوش آمدید ✅');
+showToast(T('خوش آمدید ✅'));
 }else{
-$('loginError').textContent='❌ رمز عبور نادرست است';
+$('loginError').textContent=T('❌ رمز عبور نادرست است');
 $('adminPassword').value='';
 }
 }
@@ -495,13 +594,13 @@ return Math.floor(rawExpiry/step)*step;
 
 function generateCode(){
 var phone=toEn($('custPhone').value).replace(/[^\d]/g,'');
-if(phone.length<10){alert('شماره موبایل را درست وارد کنید (۱۱ رقم)');return;}
-if(!/^09\d{9}$/.test(phone)){if(!confirm('شماره با فرمت ۰۹ شروع نمی‌شود. ادامه؟'))return;}
+if(phone.length<10){alert(T('شماره موبایل را درست وارد کنید (۱۱ رقم)'));return;}
+if(!/^09\d{9}$/.test(phone)){if(!confirm(T('شماره با فرمت ۰۹ شروع نمی‌شود. ادامه؟')))return;}
 var days=0;
 var dur=$('duration').value;
 if(dur==='custom'){
 days=Number(toEn($('customDays').value).replace(/[^\d]/g,''));
-if(!days||days<1){alert('تعداد روز را وارد کنید');return;}
+if(!days||days<1){alert(T('تعداد روز را وارد کنید'));return;}
 }else{days=Number(dur);}
 
 var expiryTs=calcExpiryTs(days);
@@ -512,7 +611,7 @@ var existing=findUserByPhone(phone);
 if(existing){
 var existingStatus=getUserStatus(existing);
 if(existingStatus!=='expired'){
-if(!confirm('⚠️ این شماره قبلاً ثبت شده.\n\nکد فعلی: '+existing.code+'\nاعتبار: '+faDateLongFromTs(existing.expiryTs)+'\n\nآیا کد جدید ساخته شود؟ (تمدید)'))return;
+if(!confirm(T('⚠️ این شماره قبلاً ثبت شده.\n\nکد فعلی: ')+existing.code+T('\nاعتبار: ')+faDateLongFromTs(existing.expiryTs)+T('\n\nآیا کد جدید ساخته شود؟ (تمدید)')))return;
 }
 }
 
@@ -521,38 +620,38 @@ addHistory(phone,code,days,expiryTs);
 
 $('outCode').textContent=code;
 $('outCodeOnly').textContent=code;
-$('outInfo').innerHTML='📱 مشتری: '+toFa(phone)+'<br>📅 اعتبار تا: '+faDateLongFromTs(expiryTs)+' ('+toFa(days)+' روز)';
+$('outInfo').innerHTML=T('📱 مشتری: ')+toFa(phone)+T('<br>📅 اعتبار تا: ')+faDateLongFromTs(expiryTs)+' ('+toFa(days)+T(' روز)');
 $('resultCard').classList.remove('hidden');
 $('resultCard').scrollIntoView({behavior:'smooth',block:'nearest'});
-showToast(existing?'کد تمدید شد 🔄':'کاربر جدید اضافه شد ✅');
+showToast(existing?T('کد تمدید شد 🔄'):T('کاربر جدید اضافه شد ✅'));
 renderUsers();
 }
 
 /* ===== RENEW USER ===== */
 function renewUser(phone){
 var user=findUserByPhone(phone);
-if(!user){showToast('کاربر یافت نشد',true);return;}
-var dur=prompt('مدت تمدید (تعداد روز):\n\nپیشنهاد:\n۳۰ = ۱ ماه\n۹۰ = ۳ ماه\n۱۸۰ = ۶ ماه\n۳۶۵ = ۱ سال','365');
+if(!user){showToast(T('کاربر یافت نشد'),true);return;}
+var dur=prompt(T('مدت تمدید (تعداد روز):\n\nپیشنهاد:\n۳۰ = ۱ ماه\n۹۰ = ۳ ماه\n۱۸۰ = ۶ ماه\n۳۶۵ = ۱ سال'),'365');
 if(!dur)return;
 var days=Number(toEn(dur).replace(/[^\d]/g,''));
-if(!days||days<1){alert('عدد نامعتبر');return;}
+if(!days||days<1){alert(T('عدد نامعتبر'));return;}
 var expiryTs=calcExpiryTs(days);
 var code=makeActivationCode(phone,expiryTs,SECRET_KEY);
 upsertUser(phone,code,days,expiryTs);
 addHistory(phone,code,days,expiryTs);
-showToast('کد تمدید ساخته شد ✅');
+showToast(T('کد تمدید ساخته شد ✅'));
 renderUsers();
 
 // نمایش کد جدید در تب «کد جدید» و پیشنهاد ارسال
 $('custPhone').value=phone;
 $('outCode').textContent=code;
 $('outCodeOnly').textContent=code;
-$('outInfo').innerHTML='📱 مشتری: '+toFa(phone)+' (تمدید)<br>📅 اعتبار جدید تا: '+faDateLongFromTs(expiryTs);
+$('outInfo').innerHTML=T('📱 مشتری: ')+toFa(phone)+T(' (تمدید)<br>📅 اعتبار جدید تا: ')+faDateLongFromTs(expiryTs);
 $('resultCard').classList.remove('hidden');
 
 // سوال ارسال
 setTimeout(function(){
-if(confirm('کد تمدید ساخته شد. الان با واتساپ بفرستم؟')){
+if(confirm(T('کد تمدید ساخته شد. الان با واتساپ بفرستم؟'))){
 sendCodeOnly(phone, code);
 }
 }, 400);
@@ -565,30 +664,30 @@ window.open('https://wa.me/'+(phone||'')+'?text='+encodeURIComponent(code),'_bla
 }
 function sendFullMessage(phone, code, days){
 if(phone&&phone.startsWith('0'))phone='98'+phone.slice(1);
-var durTxt=days+' روز';
-var msg='🎁 کد فعال‌سازی نرم‌افزار سرویس‌کار\n'+
+var durTxt=days+T(' روز');
+var msg=T('🎁 کد فعال‌سازی نرم‌افزار سرویس‌کار\n')+
 '\n'+
 '━━━━━━━━━━━━━━━\n'+
 code+'\n'+
 '━━━━━━━━━━━━━━━\n'+
 '\n'+
-'📅 مدت: '+durTxt+'\n'+
+T('📅 مدت: ')+durTxt+'\n'+
 '\n'+
-'📖 روش فعال‌سازی:\n'+
-'۱. برنامه «سرویس‌کار» را باز کنید\n'+
-'۲. شماره موبایل خود را وارد کنید\n'+
-'۳. روی «دریافت کد درخواست» بزنید\n'+
-'۴. کد بالا را در فیلد «کد فعال‌سازی» وارد کنید\n'+
-'۵. دکمه سبز «فعال‌سازی» را بزنید\n'+
+T('📖 روش فعال‌سازی:\n')+
+T('۱. برنامه «سرویس‌کار» را باز کنید\n')+
+T('۲. شماره موبایل خود را وارد کنید\n')+
+T('۳. روی «دریافت کد درخواست» بزنید\n')+
+T('۴. کد بالا را در فیلد «کد فعال‌سازی» وارد کنید\n')+
+T('۵. دکمه سبز «فعال‌سازی» را بزنید\n')+
 '\n'+
-'💡 نکته: اگر کد را نتوانستید کپی کنید، روی کد ضربه بزنید و نگه دارید.';
+T('💡 نکته: اگر کد را نتوانستید کپی کنید، روی کد ضربه بزنید و نگه دارید.');
 window.open('https://wa.me/'+(phone||'')+'?text='+encodeURIComponent(msg),'_blank');
 }
 
 /* ===== CLIPBOARD ===== */
 function copyToClipboard(text, msg){
 if(navigator.clipboard&&navigator.clipboard.writeText){
-navigator.clipboard.writeText(text).then(function(){showToast(msg||'کپی شد 📋');}).catch(function(){fallbackCopy(text,msg);});
+navigator.clipboard.writeText(text).then(function(){showToast(msg||T('کپی شد 📋'));}).catch(function(){fallbackCopy(text,msg);});
 }else{fallbackCopy(text,msg);}
 }
 function fallbackCopy(text,msg){
@@ -596,7 +695,7 @@ var ta=document.createElement('textarea');
 ta.value=text;
 ta.style.position='fixed';ta.style.left='-9999px';
 document.body.appendChild(ta);ta.select();
-try{document.execCommand('copy');showToast(msg||'کپی شد 📋');}catch(e){}
+try{document.execCommand('copy');showToast(msg||T('کپی شد 📋'));}catch(e){}
 document.body.removeChild(ta);
 }
 
@@ -611,16 +710,16 @@ a.href=url;
 a.download='serviskar-users-'+new Date().toISOString().slice(0,10)+'.json';
 document.body.appendChild(a);a.click();document.body.removeChild(a);
 setTimeout(function(){URL.revokeObjectURL(url);},1500);
-showToast('فایل پشتیبان ذخیره شد 💾');
+showToast(T('فایل پشتیبان ذخیره شد 💾'));
 }
 
 function exportUsersCSV(){
 var users=loadUsers();
-var rows=[['شماره موبایل','کد فعال‌سازی','تاریخ انقضا','وضعیت','تعداد تمدید','تاریخ ایجاد']];
+var rows=[[T('شماره موبایل'),T('کد فعال‌سازی'),T('تاریخ انقضا'),T('وضعیت'),T('تعداد تمدید'),T('تاریخ ایجاد')]];
 var nowSec=Math.floor(Date.now()/1000);
 users.forEach(function(u){
 var st=getUserStatus(u);
-var statusTxt=st==='active'?'فعال':(st==='expiring'?'نزدیک انقضا':'منقضی');
+var statusTxt=st==='active'?T('فعال'):(st==='expiring'?T('نزدیک انقضا'):T('منقضی'));
 rows.push([u.phone,u.code,faDateLongFromTs(u.expiryTs),statusTxt,(u.renewCount||0),faDateTimeFromTs(u.createdAt)]);
 });
 var csv='\uFEFF'+rows.map(function(r){return r.map(function(c){return '"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
@@ -631,7 +730,7 @@ a.href=url;
 a.download='serviskar-users-'+new Date().toISOString().slice(0,10)+'.csv';
 document.body.appendChild(a);a.click();document.body.removeChild(a);
 setTimeout(function(){URL.revokeObjectURL(url);},1500);
-showToast('فایل CSV ذخیره شد 📊');
+showToast(T('فایل CSV ذخیره شد 📊'));
 }
 
 /* ===== TABS ===== */
@@ -648,6 +747,7 @@ window.scrollTo({top:0,behavior:'smooth'});
 
 /* ===== INIT ===== */
 document.addEventListener('DOMContentLoaded',function(){
+applyLang(LANG,false);
 checkSession();
 
 // Login
@@ -675,7 +775,7 @@ $('genBtn').addEventListener('click',generateCode);
 $('copyCodeBtn').addEventListener('click',function(){
 var code=$('outCode').textContent;
 if(!code||code==='—')return;
-copyToClipboard(code,'کد کپی شد 📋');
+copyToClipboard(code,T('کد کپی شد 📋'));
 });
 $('sendCodeOnlyBtn').addEventListener('click',function(){
 var phone=toEn($('custPhone').value).replace(/[^\d]/g,'');
@@ -719,7 +819,7 @@ document.addEventListener('click',function(e){
 var codeEl=e.target.closest('.u-code');
 if(codeEl && !e.target.closest('button')){
 var c=codeEl.dataset.code;
-if(c)copyToClipboard(c,'کد کپی شد 📋');
+if(c)copyToClipboard(c,T('کد کپی شد 📋'));
 return;
 }
 var btn=e.target.closest('[data-act]');
@@ -728,15 +828,15 @@ var act=btn.dataset.act;
 var phone=btn.dataset.phone;
 var user=findUserByPhone(phone);
 if(act==='copy'&&user){
-copyToClipboard(user.code,'کد کپی شد 📋');
+copyToClipboard(user.code,T('کد کپی شد 📋'));
 }else if(act==='wa'&&user){
 sendCodeOnly(phone,user.code);
 }else if(act==='renew'){
 renewUser(phone);
 }else if(act==='del'){
-if(confirm('کاربر '+toFa(phone)+' از لیست حذف شود؟\n\n(کد فعلی او همچنان روی گوشی‌اش کار می‌کند، فقط از لیست ادمین حذف می‌شود)')) {
+if(confirm(T('کاربر ')+toFa(phone)+T(' از لیست حذف شود؟\n\n(کد فعلی او همچنان روی گوشی‌اش کار می‌کند، فقط از لیست ادمین حذف می‌شود)'))) {
 deleteUser(phone);
-showToast('کاربر حذف شد');
+showToast(T('کاربر حذف شد'));
 }
 }
 return;
@@ -744,7 +844,7 @@ return;
 
 // history copy
 var hc=e.target.closest('[data-copy]');
-if(hc){copyToClipboard(hc.dataset.copy,'کپی شد 📋');return;}
+if(hc){copyToClipboard(hc.dataset.copy,T('کپی شد 📋'));return;}
 var hw=e.target.closest('[data-copy-phone]');
 if(hw){
 sendCodeOnly(hw.dataset.copyPhone, hw.dataset.copyCode);
@@ -754,10 +854,10 @@ return;
 
 // History clear
 $('clearHistBtn').addEventListener('click',function(){
-if(!confirm('تاریخچه پاک شود؟\n\n(لیست کاربران دست‌نخورده می‌ماند)'))return;
+if(!confirm(T('تاریخچه پاک شود؟\n\n(لیست کاربران دست‌نخورده می‌ماند)')))return;
 saveHistory([]);
 renderHistory();
-showToast('تاریخچه پاک شد');
+showToast(T('تاریخچه پاک شد'));
 });
 
 // Export
@@ -772,6 +872,10 @@ $('customDays').addEventListener('input',function(e){
 e.target.value=toEn(e.target.value).replace(/[^\d]/g,'').slice(0,5);
 });
 });
+
+function i18nRerender(){
+if(!$('adminApp').classList.contains('hidden')){renderUsers();renderHistory();}
+}
 </script>
 </body>
 </html>
