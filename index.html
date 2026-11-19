@@ -397,7 +397,7 @@ html[dir="ltr"] .stat-l,html[dir="ltr"] .bnav button{letter-spacing:0;}
 <div class="balance-wrap">
 <div class="balance-card">
 <div class="bc-top"><div class="bc-label">موجودی کل</div><div class="bc-chip" id="bcLicense">💰 حساب</div></div>
-<div class="bc-value" id="balanceValue">۰ <span class="cur">تومان</span></div>
+<div class="bc-value" id="balanceValue">۰ <span class="cur">ریال</span></div>
 <div class="bc-bottom">
 <div class="bc-mini"><div class="l">📥 دریافت‌ها</div><div class="v" id="bcRec">۰</div></div>
 <div class="bc-mini"><div class="l">💸 پرداخت‌ها</div><div class="v" id="bcPay">۰</div></div>
@@ -608,12 +608,12 @@ html[dir="ltr"] .stat-l,html[dir="ltr"] .bnav button{letter-spacing:0;}
 <div class="field"><label id="invDescLabel">شرح کلی خدمات</label><textarea id="invDesc" placeholder="مثلاً: سرویس دوره‌ای آسانسور..."></textarea></div>
 <div class="field"><label id="invRowsLabel">ردیف‌های فاکتور</label><div class="inv-rows" id="invRows"></div><button class="add-row-btn" id="addRowBtn" type="button">+ افزودن ردیف</button></div>
 <div class="inv-summary">
-<div class="row"><span>جمع ردیف‌ها</span><span id="invSubtotal">۰ تومان</span></div>
-<div class="row"><span>تخفیف</span><span id="invDiscountShow">۰ تومان</span></div>
-<div class="row total"><span>جمع کل</span><span id="invTotal">۰ تومان</span></div>
+<div class="row"><span>جمع ردیف‌ها</span><span id="invSubtotal">۰ ریال</span></div>
+<div class="row"><span>تخفیف</span><span id="invDiscountShow">۰ ریال</span></div>
+<div class="row total"><span>جمع کل</span><span id="invTotal">۰ ریال</span></div>
 </div>
 <div class="field-row">
-<div class="field"><label>تخفیف (تومان)</label><input type="text" id="invDiscount" inputmode="numeric" placeholder="۰"></div>
+<div class="field"><label>تخفیف (ریال)</label><input type="text" id="invDiscount" inputmode="numeric" placeholder="۰"></div>
 <div class="field"><label>وضعیت پرداخت</label><select id="invPaid"><option value="unpaid">پرداخت‌نشده</option><option value="paid">پرداخت‌شده</option></select></div>
 </div>
 <div class="field"><label>روش پرداخت</label><div class="seg" id="paySeg"><button data-pay="cash" class="active">💵 نقدی</button><button data-pay="check">🧾 چک</button></div></div>
@@ -629,7 +629,7 @@ html[dir="ltr"] .stat-l,html[dir="ltr"] .bnav button{letter-spacing:0;}
 <button class="submit" id="saveInvoiceBtn">💾 ذخیره فاکتور خدمات</button>
 </div>
 <div id="flowForm" class="hidden">
-<div class="field"><label>مبلغ (تومان)</label><input type="text" id="amountInput" inputmode="numeric" placeholder="۰"></div>
+<div class="field"><label>مبلغ (ریال)</label><input type="text" id="amountInput" inputmode="numeric" placeholder="۰"></div>
 <div class="field"><label id="titleLabel">بابت / شرح</label><input type="text" id="titleInput" placeholder="مثلاً حقوق، خرید..."></div>
 <div class="field"><label id="personLabel">نام شخص</label><input type="text" id="personInput" placeholder="نام شخص"></div>
 <div class="field"><label>روش پرداخت / دریافت</label><div class="seg" id="flowPaySeg"><button data-pay="cash" class="active">💵 نقدی</button><button data-pay="check">🧾 چک</button></div></div>
@@ -767,7 +767,7 @@ html[dir="ltr"] .stat-l,html[dir="ltr"] .bnav button{letter-spacing:0;}
 </div>
 <div style="margin-top:14px;padding:14px;background:linear-gradient(135deg,#f0f9ff,#e0f2fe);border:2px dashed #0284c7;border-radius:14px;">
 <div style="font-size:11px;color:#0369a1;font-weight:800;margin-bottom:6px;">💳 برای فعال‌سازی، مبلغ زیر را واریز کنید:</div>
-<div style="font-size:12px;color:#334155;font-weight:700;margin-bottom:8px;">مبلغ: <b style="color:#dc2626;">۱٬۰۰۰٬۰۰۰ تومان</b> (یک ساله)</div>
+<div style="font-size:12px;color:#334155;font-weight:700;margin-bottom:8px;">مبلغ: <b style="color:#dc2626;">۱۰٬۰۰۰٬۰۰۰ ریال</b> (یک ساله)</div>
 <div style="font-size:11.5px;color:#334155;font-weight:700;margin-bottom:6px;">شماره کارت (بانک ملی):</div>
 <div style="font-size:17px;font-weight:900;color:#0c4a6e;letter-spacing:2px;direction:ltr;text-align:center;font-family:'Courier New',monospace;background:#fff;padding:10px;border-radius:10px;margin-bottom:8px;">6037-9981-7187-3432</div>
 <div style="font-size:11.5px;color:#334155;font-weight:700;text-align:center;margin-bottom:8px;">به نام: قادر صمدی</div>
@@ -804,7 +804,7 @@ html[dir="ltr"] .stat-l,html[dir="ltr"] .bnav button{letter-spacing:0;}
 /* ========== i18n (FA / EN) ========== */
 var LANG_KEY='lang';
 var LANG=(function(){var s=null;try{s=localStorage.getItem(LANG_KEY);}catch(e){}if(s==='fa'||s==='en')return s;var n=String((navigator.languages&&navigator.languages[0])||navigator.language||'').toLowerCase();return n.indexOf('fa')===0?'fa':'en';})();
-var I18N={" ردیف</div>": " line(s)</div>", " فاکتور</span></div>": " invoice(s)</span></div>", " مشتری": " customer(s)", "TXID را همراه با شماره موبایل خود به این ایمیل بفرستید": "Email the TXID together with your mobile number to", "آبان": "Aban", "آخرین تراکنش‌ها": "Latest transactions", "آخرین فاکتورها": "Latest invoices", "آدرس": "Address", "آدرس دریافت": "Receiving address", "آدرس دقیق": "Exact address", "آدرس کامل": "Full address", "آدرس کپی شد": "Address copied", "آذر": "Azar", "آپلود لوگو": "Upload logo", "ابتدا شماره موبایل ثبت شود": "Please register a mobile number first", "اختیاری": "Optional", "اردیبهشت": "Ordibehesht", "ارسال TXID با ایمیل": "Email the TXID", "ارسال به واتساپ پشتیبانی": "Send to support on WhatsApp", "ارسال فاکتور": "Send invoice", "اسفند": "Esfand", "اسکن با تراست ولت": "Scan with Trust Wallet", "اسکن کنید — نصب روی موبایل": "Scan to install on your phone", "اطلاعات شرکت / فروشنده": "Company / seller details", "اطلاعات فروشنده و لوگو": "Seller details and logo", "اطلاعات مشتری": "Customer details", "اطلاعات چک": "Cheque details", "اعمال کد تمدید": "Apply renewal code", "افزودن ردیف": "Add line", "اقلام فروش": "Items sold", "امروز": "Today", "انتخاب تاریخ": "Pick a date", "انتخاب مشتری": "Select customer", "ایمیل": "Email", "این اطلاعات در فاکتور رسمی نمایش داده می‌شود": "Shown on your official invoices", "این صفحه هیچ کیف پولی را متصل نمی‌کند و هرگز کلید خصوصی یا عبارت بازیابی شما را نمی‌خواهد.": "This page never connects to your wallet and will never ask for your private key or recovery phrase.", "این فاکتور مهم است": "Mark this invoice as important", "این فاکتور پرداخت شده است": "This invoice has been paid", "این فاکتور پرداخت نشده است": "This invoice is unpaid", "این مورد مهم است": "Mark as important", "اینستاگرام": "Instagram", "با انتخاب 🔧 فاکتور خدمات یا 📦 فاکتور فروش قطعات، فاکتور مناسب صادر می‌شود": "Choose 🔧 Service invoice or 📦 Parts sales invoice to issue the right one", "با تشکر از اعتماد شما": "Thank you for your business", "بابت / شرح": "For / description", "بابت / شرح دریافت": "Received for / description", "بابت / شرح پرداخت": "Payment for / description", "باز کردن در تراست ولت": "Open in Trust Wallet", "بازگشت": "Back", "بانک": "Bank", "برای استفاده از نرم‌افزار، ابتدا شماره موبایل خود را وارد کنید و کد درخواست را برای پشتیبانی ارسال نمایید": "To start using the app, enter your mobile number and send the request code to support", "برای فاکتور رسمی استفاده می‌شود": "Used on official invoices", "برای فعال‌سازی، مبلغ زیر را واریز کنید": "To activate, pay the amount below (Iranian bank card)", "بستن": "Close", "بعد از پرداخت": "After you pay", "به نام: قادر صمدی": "Account holder: Ghader Samadi", "بهمن": "Bahman", "تأیید": "Done", "تاریخ": "Date", "تاریخ سررسید": "Due date", "تبریزکابین": "TabrizCabin", "تخفیف": "Discount", "تخفیف (تومان": "Discount (Toman", "تست رایگان": "Free trial", "تست رایگان تمام شد</b> — <a onclick=\"go('settings')\">فعال‌سازی کنید": "Free trial has ended</b> — <a onclick=\"go('settings')\">Activate now", "تصویر فاکتور در کلیپ‌بورد کپی می‌شود — در واتساپ Paste کنید": "The invoice image is copied to the clipboard — paste it in WhatsApp", "تصویر فاکتور کپی شد — در واتساپ Paste کنید": "Invoice image copied — paste it in WhatsApp", "تعداد": "Qty", "تلفن": "Phone", "تلفن فروشنده": "Seller phone", "تماس": "Call", "تمامی حقوق محفوظ است": "All rights reserved", "تمدید": "Renew", "تمدید با موفقیت انجام شد": "Renewed successfully", "تنظیمات": "Settings", "تنظیمات ذخیره شد": "Settings saved", "تنظیمات شرکت": "Company settings", "توضیحات": "Notes", "تومان": "Toman", "تیر": "Tir", "ثبت": "New", "ثبت جدید": "New entry", "ثبت دریافت": "Record receipt", "ثبت مشتری جدید": "Add new customer", "ثبت پرداخت": "Record payment", "ج": "Fr", "جمع دریافت‌ها": "Total received", "جمع ردیف‌ها": "Subtotal", "جمع فاکتورها": "Total invoiced", "جمع پرداخت‌ها": "Total paid out", "جمع کل": "Total", "حجم لوگو باید کمتر از ۲ مگابایت باشد": "The logo must be smaller than 2 MB", "حداقل یک ردیف لازم است": "Add at least one line", "حذف شد": "Deleted", "حذف لوگو": "Remove logo", "حساب": "Account", "حساب روزانه": "Daily ledger", "حق کپی‌رایت": "Copyright", "خانه": "Home", "خدمات": "Services", "خدمات دیگر": "More services", "خدمات فنی": "Technical Services", "خدمات و محصولات ما": "Our services and products", "خرداد": "Khordad", "خرید / پرداخت": "Buy / Pay", "خرید با تراست ولت": "Pay with Trust Wallet", "خرید سرویس‌کار با تتر (USDT)": "Buy Serviskar with USDT", "خطا در آماده‌سازی فاکتور": "Could not prepare the invoice", "خطا در ساخت": "Error creating", "خطا در ساخت PDF. لطفاً دوباره تلاش کنید": "Could not create the PDF. Please try again", "خطا در ساخت فایل فاکتور": "Could not create the invoice file", "د": "Mo", "داده‌ای موجود نیست": "No data yet", "دانلود": "Download", "در انتظار": "Pending", "در حال آماده‌سازی": "Preparing", "در حال آماده‌سازی تصویر": "Preparing the image", "در حال آماده‌سازی فاکتور": "Preparing the invoice", "در حال ساخت فایل": "Creating the", "درآمد سالانه": "Yearly income", "درآمد ماهانه": "Monthly income", "درآمد و نمودار": "Income and charts", "درخواست تمدید از پشتیبانی": "Request renewal from support", "درخواست تمدید لایسنس سرویس‌کار\n\nشماره": "Serviskar license renewal request\n\nNumber", "درخواست فعال‌سازی نرم‌افزار سرویس‌کار\n\nشماره": "Serviskar activation request\n\nNumber", "دریافت": "Receipt", "دریافت امروز": "Today's receipts", "دریافت ذخیره شد": "Receipt saved", "دریافت کد درخواست": "Get request code", "دریافت‌ها": "Received", "دفترچه مشتریان": "Customer book", "دو نوع فاکتور": "Two invoice types", "دی": "Dey", "دیروز": "Yesterday", "ذخیره": "Save", "ذخیره تنظیمات": "Save settings", "ذخیره شد": "Saved", "ذخیره فاکتور خدمات": "Save service invoice", "ذخیره فاکتور فروش قطعات": "Save parts sales invoice", "ذخیره مشتری": "Save customer", "راهنما": "Help", "ردیف": "Line", "ردیف‌ها": "Lines", "ردیف‌های فاکتور": "Invoice lines", "روز": "days", "روز باقی مانده": "days left", "روز</b> از تست رایگان باقی مانده — <a onclick=\"go('settings')\">تمدید کنید": "days</b> left in your free trial — <a onclick=\"go('settings')\">Renew now", "روزانه": "Daily", "روش پرداخت": "Payment method", "روش پرداخت / دریافت": "Payment / receipt method", "زبان": "Language", "س": "Tu", "ساعت": "Time", "سررسید": "Due", "سررسید گذشته": "Overdue", "سرویس‌کار": "Serviskar", "سرویس‌کار\nمبلغ": "Serviskar\nAmount", "سرویس‌کار · تبریزکابین · پروژه‌حساب": "Serviskar · TabrizCabin · ProjeHesab", "سرویس‌کار — خدمات فنی و فروش قطعات": "Serviskar — Technical Services & Parts Sales", "سرویس‌کار — خدمات و فروش قطعات": "Serviskar — Services & Parts Sales", "سری": "Serial", "ش": "Sa", "شبکه": "Network", "شرح": "Description", "شرح خدمت": "Service description", "شرح کالا / قطعه": "Item / part description", "شرح کلی (اختیاری": "Description (optional", "شرح کلی خدمات": "Service description", "شرکت شما": "Your company", "شماره": "Number", "شماره اقتصادی / مالیاتی": "Tax / economic number", "شماره تماس": "Phone number", "شماره ثبت": "Registration no.", "شماره ثبت شرکت": "Company registration number", "شماره سری": "Serial no.", "شماره سری چک": "Cheque serial number", "شماره فاکتور": "Invoice number", "شماره فاکتور فروش": "Sales invoice number", "شماره موبایل": "Mobile number", "شماره موبایل خود را وارد کنید (۱۱ رقم": "Enter your mobile number (11 digits", "شماره موبایل را درست وارد کنید": "Please enter a valid mobile number", "شماره نامعتبر": "Invalid number", "شماره کارت (بانک ملی": "Card number (Bank Melli", "شماره کارت کپی شد": "Card number copied", "شناسه تراکنش (TXID) را از تراست ولت کپی کنید": "Copy the transaction ID (TXID) from Trust Wallet", "شناسه ملی": "National ID", "شهریور": "Shahrivar", "صدور فاکتور خدمات": "New service invoice", "صدور فاکتور فروش قطعات": "New parts sales invoice", "صمدیه ۱۴۰۵ — مرجع جامع دارویی": "Samadiyeh 1405 — Drug reference", "طراحی و اجرا": "Design and development", "طراحی و اجرای پروژه «سرویس‌کار": "Designed and built “Serviskar", "طراحی کابینت": "Cabinet design", "فاکتور": "Invoice", "فاکتور ارسال شد": "Invoice sent", "فاکتور امروز": "Today's invoices", "فاکتور خدمات": "Service invoice", "فاکتور خدمات ذخیره شد": "Service invoice saved", "فاکتور ذخیره شد — در واتساپ پیوست کنید": "Invoice saved — attach it in WhatsApp", "فاکتور رسمی خدمات": "Official service invoice", "فاکتور فروش قطعات": "Parts sales invoice", "فاکتور فروش قطعات ذخیره شد": "Parts sales invoice saved", "فاکتور قطعات": "Parts invoices", "فاکتور و ارسال": "Invoices and sending", "فاکتور • جمع": "invoice(s) • Total", "فاکتورها": "Invoices", "فاکتورهای خدمات و قطعات": "Service and parts invoices", "فایل PDF در ابعاد A4 ذخیره می‌شود": "Saves the PDF in A4 size", "فایل PDF فاکتور مستقیم به واتساپ ارسال می‌شود": "The invoice PDF is sent straight to WhatsApp", "فروردین": "Farvardin", "فروش قطعات": "Parts sales", "فروشنده": "Seller", "فعال تا": "Active until", "فعال‌سازی": "Activate", "فعال‌سازی موفق": "Activated successfully", "فعال‌سازی نرم‌افزار": "Activate the app", "فقط USDT روی شبکه TRC-20 (ترون)": "USDT on TRC-20 (Tron) only", "فقط USDT روی شبکه TRC-20 (ترون) بفرستید. ارسال هر ارز دیگر یا از هر شبکه دیگر (ERC-20، BEP-20 و …) باعث از دست رفتن دائمی پول می‌شود.": "Send only USDT on the TRC-20 (Tron) network. Sending any other coin, or using any other network (ERC-20, BEP-20, etc.), will permanently lose your funds.", "ق": "G", "قادر صمدی": "Ghader Samadi", "قطعات": "Parts", "قیمت": "Price", "قیمت واحد": "Unit price", "لایسنس منقضی شده — برای تمدید کد را وارد کنید": "License expired — enter a code to renew", "لطفاً صبر کنید": "Please wait", "لطفاً کد تمدید را ارسال کنید": "Please send me the renewal code", "لطفاً کد فعال‌سازی را ارسال کنید": "Please send me the activation code", "لوگو حذف شد": "Logo removed", "لوگو حذف شود؟": "Remove the logo?", "لوگو ذخیره شد": "Logo saved", "لوگوی شرکت": "Company logo", "مانده": "Balance", "مبلغ": "Amount", "مبلغ (تومان": "Amount (Toman", "مبلغ را دقیقاً ۲۹ USDT بفرستید. کارمزد شبکه (TRX) جداگانه از کیف پول شما کسر می‌شود.": "Send exactly 29 USDT. The network fee (TRX) is charged separately by your wallet.", "مبلغ را وارد کنید": "Please enter the amount", "مبلغ قابل پرداخت": "Amount due", "مبلغ نهایی": "Final amount", "متن کپی شد": "Text copied", "مثلاً": "e.g.", "مثلاً حقوق، خرید": "e.g. salary, purchase", "مثلاً ساختمان نگین": "e.g. Negin Building", "مثلاً ملت": "e.g. Mellat", "مثلاً ۱۴۰۴-۰۰۱": "e.g. 1404-001", "مثلاً: آسانسور ۶ طبقه": "e.g. 6-floor elevator", "مثلاً: سرویس دوره‌ای آسانسور": "e.g. Routine elevator service", "مثلاً: سرویس‌کار": "e.g. Serviskar", "مثلاً: فروش قطعات یدکی آسانسور": "e.g. Elevator spare parts sale", "مثلاً: ۰۴۱-۳۳۳۳۳۳۳۳": "e.g. 041-33333333", "مثلاً: ۱۲۳۴۵": "e.g. 12345", "مثلاً: ۱۲۳۴۵۶۷۸۹۰": "e.g. 1234567890", "مرداد": "Mordad", "مشتری": "Customer", "مشتری حذف شود؟": "Delete this customer?", "مشتری ذخیره شد": "Customer saved", "مشتریان": "Customers", "مهر": "Mehr", "مهم": "Important", "موجودی کل": "Total balance", "موردی یافت نشد</p><span>با دکمه «ثبت» شروع کنید": "Nothing found</p><span>Tap “New” to get started", "نام": "Name", "نام بانک": "Bank name", "نام دریافت‌کننده": "Payee name", "نام شخص": "Person", "نام شرکت / فروشگاه": "Company / shop name", "نام قطعه / کالا": "Part / item name", "نام مشتری / ساختمان": "Customer / building name", "نام مشتری الزامی است": "Customer name is required", "نام پرداخت‌کننده": "Payer name", "نزدیک سررسید": "Due soon", "نقدی": "Cash", "نمایش و ارسال فاکتور": "View and send invoice", "هرگونه کپی‌برداری بدون اجازه کتبی طراح پیگرد قانونی دارد": "Copying without the written permission of the designer is prohibited and may be prosecuted", "هشدار": "Warning", "همه": "All", "هنوز فاکتوری صادر نشده": "No invoices issued yet", "هنوز مشتری ثبت نشده</p><span>با دکمه + مشتری اضافه کنید": "No customers yet</p><span>Add one with the + button", "هنوز چیزی ثبت نشده": "Nothing recorded yet", "واتساپ": "WhatsApp", "وضعیت": "Status", "وضعیت لایسنس": "License status", "وضعیت پرداخت": "Payment status", "پ": "Th", "پاس‌شده": "Cleared", "پرداخت": "Payment", "پرداخت امروز": "Today's payments", "پرداخت امن با کیف پول تراست ولت": "Pay securely from your Trust Wallet", "پرداخت ذخیره شد": "Payment saved", "پرداخت و دریافت": "Payments and receipts", "پرداخت‌شده": "Paid", "پرداخت‌نشده": "Unpaid", "پرداخت‌ها": "Paid out", "پس از بررسی دستی تراکنش، کد فعال‌سازی برای شما ارسال می‌شود": "Once the payment is checked manually, we will send you your activation code", "پشتیبان ذخیره شد": "Backup saved", "پشتیبانی": "Support", "چ": "We", "چک": "Cheque", "چک در انتظار": "pending cheque(s)", "چکی": "Cheque", "چکی یافت نشد</p><span>چک‌ها اینجا نمایش داده می‌شوند": "No cheques found</p><span>Your cheques will appear here", "چک‌ها": "Cheques", "کد اقتصادی": "Economic code", "کد تمدید را وارد کنید": "Enter your renewal code", "کد درخواست": "Request code", "کد درخواست شما (به پشتیبانی بفرستید": "Your request code (send it to support", "کد فعال‌سازی": "Activation code", "کد فعال‌سازی (دریافتی از پشتیبانی": "Activation code (from support", "کد فعال‌سازی را وارد کنید": "Please enter the activation code", "کد ملی / شناسه ملی": "National ID / company ID", "کد نامعتبر است یا برای این شماره نیست": "Invalid code, or it belongs to another number", "کمی صبر کنید": "One moment", "کپی": "Copy", "کپی آدرس": "Copy address", "کپی تصویر": "Copy image", "کپی تصویر فاکتور": "Copy invoice image", "کپی شد": "Copied", "کپی شماره کارت": "Copy card number", "گزارش‌ها": "Reports", "ی": "Su", "یک ساله": "one year", "۱٬۰۰۰٬۰۰۰ تومان": "1,000,000 Toman", "۱۲ ماه اخیر": "Last 12 months", "۵ سال اخیر": "Last 5 years"};
+var I18N={" ردیف</div>": " line(s)</div>", " فاکتور</span></div>": " invoice(s)</span></div>", " مشتری": " customer(s)", "TXID را همراه با شماره موبایل خود به این ایمیل بفرستید": "Email the TXID together with your mobile number to", "آبان": "Aban", "آخرین تراکنش‌ها": "Latest transactions", "آخرین فاکتورها": "Latest invoices", "آدرس": "Address", "آدرس دریافت": "Receiving address", "آدرس دقیق": "Exact address", "آدرس کامل": "Full address", "آدرس کپی شد": "Address copied", "آذر": "Azar", "آپلود لوگو": "Upload logo", "ابتدا شماره موبایل ثبت شود": "Please register a mobile number first", "اختیاری": "Optional", "اردیبهشت": "Ordibehesht", "ارسال TXID با ایمیل": "Email the TXID", "ارسال به واتساپ پشتیبانی": "Send to support on WhatsApp", "ارسال فاکتور": "Send invoice", "اسفند": "Esfand", "اسکن با تراست ولت": "Scan with Trust Wallet", "اسکن کنید — نصب روی موبایل": "Scan to install on your phone", "اطلاعات شرکت / فروشنده": "Company / seller details", "اطلاعات فروشنده و لوگو": "Seller details and logo", "اطلاعات مشتری": "Customer details", "اطلاعات چک": "Cheque details", "اعمال کد تمدید": "Apply renewal code", "افزودن ردیف": "Add line", "اقلام فروش": "Items sold", "امروز": "Today", "انتخاب تاریخ": "Pick a date", "انتخاب مشتری": "Select customer", "ایمیل": "Email", "این اطلاعات در فاکتور رسمی نمایش داده می‌شود": "Shown on your official invoices", "این صفحه هیچ کیف پولی را متصل نمی‌کند و هرگز کلید خصوصی یا عبارت بازیابی شما را نمی‌خواهد.": "This page never connects to your wallet and will never ask for your private key or recovery phrase.", "این فاکتور مهم است": "Mark this invoice as important", "این فاکتور پرداخت شده است": "This invoice has been paid", "این فاکتور پرداخت نشده است": "This invoice is unpaid", "این مورد مهم است": "Mark as important", "اینستاگرام": "Instagram", "با انتخاب 🔧 فاکتور خدمات یا 📦 فاکتور فروش قطعات، فاکتور مناسب صادر می‌شود": "Choose 🔧 Service invoice or 📦 Parts sales invoice to issue the right one", "با تشکر از اعتماد شما": "Thank you for your business", "بابت / شرح": "For / description", "بابت / شرح دریافت": "Received for / description", "بابت / شرح پرداخت": "Payment for / description", "باز کردن در تراست ولت": "Open in Trust Wallet", "بازگشت": "Back", "بانک": "Bank", "برای استفاده از نرم‌افزار، ابتدا شماره موبایل خود را وارد کنید و کد درخواست را برای پشتیبانی ارسال نمایید": "To start using the app, enter your mobile number and send the request code to support", "برای فاکتور رسمی استفاده می‌شود": "Used on official invoices", "برای فعال‌سازی، مبلغ زیر را واریز کنید": "To activate, pay the amount below (Iranian bank card)", "بستن": "Close", "بعد از پرداخت": "After you pay", "به نام: قادر صمدی": "Account holder: Ghader Samadi", "بهمن": "Bahman", "تأیید": "Done", "تاریخ": "Date", "تاریخ سررسید": "Due date", "تبریزکابین": "TabrizCabin", "تخفیف": "Discount", "تخفیف (ریال": "Discount (USD", "تست رایگان": "Free trial", "تست رایگان تمام شد</b> — <a onclick=\"go('settings')\">فعال‌سازی کنید": "Free trial has ended</b> — <a onclick=\"go('settings')\">Activate now", "تصویر فاکتور در کلیپ‌بورد کپی می‌شود — در واتساپ Paste کنید": "The invoice image is copied to the clipboard — paste it in WhatsApp", "تصویر فاکتور کپی شد — در واتساپ Paste کنید": "Invoice image copied — paste it in WhatsApp", "تعداد": "Qty", "تلفن": "Phone", "تلفن فروشنده": "Seller phone", "تماس": "Call", "تمامی حقوق محفوظ است": "All rights reserved", "تمدید": "Renew", "تمدید با موفقیت انجام شد": "Renewed successfully", "تنظیمات": "Settings", "تنظیمات ذخیره شد": "Settings saved", "تنظیمات شرکت": "Company settings", "توضیحات": "Notes", "ریال": "USD", "تیر": "Tir", "ثبت": "New", "ثبت جدید": "New entry", "ثبت دریافت": "Record receipt", "ثبت مشتری جدید": "Add new customer", "ثبت پرداخت": "Record payment", "ج": "Fr", "جمع دریافت‌ها": "Total received", "جمع ردیف‌ها": "Subtotal", "جمع فاکتورها": "Total invoiced", "جمع پرداخت‌ها": "Total paid out", "جمع کل": "Total", "حجم لوگو باید کمتر از ۲ مگابایت باشد": "The logo must be smaller than 2 MB", "حداقل یک ردیف لازم است": "Add at least one line", "حذف شد": "Deleted", "حذف لوگو": "Remove logo", "حساب": "Account", "حساب روزانه": "Daily ledger", "حق کپی‌رایت": "Copyright", "خانه": "Home", "خدمات": "Services", "خدمات دیگر": "More services", "خدمات فنی": "Technical Services", "خدمات و محصولات ما": "Our services and products", "خرداد": "Khordad", "خرید / پرداخت": "Buy / Pay", "خرید با تراست ولت": "Pay with Trust Wallet", "خرید سرویس‌کار با تتر (USDT)": "Buy Serviskar with USDT", "خطا در آماده‌سازی فاکتور": "Could not prepare the invoice", "خطا در ساخت": "Error creating", "خطا در ساخت PDF. لطفاً دوباره تلاش کنید": "Could not create the PDF. Please try again", "خطا در ساخت فایل فاکتور": "Could not create the invoice file", "د": "Mo", "داده‌ای موجود نیست": "No data yet", "دانلود": "Download", "در انتظار": "Pending", "در حال آماده‌سازی": "Preparing", "در حال آماده‌سازی تصویر": "Preparing the image", "در حال آماده‌سازی فاکتور": "Preparing the invoice", "در حال ساخت فایل": "Creating the", "درآمد سالانه": "Yearly income", "درآمد ماهانه": "Monthly income", "درآمد و نمودار": "Income and charts", "درخواست تمدید از پشتیبانی": "Request renewal from support", "درخواست تمدید لایسنس سرویس‌کار\n\nشماره": "Serviskar license renewal request\n\nNumber", "درخواست فعال‌سازی نرم‌افزار سرویس‌کار\n\nشماره": "Serviskar activation request\n\nNumber", "دریافت": "Receipt", "دریافت امروز": "Today's receipts", "دریافت ذخیره شد": "Receipt saved", "دریافت کد درخواست": "Get request code", "دریافت‌ها": "Received", "دفترچه مشتریان": "Customer book", "دو نوع فاکتور": "Two invoice types", "دی": "Dey", "دیروز": "Yesterday", "ذخیره": "Save", "ذخیره تنظیمات": "Save settings", "ذخیره شد": "Saved", "ذخیره فاکتور خدمات": "Save service invoice", "ذخیره فاکتور فروش قطعات": "Save parts sales invoice", "ذخیره مشتری": "Save customer", "راهنما": "Help", "ردیف": "Line", "ردیف‌ها": "Lines", "ردیف‌های فاکتور": "Invoice lines", "روز": "days", "روز باقی مانده": "days left", "روز</b> از تست رایگان باقی مانده — <a onclick=\"go('settings')\">تمدید کنید": "days</b> left in your free trial — <a onclick=\"go('settings')\">Renew now", "روزانه": "Daily", "روش پرداخت": "Payment method", "روش پرداخت / دریافت": "Payment / receipt method", "زبان": "Language", "س": "Tu", "ساعت": "Time", "سررسید": "Due", "سررسید گذشته": "Overdue", "سرویس‌کار": "Serviskar", "سرویس‌کار\nمبلغ": "Serviskar\nAmount", "سرویس‌کار · تبریزکابین · پروژه‌حساب": "Serviskar · TabrizCabin · ProjeHesab", "سرویس‌کار — خدمات فنی و فروش قطعات": "Serviskar — Technical Services & Parts Sales", "سرویس‌کار — خدمات و فروش قطعات": "Serviskar — Services & Parts Sales", "سری": "Serial", "ش": "Sa", "شبکه": "Network", "شرح": "Description", "شرح خدمت": "Service description", "شرح کالا / قطعه": "Item / part description", "شرح کلی (اختیاری": "Description (optional", "شرح کلی خدمات": "Service description", "شرکت شما": "Your company", "شماره": "Number", "شماره اقتصادی / مالیاتی": "Tax / economic number", "شماره تماس": "Phone number", "شماره ثبت": "Registration no.", "شماره ثبت شرکت": "Company registration number", "شماره سری": "Serial no.", "شماره سری چک": "Cheque serial number", "شماره فاکتور": "Invoice number", "شماره فاکتور فروش": "Sales invoice number", "شماره موبایل": "Mobile number", "شماره موبایل خود را وارد کنید (۱۱ رقم": "Enter your mobile number (11 digits", "شماره موبایل را درست وارد کنید": "Please enter a valid mobile number", "شماره نامعتبر": "Invalid number", "شماره کارت (بانک ملی": "Card number (Bank Melli", "شماره کارت کپی شد": "Card number copied", "شناسه تراکنش (TXID) را از تراست ولت کپی کنید": "Copy the transaction ID (TXID) from Trust Wallet", "شناسه ملی": "National ID", "شهریور": "Shahrivar", "صدور فاکتور خدمات": "New service invoice", "صدور فاکتور فروش قطعات": "New parts sales invoice", "صمدیه ۱۴۰۵ — مرجع جامع دارویی": "Samadiyeh 1405 — Drug reference", "طراحی و اجرا": "Design and development", "طراحی و اجرای پروژه «سرویس‌کار": "Designed and built “Serviskar", "طراحی کابینت": "Cabinet design", "فاکتور": "Invoice", "فاکتور ارسال شد": "Invoice sent", "فاکتور امروز": "Today's invoices", "فاکتور خدمات": "Service invoice", "فاکتور خدمات ذخیره شد": "Service invoice saved", "فاکتور ذخیره شد — در واتساپ پیوست کنید": "Invoice saved — attach it in WhatsApp", "فاکتور رسمی خدمات": "Official service invoice", "فاکتور فروش قطعات": "Parts sales invoice", "فاکتور فروش قطعات ذخیره شد": "Parts sales invoice saved", "فاکتور قطعات": "Parts invoices", "فاکتور و ارسال": "Invoices and sending", "فاکتور • جمع": "invoice(s) • Total", "فاکتورها": "Invoices", "فاکتورهای خدمات و قطعات": "Service and parts invoices", "فایل PDF در ابعاد A4 ذخیره می‌شود": "Saves the PDF in A4 size", "فایل PDF فاکتور مستقیم به واتساپ ارسال می‌شود": "The invoice PDF is sent straight to WhatsApp", "فروردین": "Farvardin", "فروش قطعات": "Parts sales", "فروشنده": "Seller", "فعال تا": "Active until", "فعال‌سازی": "Activate", "فعال‌سازی موفق": "Activated successfully", "فعال‌سازی نرم‌افزار": "Activate the app", "فقط USDT روی شبکه TRC-20 (ترون)": "USDT on TRC-20 (Tron) only", "فقط USDT روی شبکه TRC-20 (ترون) بفرستید. ارسال هر ارز دیگر یا از هر شبکه دیگر (ERC-20، BEP-20 و …) باعث از دست رفتن دائمی پول می‌شود.": "Send only USDT on the TRC-20 (Tron) network. Sending any other coin, or using any other network (ERC-20, BEP-20, etc.), will permanently lose your funds.", "ق": "G", "قادر صمدی": "Ghader Samadi", "قطعات": "Parts", "قیمت": "Price", "قیمت واحد": "Unit price", "لایسنس منقضی شده — برای تمدید کد را وارد کنید": "License expired — enter a code to renew", "لطفاً صبر کنید": "Please wait", "لطفاً کد تمدید را ارسال کنید": "Please send me the renewal code", "لطفاً کد فعال‌سازی را ارسال کنید": "Please send me the activation code", "لوگو حذف شد": "Logo removed", "لوگو حذف شود؟": "Remove the logo?", "لوگو ذخیره شد": "Logo saved", "لوگوی شرکت": "Company logo", "مانده": "Balance", "مبلغ": "Amount", "مبلغ (ریال": "Amount (USD", "مبلغ را دقیقاً ۲۹ USDT بفرستید. کارمزد شبکه (TRX) جداگانه از کیف پول شما کسر می‌شود.": "Send exactly 29 USDT. The network fee (TRX) is charged separately by your wallet.", "مبلغ را وارد کنید": "Please enter the amount", "مبلغ قابل پرداخت": "Amount due", "مبلغ نهایی": "Final amount", "متن کپی شد": "Text copied", "مثلاً": "e.g.", "مثلاً حقوق، خرید": "e.g. salary, purchase", "مثلاً ساختمان نگین": "e.g. Negin Building", "مثلاً ملت": "e.g. Mellat", "مثلاً ۱۴۰۴-۰۰۱": "e.g. 1404-001", "مثلاً: آسانسور ۶ طبقه": "e.g. 6-floor elevator", "مثلاً: سرویس دوره‌ای آسانسور": "e.g. Routine elevator service", "مثلاً: سرویس‌کار": "e.g. Serviskar", "مثلاً: فروش قطعات یدکی آسانسور": "e.g. Elevator spare parts sale", "مثلاً: ۰۴۱-۳۳۳۳۳۳۳۳": "e.g. 041-33333333", "مثلاً: ۱۲۳۴۵": "e.g. 12345", "مثلاً: ۱۲۳۴۵۶۷۸۹۰": "e.g. 1234567890", "مرداد": "Mordad", "مشتری": "Customer", "مشتری حذف شود؟": "Delete this customer?", "مشتری ذخیره شد": "Customer saved", "مشتریان": "Customers", "مهر": "Mehr", "مهم": "Important", "موجودی کل": "Total balance", "موردی یافت نشد</p><span>با دکمه «ثبت» شروع کنید": "Nothing found</p><span>Tap “New” to get started", "نام": "Name", "نام بانک": "Bank name", "نام دریافت‌کننده": "Payee name", "نام شخص": "Person", "نام شرکت / فروشگاه": "Company / shop name", "نام قطعه / کالا": "Part / item name", "نام مشتری / ساختمان": "Customer / building name", "نام مشتری الزامی است": "Customer name is required", "نام پرداخت‌کننده": "Payer name", "نزدیک سررسید": "Due soon", "نقدی": "Cash", "نمایش و ارسال فاکتور": "View and send invoice", "هرگونه کپی‌برداری بدون اجازه کتبی طراح پیگرد قانونی دارد": "Copying without the written permission of the designer is prohibited and may be prosecuted", "هشدار": "Warning", "همه": "All", "هنوز فاکتوری صادر نشده": "No invoices issued yet", "هنوز مشتری ثبت نشده</p><span>با دکمه + مشتری اضافه کنید": "No customers yet</p><span>Add one with the + button", "هنوز چیزی ثبت نشده": "Nothing recorded yet", "واتساپ": "WhatsApp", "وضعیت": "Status", "وضعیت لایسنس": "License status", "وضعیت پرداخت": "Payment status", "پ": "Th", "پاس‌شده": "Cleared", "پرداخت": "Payment", "پرداخت امروز": "Today's payments", "پرداخت امن با کیف پول تراست ولت": "Pay securely from your Trust Wallet", "پرداخت ذخیره شد": "Payment saved", "پرداخت و دریافت": "Payments and receipts", "پرداخت‌شده": "Paid", "پرداخت‌نشده": "Unpaid", "پرداخت‌ها": "Paid out", "پس از بررسی دستی تراکنش، کد فعال‌سازی برای شما ارسال می‌شود": "Once the payment is checked manually, we will send you your activation code", "پشتیبان ذخیره شد": "Backup saved", "پشتیبانی": "Support", "چ": "We", "چک": "Cheque", "چک در انتظار": "pending cheque(s)", "چکی": "Cheque", "چکی یافت نشد</p><span>چک‌ها اینجا نمایش داده می‌شوند": "No cheques found</p><span>Your cheques will appear here", "چک‌ها": "Cheques", "کد اقتصادی": "Economic code", "کد تمدید را وارد کنید": "Enter your renewal code", "کد درخواست": "Request code", "کد درخواست شما (به پشتیبانی بفرستید": "Your request code (send it to support", "کد فعال‌سازی": "Activation code", "کد فعال‌سازی (دریافتی از پشتیبانی": "Activation code (from support", "کد فعال‌سازی را وارد کنید": "Please enter the activation code", "کد ملی / شناسه ملی": "National ID / company ID", "کد نامعتبر است یا برای این شماره نیست": "Invalid code, or it belongs to another number", "کمی صبر کنید": "One moment", "کپی": "Copy", "کپی آدرس": "Copy address", "کپی تصویر": "Copy image", "کپی تصویر فاکتور": "Copy invoice image", "کپی شد": "Copied", "کپی شماره کارت": "Copy card number", "گزارش‌ها": "Reports", "ی": "Su", "یک ساله": "one year", "۱۰٬۰۰۰٬۰۰۰ ریال": "$29", "۱۲ ماه اخیر": "Last 12 months", "۵ سال اخیر": "Last 5 years"};
 var I18N_REV=null;
 var I18N_FA_D='\u06f0\u06f1\u06f2\u06f3\u06f4\u06f5\u06f6\u06f7\u06f8\u06f9';
 var I18N_HAS_FA=/[\u0600-\u06FF]/;
@@ -905,6 +905,23 @@ function $(id){return document.getElementById(id);}
 function toEn(s){return String(s).replace(/[۰-۹]/g,function(c){return FA_D.indexOf(c);});}
 function toFa(s){if(LANG==='en')return String(s);return String(s).replace(/\d/g,function(d){return FA_D[+d];});}
 function fmt(n){return Number(n).toLocaleString(LOC());}
+/* Money: stored amounts are numbers in the app's base unit (historically Toman).
+   Persian display = Rial (stored x10). English display = US dollars (stored value as-is, 2 decimals).
+   No USD<->Rial conversion: the currency follows the display language. Stored data is never rewritten. */
+var RIAL_PER_UNIT=10;
+function moneyNum(n){n=Number(n)||0;return LANG==='en'?n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}):Math.round(n*RIAL_PER_UNIT).toLocaleString('fa-IR');}
+function moneyS(n){n=Number(n)||0;return LANG==='en'?(n<0?'−':'')+'$'+moneyNum(Math.abs(n)):moneyNum(n);}
+function money(n){n=Number(n)||0;return LANG==='en'?(n<0?'−':'')+'$'+moneyNum(Math.abs(n)):moneyNum(n)+' ریال';}
+function moneyC(n){n=Number(n)||0;var v=LANG==='en'?n:n*RIAL_PER_UNIT;var c=new Intl.NumberFormat(LANG==='en'?'en-US':'fa-IR',{notation:'compact',maximumFractionDigits:1}).format(Math.abs(v));return (v<0?'−':'')+(LANG==='en'?'$'+c:c);}
+function moneyInputClean(v){
+ v=toEn(String(v)).replace(/[٫]/g,'.');
+ if(LANG==='en'){v=v.replace(/[^\d.]/g,'');var i=v.indexOf('.');var a=i<0?v:v.slice(0,i),b=i<0?null:v.slice(i+1).replace(/\./g,'').slice(0,2);a=a.replace(/^0+(?=\d)/,'');if(!a&&b===null)return '';return (a?Number(a).toLocaleString('en-US'):'0')+(b!==null?'.'+b:'');}
+ var d=v.replace(/[^\d]/g,'').replace(/^0+/,'');return d?Number(d).toLocaleString('fa-IR'):'';}
+function parseMoneyInput(v){
+ v=toEn(String(v)).replace(/[٫]/g,'.');
+ if(LANG==='en'){var n=parseFloat(v.replace(/[^\d.]/g,''));return isFinite(n)?Math.round(n*100)/100:0;}
+ return (Number(v.replace(/[^\d]/g,''))||0)/RIAL_PER_UNIT;}
+function round2(n){return Math.round(n*100)/100;}
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function pad2(n){return String(n).padStart(2,'0');}
 function todayISO(){var d=new Date();return d.getFullYear()+'-'+pad2(d.getMonth()+1)+'-'+pad2(d.getDate());}
@@ -1005,12 +1022,12 @@ else if(t.type==='payment'){balance-=itemAmount(t);totalPay+=itemAmount(t);}
 else if(t.type==='invoice'){totalRec+=itemAmount(t);balance+=itemAmount(t);}
 if(t.date===t0){if(t.type==='invoice')todayInv+=itemAmount(t);else if(t.type==='payment')todayPay+=itemAmount(t);else todayRec+=itemAmount(t);}
 }
-$('balanceValue').innerHTML=(balance<0?'−':'')+fmt(Math.abs(balance))+T(' <span class="cur">تومان</span>');
-$('bcRec').textContent=fmt(totalRec)+T(' تومان');
-$('bcPay').textContent=fmt(totalPay)+T(' تومان');
-$('sTodayInv').textContent=fmt(todayInv);
-$('sTodayPay').textContent=fmt(todayPay);
-$('sTodayRec').textContent=fmt(todayRec);
+$('balanceValue').innerHTML=(balance<0?'−':'')+(LANG==='en'?'$'+moneyNum(Math.abs(balance))+' <span class="cur">USD</span>':moneyNum(Math.abs(balance))+' <span class="cur">ریال</span>');
+$('bcRec').textContent=money(totalRec);
+$('bcPay').textContent=money(totalPay);
+$('sTodayInv').textContent=moneyS(todayInv);
+$('sTodayPay').textContent=moneyS(todayPay);
+$('sTodayRec').textContent=moneyS(todayRec);
 var todayArr=todayISO().split('-').map(Number);
 var j=toJalali(todayArr[0],todayArr[1],todayArr[2]);
 $('jdDay').textContent=toFa(j.jd);
@@ -1054,7 +1071,7 @@ custLine+personLine+invLine+checkLine+
 printBtn+
 '</div>'+
 '<div class="item-right">'+
-'<div class="item-amount '+cls+'">'+sign+fmt(itemAmount(t))+'</div>'+
+'<div class="item-amount '+cls+'">'+sign+moneyS(itemAmount(t))+'</div>'+
 '<div class="actions-row">'+
 '<button class="star-btn '+(t.important?'on':'')+'" data-star="'+t.id+'">⭐</button>'+
 '<button class="del" data-del="'+t.id+'">✕</button>'+
@@ -1071,7 +1088,7 @@ if(invFilter==='cash')items=items.filter(function(t){return t.pay==='cash';});
 if(invFilter==='check')items=items.filter(function(t){return t.pay==='check';});
 if(invFilter==='star')items=items.filter(function(t){return t.important;});
 var total=items.reduce(function(s,t){return s+itemAmount(t);},0);
-$('invSub').textContent=fmt(items.length)+T(' فاکتور • جمع ')+fmt(total)+T(' تومان');
+$('invSub').textContent=fmt(items.length)+T(' فاکتور • جمع ')+money(total);
 $('invList').innerHTML=renderGrouped(items);
 }
 
@@ -1089,7 +1106,7 @@ return '<div class="item">'+
 (c.address?'<div class="item-person">📍 '+esc(c.address)+'</div>':'')+
 (c.note?'<div class="item-person">📝 '+esc(c.note)+'</div>':'')+
 '</div>'+
-'<div class="item-right"><div class="item-amount income">'+fmt(total)+'</div>'+
+'<div class="item-right"><div class="item-amount income">'+moneyS(total)+'</div>'+
 '<div class="actions-row"><button class="del" data-delcust="'+c.id+'">✕</button></div></div></div>';
 }).join('');
 }
@@ -1110,7 +1127,7 @@ if(checkFilter!=='all')items=items.filter(function(t){return checkStatus(t)===ch
 items=items.slice().sort(function(a,b){return (a.due||'9999')<(b.due||'9999')?-1:1;});
 var pending=tx.filter(function(t){return t.pay==='check'&&checkStatus(t)!=='paid';});
 var totalPending=pending.reduce(function(s,t){return s+itemAmount(t);},0);
-$('checksSub').textContent=fmt(pending.length)+T(' چک در انتظار • ')+fmt(totalPending)+T(' تومان');
+$('checksSub').textContent=fmt(pending.length)+T(' چک در انتظار • ')+money(totalPending);
 $('checksList').innerHTML=items.length?items.map(itemHTML).join(''):T('<div class="empty"><div class="empty-icon">🧾</div><p>چکی یافت نشد</p><span>چک‌ها اینجا نمایش داده می‌شوند</span></div>');
 }
 
@@ -1125,7 +1142,7 @@ var dayItems=groups[date];
 var net=0;
 for(var k=0;k<dayItems.length;k++){var t=dayItems[k];net+=(t.type==='receipt'||t.type==='invoice')?itemAmount(t):-itemAmount(t);}
 var cls=net>=0?'income':'expense';
-return '<div class="day"><div class="day-head"><span>'+dayLabel(date)+'</span><span class="day-net '+cls+'">'+(net>=0?'+':'−')+fmt(Math.abs(net))+'</span></div>'+dayItems.map(itemHTML).join('')+'</div>';
+return '<div class="day"><div class="day-head"><span>'+dayLabel(date)+'</span><span class="day-net '+cls+'">'+(net>=0?'+':'−')+moneyS(Math.abs(net))+'</span></div>'+dayItems.map(itemHTML).join('')+'</div>';
 }).join('');
 }
 
@@ -1137,9 +1154,9 @@ if(t.type==='invoice'){inv+=itemAmount(t);if(t.kind==='parts')prts+=itemAmount(t
 else if(t.type==='payment')pay+=itemAmount(t);
 else rec+=itemAmount(t);
 }
-$('rInv').textContent=fmt(inv);$('rPay').textContent=fmt(pay);$('rRec').textContent=fmt(rec);
-$('rSvc').textContent=fmt(svc);$('rPrts').textContent=fmt(prts);
-var bal=rec+inv-pay;$('rBal').innerHTML=(bal<0?'−':'')+fmt(Math.abs(bal));
+$('rInv').textContent=moneyS(inv);$('rPay').textContent=moneyS(pay);$('rRec').textContent=moneyS(rec);
+$('rSvc').textContent=moneyS(svc);$('rPrts').textContent=moneyS(prts);
+var bal=rec+inv-pay;$('rBal').innerHTML=(bal<0?'−':'')+moneyS(Math.abs(bal));
 var todayArr=todayISO().split('-').map(Number);var now=toJalali(todayArr[0],todayArr[1],todayArr[2]);
 var y=now.jy,m=now.jm;var mKeys=[];
 for(var k=0;k<12;k++){mKeys.unshift(y*100+m);m--;if(m===0){m=12;y--;}}
@@ -1160,7 +1177,7 @@ return '<div style="display:flex;align-items:center;gap:9px;margin-bottom:10px;f
 '<div style="flex:1;display:flex;height:16px;border-radius:8px;overflow:hidden;background:var(--bg-2);">'+
 '<div style="height:100%;width:'+wc+'%;background:linear-gradient(90deg,#0284c7,#0369a1);"></div>'+
 '<div style="height:100%;width:'+wk+'%;background:linear-gradient(90deg,#fbbf24,#d97706);"></div></div>'+
-'<div style="width:66px;flex-shrink:0;text-align:'+DIRS().e+';font-weight:800;font-size:10.5px;color:var(--text-2);direction:ltr;">'+(total?fmt(total):'—')+'</div></div>';}).join('');
+'<div style="width:66px;flex-shrink:0;text-align:'+DIRS().e+';font-weight:800;font-size:10.5px;color:var(--text-2);direction:ltr;white-space:nowrap;">'+(total?moneyC(total):'—')+'</div></div>';}).join('');
 }
 
 function renderBrand(){
@@ -1229,12 +1246,13 @@ div.innerHTML=T('<span class="row-num">ردیف ')+toFa(invRowCounter)+'</span>'
 '<button class="row-del" type="button" onclick="document.getElementById(\''+id+'\').remove();updateInvSummary();">✕</button>'+
 '<div class="row-fields"><input type="text" class="row-name" placeholder="'+ph+'">'+
 T('<input type="text" class="row-qty" placeholder="تعداد" inputmode="numeric">')+
-T('<input type="text" class="row-price" placeholder="قیمت واحد" inputmode="numeric"></div>');
+T('<input type="text" class="row-price" placeholder="قیمت واحد" inputmode="numeric"></div>');if(LANG==='en'){var _rp=div.querySelector('.row-price');if(_rp)_rp.setAttribute('inputmode','decimal');}
 $('invRows').appendChild(div);
 var inputs=div.querySelectorAll('input');
 for(var i=0;i<inputs.length;i++){
 inputs[i].addEventListener('input',function(){
-if(this.classList.contains('row-price')||this.classList.contains('row-qty')){
+if(this.classList.contains('row-price')){this.value=moneyInputClean(this.value);}
+else if(this.classList.contains('row-qty')){
 var digits=toEn(this.value).replace(/[^\d]/g,'').replace(/^0+/,'');
 this.value=digits?Number(digits).toLocaleString(LOC()):'';
 }
@@ -1245,9 +1263,9 @@ updateInvSummary();
 }
 function updateInvSummary(){
 var subtotal=0;var rows=document.querySelectorAll('#invRows .inv-row');
-for(var i=0;i<rows.length;i++){var qty=Number(toEn(rows[i].querySelector('.row-qty').value).replace(/[^\d]/g,''))||0;var price=Number(toEn(rows[i].querySelector('.row-price').value).replace(/[^\d]/g,''))||0;subtotal+=qty*price;}
-var disc=Number(toEn($('invDiscount').value).replace(/[^\d]/g,''))||0;var total=Math.max(0,subtotal-disc);
-$('invSubtotal').textContent=fmt(subtotal)+T(' تومان');$('invDiscountShow').textContent=fmt(disc)+T(' تومان');$('invTotal').textContent=fmt(total)+T(' تومان');
+for(var i=0;i<rows.length;i++){var qty=Number(toEn(rows[i].querySelector('.row-qty').value).replace(/[^\d]/g,''))||0;var price=parseMoneyInput(rows[i].querySelector('.row-price').value);subtotal+=qty*price;}subtotal=round2(subtotal);
+var disc=parseMoneyInput($('invDiscount').value);var total=round2(Math.max(0,subtotal-disc));
+$('invSubtotal').textContent=money(subtotal);$('invDiscountShow').textContent=money(disc);$('invTotal').textContent=money(total);
 }
 
 function applyKindUI(){
@@ -1334,13 +1352,13 @@ var rowEls=document.querySelectorAll('#invRows .inv-row');
 for(var i=0;i<rowEls.length;i++){
 var name=rowEls[i].querySelector('.row-name').value.trim();
 var qty=Number(toEn(rowEls[i].querySelector('.row-qty').value).replace(/[^\d]/g,''))||0;
-var price=Number(toEn(rowEls[i].querySelector('.row-price').value).replace(/[^\d]/g,''))||0;
+var price=parseMoneyInput(rowEls[i].querySelector('.row-price').value);
 if(name||qty||price)rows.push({name:name,qty:qty,price:price});
 }
 if(!rows.length){alert(T('حداقل یک ردیف لازم است.'));return;}
-var subtotal=0;for(var i=0;i<rows.length;i++)subtotal+=rows[i].qty*rows[i].price;
-var disc=Number(toEn($('invDiscount').value).replace(/[^\d]/g,''))||0;
-var total=Math.max(0,subtotal-disc);
+var subtotal=0;for(var i=0;i<rows.length;i++)subtotal+=rows[i].qty*rows[i].price;subtotal=round2(subtotal);
+var disc=parseMoneyInput($('invDiscount').value);
+var total=round2(Math.max(0,subtotal-disc));
 var customerId=$('invCustomer').value||null;
 var cust=customerId?customerById(customerId):null;
 var defaultDesc=fKind==='parts'?(cust?T('فاکتور فروش قطعات — ')+cust.name:T('فاکتور فروش قطعات')):(cust?T('فاکتور خدمات — ')+cust.name:T('فاکتور خدمات'));
@@ -1350,7 +1368,7 @@ showToast(fKind==='parts'?T('فاکتور فروش قطعات ذخیره شد �
 }
 
 function saveFlow(){
-var amount=Number(toEn($('amountInput').value).replace(/[^\d]/g,''));
+var amount=parseMoneyInput($('amountInput').value);
 if(!amount||amount<=0){alert(T('مبلغ را وارد کنید.'));return;}
 var rec={id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),type:fType,amount:amount,title:$('titleInput').value.trim(),person:$('personInput').value.trim(),pay:fPay,serial:fPay==='check'?$('flowSerial').value.trim():'',due:fPay==='check'?formDue:'',bank:fPay==='check'?$('flowBank').value.trim():'',paid:fPay==='check'?false:true,important:$('flowImportant').checked,date:formDate||todayISO(),time:$('timeInput').value||nowTime(),createdAt:Date.now()};
 tx.push(rec);persist();render();closeSheet();showToast(fType==='payment'?T('پرداخت ذخیره شد 💸'):T('دریافت ذخیره شد 📥'));
@@ -1394,8 +1412,8 @@ var rowsHTML=(t.rows||[]).map(function(r,i){return '<tr>'+
 '<td style="padding:8px 6px;border:1px solid #cbd5e1;text-align:center;font-size:11px;">'+fmt(i+1)+'</td>'+
 '<td style="padding:8px 6px;border:1px solid #cbd5e1;font-size:11px;">'+esc(r.name||'—')+'</td>'+
 '<td style="padding:8px 6px;border:1px solid #cbd5e1;text-align:center;font-size:11px;">'+fmt(r.qty||0)+'</td>'+
-'<td style="padding:8px 6px;border:1px solid #cbd5e1;text-align:'+_D.e+';font-size:11px;direction:ltr;">'+fmt(r.price||0)+'</td>'+
-'<td style="padding:8px 6px;border:1px solid #cbd5e1;text-align:'+_D.e+';font-size:11px;direction:ltr;font-weight:800;">'+fmt((r.qty||0)*(r.price||0))+'</td>'+
+'<td style="padding:8px 6px;border:1px solid #cbd5e1;text-align:'+_D.e+';font-size:11px;direction:ltr;">'+moneyS(r.price||0)+'</td>'+
+'<td style="padding:8px 6px;border:1px solid #cbd5e1;text-align:'+_D.e+';font-size:11px;direction:ltr;font-weight:800;">'+moneyS((r.qty||0)*(r.price||0))+'</td>'+
 '</tr>';}).join('');
 var companyInfo='';
 if(s.name)companyInfo+='<div style="font-size:13px;font-weight:900;color:'+darkColor+';margin-bottom:5px;">'+esc(s.name)+'</div>';
@@ -1441,9 +1459,9 @@ T('<div><b>نام:</b> ')+esc(c.name)+'</div>'+
 '</table>'+
 '<div style="display:flex;justify-content:flex-start;margin-top:12px;">'+
 '<div style="width:290px;background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:10px;padding:11px 14px;color:'+darkColor+';font-weight:700;">'+
-T('<div style="display:flex;justify-content:space-between;padding:3px 0;"><span>جمع ردیف‌ها:</span><span style="direction:ltr;">')+fmt(t.subtotal||0)+T(' تومان</span></div>')+
-(t.discount?T('<div style="display:flex;justify-content:space-between;padding:3px 0;color:#dc2626;"><span>تخفیف:</span><span style="direction:ltr;">− ')+fmt(t.discount)+T(' تومان</span></div>'):'')+
-'<div style="display:flex;justify-content:space-between;padding:8px 0 3px;font-size:13.5px;border-top:1.5px solid #bae6fd;margin-top:5px;color:'+mainColor+T(';font-weight:900;"><span>مبلغ قابل پرداخت:</span><span style="direction:ltr;">')+fmt(t.total||0)+T(' تومان</span></div>')+
+T('<div style="display:flex;justify-content:space-between;padding:3px 0;"><span>جمع ردیف‌ها:</span><span style="direction:ltr;">')+money(t.subtotal||0)+'</span></div>'+
+(t.discount?T('<div style="display:flex;justify-content:space-between;padding:3px 0;color:#dc2626;"><span>تخفیف:</span><span style="direction:ltr;">− ')+money(t.discount)+'</span></div>':'')+
+'<div style="display:flex;justify-content:space-between;padding:8px 0 3px;font-size:13.5px;border-top:1.5px solid #bae6fd;margin-top:5px;color:'+mainColor+T(';font-weight:900;"><span>مبلغ قابل پرداخت:</span><span style="direction:ltr;">')+money(t.total||0)+'</span></div>'+
 '</div></div>'+
 '<div style="text-align:center;font-weight:900;font-size:12px;margin-top:12px;padding:10px;border-radius:10px;'+
 (t.paidStatus==='paid'?T('background:#d1fae5;color:#065f46;border:1.5px solid #6ee7b7;">✅ این فاکتور پرداخت شده است'):T('background:#fee2e2;color:#991b1b;border:1.5px solid #fca5a5;">⏳ این فاکتور پرداخت نشده است'))+
@@ -1489,12 +1507,12 @@ if(t.desc)out+=T('شرح: ')+t.desc+'\n'+sep+'\n';
 out+=T('ردیف‌ها:\n');
 (t.rows||[]).forEach(function(r,i){
 out+=(i+1)+') '+r.name+'\n';
-out+='   '+toFa(r.qty)+' × '+fmt(r.price)+' = '+fmt(r.qty*r.price)+T(' تومان\n');
+out+='   '+toFa(r.qty)+' × '+moneyS(r.price)+' = '+money(r.qty*r.price)+'\n';
 });
 out+=sep+'\n';
-out+=T('جمع ردیف‌ها: ')+fmt(t.subtotal||0)+T(' تومان\n');
-if(t.discount)out+=T('تخفیف: -')+fmt(t.discount)+T(' تومان\n');
-out+=T('مبلغ نهایی: ')+fmt(t.total||0)+T(' تومان\n');
+out+=T('جمع ردیف‌ها: ')+money(t.subtotal||0)+'\n';
+if(t.discount)out+=T('تخفیف: -')+money(t.discount)+'\n';
+out+=T('مبلغ نهایی: ')+money(t.total||0)+'\n';
 out+=T('وضعیت: ')+(t.paidStatus==='paid'?T('پرداخت‌شده'):T('پرداخت‌نشده'))+'\n';
 if(t.pay==='check'){
 out+=sep+'\n';
@@ -1705,7 +1723,7 @@ setTimeout(function(){
 var phone=c&&c.phone?c.phone.replace(/[^\d]/g,''):'';
 if(phone&&phone.startsWith('0'))phone='98'+phone.slice(1);
 var kind=t.kind==='parts'?T('فاکتور فروش قطعات'):T('فاکتور خدمات');
-var msg=kind+T(' — سرویس‌کار\nمبلغ: ')+fmt(t.total||0)+T(' تومان');
+var msg=kind+T(' — سرویس‌کار\nمبلغ: ')+money(t.total||0);
 window.open('https://wa.me/'+(phone||'')+'?text='+encodeURIComponent(msg),'_blank');
 },800);
 }
@@ -1922,13 +1940,11 @@ syncForm();
 $('addRowBtn').addEventListener('click',addInvRow);
 $('addCustomerFromInvBtn').addEventListener('click',function(){openCustomerSheet(true);});
 $('invDiscount').addEventListener('input',function(e){
-var digits=toEn(e.target.value).replace(/[^\d]/g,'').replace(/^0+/,'');
-e.target.value=digits?Number(digits).toLocaleString(LOC()):'';
+e.target.value=moneyInputClean(e.target.value);
 updateInvSummary();
 });
 $('amountInput').addEventListener('input',function(e){
-var digits=toEn(e.target.value).replace(/[^\d]/g,'').replace(/^0+/,'');
-e.target.value=digits?Number(digits).toLocaleString(LOC()):'';
+e.target.value=moneyInputClean(e.target.value);
 });
 $('dateDisplay').addEventListener('click',function(){openDatePicker('date');});
 $('dueDisplay').addEventListener('click',function(){openDatePicker('due');});
@@ -2090,11 +2106,13 @@ if(fType==='customer')$('sheetTitle').textContent=T('ثبت مشتری جدید'
 }
 var rows=document.querySelectorAll('#invRows .row-num');for(var i=0;i<rows.length;i++){rows[i].textContent=T('ردیف ')+toFa(i+1);}
 var qn=document.querySelectorAll('#invRows .row-qty');for(var i=0;i<qn.length;i++)qn[i].placeholder=T('تعداد');
-var pn=document.querySelectorAll('#invRows .row-price');for(var i=0;i<pn.length;i++)pn[i].placeholder=T('قیمت واحد');
+var pn=document.querySelectorAll('#invRows .row-price');for(var i=0;i<pn.length;i++){pn[i].placeholder=T('قیمت واحد');pn[i].setAttribute('inputmode',LANG==='en'?'decimal':'numeric');if(pn[i].value)pn[i].value=moneyInputClean(pn[i].value);}
+if($('invDiscount').value)$('invDiscount').value=moneyInputClean($('invDiscount').value);if($('amountInput').value)$('amountInput').value=moneyInputClean($('amountInput').value);
+$('invDiscount').setAttribute('inputmode',LANG==='en'?'decimal':'numeric');$('amountInput').setAttribute('inputmode',LANG==='en'?'decimal':'numeric');
 if(formDate&&$('dateDisplay').value)$('dateDisplay').value=faDateFull(formDate);
 if(formDue){if($('dueDisplay').value)$('dueDisplay').value=faDateFull(formDue);if($('flowDueDisplay').value)$('flowDueDisplay').value=faDateFull(formDue);}
 if(dpView)renderDP();
-if($('invRows').children.length||$('invDiscount').value)updateInvSummary();else{$('invSubtotal').textContent=fmt(0)+T(' تومان');$('invDiscountShow').textContent=fmt(0)+T(' تومان');$('invTotal').textContent=fmt(0)+T(' تومان');}
+if($('invRows').children.length||$('invDiscount').value)updateInvSummary();else{$('invSubtotal').textContent=money(0);$('invDiscountShow').textContent=money(0);$('invTotal').textContent=money(0);}
 if(currentPreviewInvoice)showInvoicePreview(currentPreviewInvoice);
 renderPay();
 }
